@@ -10,7 +10,120 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "PtoExpedicPtoRecepcion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Denominacion1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DestinatarioMercancia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Nombre1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NTransporte",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AgenteServicios",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Nombre2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Entrega",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Posicion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TipoPosicion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Denominacion2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Material",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TextoBreveMaterial",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CantidadEntrega",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UnidadMedidaBase",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FeMovMercanciaReal",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DocumentoModelo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NPedido",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Creado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IdentiExterna1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IdentiExterna2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IDTrackingTransp",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ClaseExpedicion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Denominacion3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RutaPTransporte",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Denominacion4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FePlanifRegistro",
+				"type": "nvarchar"
+			},
+			{
+				"name": "StaTotMovMercancia",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "ext",
 			"table": "mex_log_reverlog_trans_trans"

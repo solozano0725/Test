@@ -10,7 +10,100 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "ClDocuCompras",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DocuCompras",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Proveedor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Posicion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Material",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TextoBreve",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CantidadPedido",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UnidadMedidaPedido",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Centro",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Almacen",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Entrega",
+				"type": "nvarchar"
+			},
+			{
+				"name": "StaTotMovMercancia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FechaEntrega",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ClaseMovimiento1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DocuMaterial1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cantidad1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Lote1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FeContabilizacion1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ClaseMovimiento2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DocuMaterial2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cantidad2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Lote2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FeContabilizacion2",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "ext",
 			"table": "mex_log_reverlog_trans_status"

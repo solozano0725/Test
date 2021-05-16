@@ -10,7 +10,16 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "EtiquetasFila",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SumaTarimas",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "ext",
 			"table": "mex_log_reverlog_trans_tarima"

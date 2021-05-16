@@ -10,7 +10,20 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "DocumentoCompras",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NumNecesidad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NombreProveedor",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "ext",
 			"table": "mex_log_reverlog_trans_itme2n"

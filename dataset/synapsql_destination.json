@@ -10,7 +10,92 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "i2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NSociedadNueva",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NSociedadAnterior",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IDSAGNueva",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IDSAGAnterior",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DRVNva",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DRV",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DescripcionUEN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DescripcionUENCorto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Esquema",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Estado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tipo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Distribucion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Zona",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Agencia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SubAgencia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TipoInv",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OrigenJDA",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DestinoJDA",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DescripcionDestino",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TipoDistribución",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "ext",
 			"table": "mex_log_reverlog_trans_destination"

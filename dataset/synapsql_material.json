@@ -10,7 +10,52 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "Material",
+				"type": "nvarchar"
+			},
+			{
+				"name": "I2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TextoBreveDeMaterial",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Marca",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cupo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Color",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TipoDeEnvase",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CupoAgrupado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Factor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CajaPorTarima",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Destino",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "ext",
 			"table": "mex_log_reverlog_trans_material"
