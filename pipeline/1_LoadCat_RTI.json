@@ -1,0 +1,344 @@
+{
+	"name": "1_LoadCat_RTI",
+	"properties": {
+		"activities": [
+			{
+				"name": "CsvSales to SynapseSales",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "CsvCatalog To SynapseCatalog",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "csvSalesToSynapseSales",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "mex/log/reverse_logistics/script"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "CsvCatalog To SynapseCatalog",
+				"description": "Source: csv_catalog\nTarget: ext.mex_log_reverse_logistics_catalog",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "TRUNCATE TABLE ext.mex_log_reverse_logistics_catalog",
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Material",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Material",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Texto breve de material",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Texto_breve_de_material",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Mercado",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Mercado",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Cupo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Cupo",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Envase",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Envase",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Factor",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Factor",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Cupo 1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Cupo1",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Cupo 2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Cupo2",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ce",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Ce",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Zona",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Zona",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Agencia",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Agencia",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Subagencia",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Subagencia",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COD_SAG",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "COD_SAG",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ce2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Ce2",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ce3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Ce3",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Zona2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Zona2",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Agencia2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Agencia2",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Subagencia2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Subagencia2",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Tipo",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "csv_catalog",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "synpsql_catalog",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "reverse_logistics/RTI"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-14T20:52:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

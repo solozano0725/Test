@@ -1,0 +1,71 @@
+{
+	"name": "xlsx_packaging",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/transit/catalog/excel"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Cat_Envase",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "CAT_Envase.xlsx",
+				"folderPath": "log/reverse_logistics/catalog/transit",
+				"container": "mex"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Material",
+				"type": "String"
+			},
+			{
+				"name": "I2",
+				"type": "String"
+			},
+			{
+				"name": "Texto breve de material",
+				"type": "String"
+			},
+			{
+				"name": "Marca",
+				"type": "String"
+			},
+			{
+				"name": "Cupo",
+				"type": "String"
+			},
+			{
+				"name": "Color",
+				"type": "String"
+			},
+			{
+				"name": "Tipo de Envase",
+				"type": "String"
+			},
+			{
+				"name": "Cupo Agrupado",
+				"type": "String"
+			},
+			{
+				"name": "Factor",
+				"type": "String"
+			},
+			{
+				"name": "Cajas x Tarima",
+				"type": "String"
+			},
+			{
+				"name": "Destino",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

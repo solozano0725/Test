@@ -1,0 +1,33 @@
+{
+	"name": "csv_transaction2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/RTI/input/excel"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "MB51 (transaccion 2)BD.csv",
+				"folderPath": "log/reverse_logistics/input",
+				"container": "mex"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Material\tTexto breve de material\tCe.\tAlm.\tCMv\tFe.contab.\tOrden\tLote\tUME\tCantidad\tProveedor\tPedido\tReferencia",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

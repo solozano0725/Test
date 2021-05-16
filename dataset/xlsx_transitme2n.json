@@ -1,0 +1,39 @@
+{
+	"name": "xlsx_transitme2n",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/transit/input/excel"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "me2n_transitos.xlsx",
+				"folderPath": "log/reverse_logistics/input/transit",
+				"container": "mex"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Documento compras",
+				"type": "String"
+			},
+			{
+				"name": "Número de necesidad",
+				"type": "String"
+			},
+			{
+				"name": "Nombre del proveedor",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

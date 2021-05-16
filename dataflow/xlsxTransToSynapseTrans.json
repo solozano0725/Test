@@ -1,0 +1,38 @@
+{
+	"name": "xlsxTransToSynapseTrans",
+	"properties": {
+		"folder": {
+			"name": "reverse_logistics/transit/data_cleaning/inputs"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "xlsx_trans",
+						"type": "DatasetReference"
+					},
+					"name": "SourceXLSXTrans"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "synapsql_trans",
+						"type": "DatasetReference"
+					},
+					"name": "DestintarionSynapseTrans"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectColumns"
+				},
+				{
+					"name": "TrimColumns"
+				}
+			],
+			"script": "source(output(\n\t\t{Pto.expedic./Pto.recepción} as string,\n\t\t{Denominación1} as string,\n\t\t{Destinatario mcía.} as string,\n\t\tNombre1 as string,\n\t\t{Nº de transporte} as string,\n\t\t{Agente servicios} as string,\n\t\tNombre2 as string,\n\t\tEntrega as string,\n\t\t{Posición} as string,\n\t\t{Tipo de posición} as string,\n\t\t{Denominación2} as string,\n\t\tMaterial as string,\n\t\t{Texto breve material} as string,\n\t\t{Cantidad entrega} as string,\n\t\t{Unidad medida base} as string,\n\t\t{Fe.mov.mcía.real} as string,\n\t\t{Documento modelo} as string,\n\t\t{Nº de pedido} as string,\n\t\t{Creado el} as string,\n\t\t{Identif.externa 1} as string,\n\t\t{Identif.externa 2} as string,\n\t\t{ID tracking transp.} as string,\n\t\t{Clase expedición} as string,\n\t\t{Denominación3} as string,\n\t\t{Ruta p.transporte} as string,\n\t\t{Denominación4} as string,\n\t\t{Fe.planif.registro} as string,\n\t\t{Stat.tot.mov.mcía.} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceXLSXTrans\nSourceXLSXTrans select(mapColumn(\n\t\tPtoExpedicPtoRecepcion = {Pto.expedic./Pto.recepción},\n\t\tDenominacion1 = {Denominación1},\n\t\tDestinatarioMercancia = {Destinatario mcía.},\n\t\tNombre1,\n\t\tNTransporte = {Nº de transporte},\n\t\tAgenteServicios = {Agente servicios},\n\t\tNombre2,\n\t\tEntrega,\n\t\tPosicion = {Posición},\n\t\tTipoPosicion = {Tipo de posición},\n\t\tDenominacion2 = {Denominación2},\n\t\tMaterial,\n\t\tTextoBreveMaterial = {Texto breve material},\n\t\tCantidadEntrega = {Cantidad entrega},\n\t\tUnidadMedidaBase = {Unidad medida base},\n\t\tFeMovMercanciaReal = {Fe.mov.mcía.real},\n\t\tDocumentoModelo = {Documento modelo},\n\t\tNPedido = {Nº de pedido},\n\t\tCreado = {Creado el},\n\t\tIdentiExterna1 = {Identif.externa 1},\n\t\tIdentiExterna2 = {Identif.externa 2},\n\t\tIDTrackingTransp = {ID tracking transp.},\n\t\tClaseExpedicion = {Clase expedición},\n\t\tDenominacion3 = {Denominación3},\n\t\tRutaPTransporte = {Ruta p.transporte},\n\t\tDenominacion4 = {Denominación4},\n\t\tFePlanifRegistro = {Fe.planif.registro},\n\t\tStaTotMovMercancia = {Stat.tot.mov.mcía.}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns derive(PtoExpedicPtoRecepcion = trim(PtoExpedicPtoRecepcion),\n\t\tDenominacion1 = trim(Denominacion1),\n\t\tDestinatarioMercancia = trim(DestinatarioMercancia),\n\t\tNombre1 = trim(Nombre1),\n\t\tNTransporte = trim(NTransporte),\n\t\tAgenteServicios = trim(AgenteServicios),\n\t\tNombre2 = trim(Nombre2),\n\t\tEntrega = trim(Entrega),\n\t\tPosicion = trim(Posicion),\n\t\tTipoPosicion = trim(TipoPosicion),\n\t\tDenominacion2 = trim(Denominacion2),\n\t\tMaterial = trim(Material),\n\t\tTextoBreveMaterial = trim(TextoBreveMaterial),\n\t\tCantidadEntrega = trim(CantidadEntrega),\n\t\tUnidadMedidaBase = trim(UnidadMedidaBase),\n\t\tFeMovMercanciaReal = trim(FeMovMercanciaReal),\n\t\tDocumentoModelo = trim(DocumentoModelo),\n\t\tNPedido = trim(NPedido),\n\t\tCreado = trim(Creado),\n\t\tIdentiExterna1 = trim(IdentiExterna1),\n\t\tIdentiExterna2 = trim(IdentiExterna2),\n\t\tIDTrackingTransp = trim(IDTrackingTransp),\n\t\tClaseExpedicion = trim(ClaseExpedicion),\n\t\tDenominacion3 = trim(Denominacion3),\n\t\tRutaPTransporte = trim(RutaPTransporte),\n\t\tDenominacion4 = trim(Denominacion4),\n\t\tFePlanifRegistro = trim(FePlanifRegistro),\n\t\tStaTotMovMercancia = trim(StaTotMovMercancia)) ~> TrimColumns\nTrimColumns sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestintarionSynapseTrans"
+		}
+	}
+}

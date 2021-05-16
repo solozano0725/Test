@@ -1,0 +1,57 @@
+{
+	"name": "Step4_createDashboard",
+	"properties": {
+		"folder": {
+			"name": "reverse_logistics/RTI"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "synpsql_salesdb",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSynapseSalesDB"
+				},
+				{
+					"dataset": {
+						"referenceName": "synpsql_catalog",
+						"type": "DatasetReference"
+					},
+					"name": "SelectSynapseCatalog"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "synpsql_mastertable",
+						"type": "DatasetReference"
+					},
+					"name": "DestinationSynapseDashboard"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectColumnsFromCatalog"
+				},
+				{
+					"name": "SelectColumnsFromSalesDB"
+				},
+				{
+					"name": "JoinSalesDBAndCatalog"
+				},
+				{
+					"name": "SelectFirstColumns"
+				},
+				{
+					"name": "GetVentaCtsTotalAndHLRetorno"
+				},
+				{
+					"name": "SortRows"
+				}
+			],
+			"script": "source(output(\n\t\tAno as integer,\n\t\tMes as string,\n\t\tCentro as string,\n\t\tDRV as string,\n\t\tUEN as string,\n\t\tAgencia as string,\n\t\tEnvaseUsado as string,\n\t\tProveedor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tSAG as string,\n\t\tCODSAG as string,\n\t\tMaterial as string,\n\t\tDescripcion as string,\n\t\tHLVentas as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseSalesDB\nsource(output(\n\t\tMaterial as string,\n\t\tTexto_breve_de_material as string,\n\t\tMercado as string,\n\t\tCupo as string,\n\t\tEnvase as string,\n\t\tFactor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tCe as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubagencia as string,\n\t\tCOD_SAG as string,\n\t\tCe2 as string,\n\t\tCe3 as string,\n\t\tZona2 as string,\n\t\tAgencia2 as string,\n\t\tSubagencia2 as string,\n\t\tId as string,\n\t\tTipo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SelectSynapseCatalog\nSelectSynapseCatalog select(mapColumn(\n\t\tMaterial,\n\t\tEnvase,\n\t\tFactor\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsFromCatalog\nSourceSynapseSalesDB select(mapColumn(\n\t\tAno,\n\t\tMes,\n\t\tCentro,\n\t\tDRV,\n\t\tUEN,\n\t\tAgencia,\n\t\tEnvaseUsado,\n\t\tProveedor,\n\t\tCupo1,\n\t\tCupo2,\n\t\tSAG,\n\t\tCODSAG,\n\t\tMaterial,\n\t\tDescripcion,\n\t\tHLVentas\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsFromSalesDB\nSelectColumnsFromSalesDB, SelectColumnsFromCatalog join(SelectColumnsFromSalesDB@Material == SelectColumnsFromCatalog@Material,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinSalesDBAndCatalog\nJoinSalesDBAndCatalog select(mapColumn(\n\t\tAno,\n\t\tMes,\n\t\tCentro,\n\t\tDRV,\n\t\tUEN,\n\t\tAgencia,\n\t\tEnvaseUsado,\n\t\tProveedor,\n\t\tCupo1,\n\t\tCODSAG,\n\t\tCupo2,\n\t\tSAG,\n\t\tMaterial = SelectColumnsFromSalesDB@Material,\n\t\tFactor,\n\t\tDescripcion,\n\t\tHLVentas\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectFirstColumns\nSelectFirstColumns derive(HLRetorno = 0,\n\t\tVentaCtsTotal = iif(divide(toFloat(HLVentas), toFloat(Factor)) != 0, divide(toFloat(HLVentas), toFloat(Factor)), 0.0)) ~> GetVentaCtsTotalAndHLRetorno\nGetVentaCtsTotalAndHLRetorno sort(asc(Ano, true),\n\tasc(Mes, true)) ~> SortRows\nSortRows sink(input(\n\t\tCentro as string,\n\t\tDRV as string,\n\t\tUEN as string,\n\t\tAgencia as string,\n\t\tEnvaseUsado as string,\n\t\tProveedor as string,\n\t\tCupo1 as string,\n\t\tCODSAG as string,\n\t\tCupo2 as string,\n\t\tSAG as string,\n\t\tMaterial as string,\n\t\tFactor as string,\n\t\tDescripcion as string,\n\t\tMes as string,\n\t\tHLVentas as string,\n\t\tHLRetorno as integer,\n\t\tVentaCtsTotal as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseDashboard"
+		}
+	}
+}

@@ -1,0 +1,139 @@
+{
+	"name": "xlsx_trans",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/transit/input/excel"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "trans.xlsx",
+				"folderPath": "log/reverse_logistics/input/transit",
+				"container": "mex"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Pto.expedic./Pto.recepción",
+				"type": "String"
+			},
+			{
+				"name": "Denominación1",
+				"type": "String"
+			},
+			{
+				"name": "Destinatario mcía.",
+				"type": "String"
+			},
+			{
+				"name": "Nombre1",
+				"type": "String"
+			},
+			{
+				"name": "Nº de transporte",
+				"type": "String"
+			},
+			{
+				"name": "Agente servicios",
+				"type": "String"
+			},
+			{
+				"name": "Nombre2",
+				"type": "String"
+			},
+			{
+				"name": "Entrega",
+				"type": "String"
+			},
+			{
+				"name": "Posición",
+				"type": "String"
+			},
+			{
+				"name": "Tipo de posición",
+				"type": "String"
+			},
+			{
+				"name": "Denominación2",
+				"type": "String"
+			},
+			{
+				"name": "Material",
+				"type": "String"
+			},
+			{
+				"name": "Texto breve material",
+				"type": "String"
+			},
+			{
+				"name": "Cantidad entrega",
+				"type": "String"
+			},
+			{
+				"name": "Unidad medida base",
+				"type": "String"
+			},
+			{
+				"name": "Fe.mov.mcía.real",
+				"type": "String"
+			},
+			{
+				"name": "Documento modelo",
+				"type": "String"
+			},
+			{
+				"name": "Nº de pedido",
+				"type": "String"
+			},
+			{
+				"name": "Creado el",
+				"type": "String"
+			},
+			{
+				"name": "Identif.externa 1",
+				"type": "String"
+			},
+			{
+				"name": "Identif.externa 2",
+				"type": "String"
+			},
+			{
+				"name": "ID tracking transp.",
+				"type": "String"
+			},
+			{
+				"name": "Clase expedición",
+				"type": "String"
+			},
+			{
+				"name": "Denominación3",
+				"type": "String"
+			},
+			{
+				"name": "Ruta p.transporte",
+				"type": "String"
+			},
+			{
+				"name": "Denominación4",
+				"type": "String"
+			},
+			{
+				"name": "Fe.planif.registro",
+				"type": "String"
+			},
+			{
+				"name": "Stat.tot.mov.mcía.",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

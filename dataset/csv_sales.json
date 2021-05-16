@@ -1,0 +1,250 @@
+{
+	"name": "csv_sales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/RTI/input/excel"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Ventas.csv",
+				"folderPath": "log/reverse_logistics/input",
+				"container": "mex"
+			},
+			"columnDelimiter": ",",
+			"encodingName": "UTF-8",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Tipo1",
+				"type": "String"
+			},
+			{
+				"name": "Tipo2",
+				"type": "String"
+			},
+			{
+				"name": "Tipo",
+				"type": "String"
+			},
+			{
+				"name": "Drv_Act",
+				"type": "String"
+			},
+			{
+				"name": "COD_UEN",
+				"type": "String"
+			},
+			{
+				"name": "UEN",
+				"type": "String"
+			},
+			{
+				"name": "SAG",
+				"type": "String"
+			},
+			{
+				"name": "COD_SAG",
+				"type": "String"
+			},
+			{
+				"name": "Material",
+				"type": "String"
+			},
+			{
+				"name": "Des_Mat",
+				"type": "String"
+			},
+			{
+				"name": "Marca",
+				"type": "String"
+			},
+			{
+				"name": "Cupo",
+				"type": "String"
+			},
+			{
+				"name": "Segmento",
+				"type": "String"
+			},
+			{
+				"name": "Sector",
+				"type": "String"
+			},
+			{
+				"name": "Innovacion",
+				"type": "String"
+			},
+			{
+				"name": "Clasificacion",
+				"type": "String"
+			},
+			{
+				"name": "Beerhouse",
+				"type": "String"
+			},
+			{
+				"name": "SubCupo",
+				"type": "String"
+			},
+			{
+				"name": "Onzas",
+				"type": "String"
+			},
+			{
+				"name": "PackPresentacion",
+				"type": "String"
+			},
+			{
+				"name": "Familia",
+				"type": "String"
+			},
+			{
+				"name": "High End",
+				"type": "String"
+			},
+			{
+				"name": "Origen",
+				"type": "String"
+			},
+			{
+				"name": "Abr_19",
+				"type": "String"
+			},
+			{
+				"name": "May_19",
+				"type": "String"
+			},
+			{
+				"name": "Ene_20",
+				"type": "String"
+			},
+			{
+				"name": "Feb_20",
+				"type": "String"
+			},
+			{
+				"name": "Mar_20",
+				"type": "String"
+			},
+			{
+				"name": "Abr_20",
+				"type": "String"
+			},
+			{
+				"name": "May_20",
+				"type": "String"
+			},
+			{
+				"name": "Jun_20",
+				"type": "String"
+			},
+			{
+				"name": "Jul_20",
+				"type": "String"
+			},
+			{
+				"name": "Ago_20",
+				"type": "String"
+			},
+			{
+				"name": "Sep_20",
+				"type": "String"
+			},
+			{
+				"name": "Oct_20",
+				"type": "String"
+			},
+			{
+				"name": "Nov_20",
+				"type": "String"
+			},
+			{
+				"name": "Dic_20",
+				"type": "String"
+			},
+			{
+				"name": "Ene_21",
+				"type": "String"
+			},
+			{
+				"name": "Feb_21",
+				"type": "String"
+			},
+			{
+				"name": "Mar_21",
+				"type": "String"
+			},
+			{
+				"name": "Abr_21",
+				"type": "String"
+			},
+			{
+				"name": "May_21",
+				"type": "String"
+			},
+			{
+				"name": "Jun_21",
+				"type": "String"
+			},
+			{
+				"name": "Jul_21",
+				"type": "String"
+			},
+			{
+				"name": "Ago_21",
+				"type": "String"
+			},
+			{
+				"name": "Sep_21",
+				"type": "String"
+			},
+			{
+				"name": "Oct_21",
+				"type": "String"
+			},
+			{
+				"name": "Nov_21",
+				"type": "String"
+			},
+			{
+				"name": "Dic_21",
+				"type": "String"
+			},
+			{
+				"name": "AcumDia_19",
+				"type": "String"
+			},
+			{
+				"name": "AcumDia_21",
+				"type": "String"
+			},
+			{
+				"name": "MTD_19",
+				"type": "String"
+			},
+			{
+				"name": "Tend",
+				"type": "String"
+			},
+			{
+				"name": "YTD_19",
+				"type": "String"
+			},
+			{
+				"name": "YTD_21",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,82 @@
+{
+	"name": "synpsql_salesdb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx130_AzureSynapse",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/RTI/output/synapse"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Ano",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Mes",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Centro",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DRV",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UEN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Agencia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EnvaseUsado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Proveedor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cupo1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cupo2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SAG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CODSAG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Material",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Descripcion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HLVentas",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "stg",
+			"table": "mex_log_reverlog_rit_salesdb"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

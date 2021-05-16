@@ -1,0 +1,38 @@
+{
+	"name": "xlsxTranStatusToSynapseTranStatus",
+	"properties": {
+		"folder": {
+			"name": "reverse_logistics/transit/data_cleaning/inputs"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "xlsx_transitstatus",
+						"type": "DatasetReference"
+					},
+					"name": "SourceXLSXTranStatus"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "synapsql_transtatus",
+						"type": "DatasetReference"
+					},
+					"name": "DestintarionSynapseTrans"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectColumns"
+				},
+				{
+					"name": "TrimColumns"
+				}
+			],
+			"script": "source(output(\n\t\t{Cl.documento compras} as string,\n\t\t{Documento compras} as string,\n\t\tProveedor as string,\n\t\t{Posición} as string,\n\t\tMaterial as string,\n\t\t{Texto breve} as string,\n\t\t{Cantidad de pedido} as string,\n\t\t{Unidad medida pedido} as string,\n\t\tCentro as string,\n\t\t{Almacén} as string,\n\t\tEntrega as string,\n\t\t{Stat.tot.mov.mcía.} as string,\n\t\t{Fecha de entrega} as string,\n\t\tColumn_14 as string,\n\t\t{Clase de movimiento1} as string,\n\t\t{Documento material1} as string,\n\t\tCantidad1 as string,\n\t\tLote1 as string,\n\t\t{Fe.contabilización1} as string,\n\t\tColumn_20 as string,\n\t\t{Clase de movimiento2} as string,\n\t\t{Documento material2} as string,\n\t\tCantidad2 as string,\n\t\tLote2 as string,\n\t\t{Fe.contabilización2} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceXLSXTranStatus\nSourceXLSXTranStatus select(mapColumn(\n\t\tClDocuCompras = {Cl.documento compras},\n\t\tDocuCompras = {Documento compras},\n\t\tProveedor,\n\t\tPosicion = {Posición},\n\t\tMaterial,\n\t\tTextoBreve = {Texto breve},\n\t\tCantidadPedido = {Cantidad de pedido},\n\t\tUnidadMedidaPedido = {Unidad medida pedido},\n\t\tCentro,\n\t\tAlmacen = {Almacén},\n\t\tEntrega,\n\t\tStaTotMovMercancia = {Stat.tot.mov.mcía.},\n\t\tFechaEntrega = {Fecha de entrega},\n\t\tClaseMovimiento1 = {Clase de movimiento1},\n\t\tDocuMaterial1 = {Documento material1},\n\t\tCantidad1,\n\t\tLote1,\n\t\tFeContabilizacion1 = {Fe.contabilización1},\n\t\tClaseMovimiento2 = {Clase de movimiento2},\n\t\tDocuMaterial2 = {Documento material2},\n\t\tCantidad2,\n\t\tLote2,\n\t\tFeContabilizacion2 = {Fe.contabilización2}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns derive(ClDocuCompras = trim(ClDocuCompras),\n\t\tDocuCompras = trim(DocuCompras),\n\t\tProveedor = trim(Proveedor),\n\t\tPosicion = trim(Posicion),\n\t\tMaterial = trim(Material),\n\t\tTextoBreve = trim(TextoBreve),\n\t\tCantidadPedido = trim(CantidadPedido),\n\t\tUnidadMedidaPedido = trim(UnidadMedidaPedido),\n\t\tCentro = trim(Centro),\n\t\tAlmacen = trim(Almacen),\n\t\tEntrega = trim(Entrega),\n\t\tStaTotMovMercancia = trim(StaTotMovMercancia),\n\t\tFechaEntrega = trim(FechaEntrega),\n\t\tClaseMovimiento1 = trim(ClaseMovimiento1),\n\t\tDocuMaterial1 = trim(DocuMaterial1),\n\t\tCantidad1 = trim(Cantidad1),\n\t\tLote1 = trim(Lote1),\n\t\tFeContabilizacion1 = trim(FeContabilizacion1),\n\t\tClaseMovimiento2 = trim(ClaseMovimiento2),\n\t\tDocuMaterial2 = trim(DocuMaterial2),\n\t\tCantidad2 = trim(Cantidad2),\n\t\tLote2 = trim(Lote2),\n\t\tFeContabilizacion2 = trim(FeContabilizacion2)) ~> TrimColumns\nTrimColumns sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestintarionSynapseTrans"
+		}
+	}
+}

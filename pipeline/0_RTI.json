@@ -1,0 +1,66 @@
+{
+	"name": "0_RTI",
+	"properties": {
+		"activities": [
+			{
+				"name": "LoadCatalog",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "1_LoadCat_RTI",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "LoadInputs",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "LoadCatalog",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "2_LoadInput_RTI",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Process",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "LoadInputs",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "3_Process_RTI",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "reverse_logistics/RTI"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-14T20:52:45Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

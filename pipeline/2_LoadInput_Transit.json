@@ -1,0 +1,120 @@
+{
+	"name": "2_LoadInput_Transit",
+	"properties": {
+		"activities": [
+			{
+				"name": "XLSXTransme2nToSynapseTransme2n",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "XLSXTranStatusToSynapseTranStatus",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "xlsxTransme2nToSynapseTransme2n",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "mex/log"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "XLSXTransToSynapseTrans",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "xlsxTransToSynapseTrans",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "mex/log"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "XLSXTranStatusToSynapseTranStatus",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "XLSXTransToSynapseTrans",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "xlsxTranStatusToSynapseTranStatus",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "mex/log/reverse_logistics"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "reverse_logistics/transit"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-14T23:23:34Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

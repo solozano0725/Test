@@ -1,0 +1,38 @@
+{
+	"name": "xlsxTransme2nToSynapseTransme2n",
+	"properties": {
+		"folder": {
+			"name": "reverse_logistics/transit/data_cleaning/inputs"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "xlsx_transitme2n",
+						"type": "DatasetReference"
+					},
+					"name": "SourceXLSXTransme2n"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "synapsql_transitme2n",
+						"type": "DatasetReference"
+					},
+					"name": "DestintarionSynapseTransme2n"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectColumns"
+				},
+				{
+					"name": "TrimColumns"
+				}
+			],
+			"script": "source(output(\n\t\t{Documento compras} as string,\n\t\t{Número de necesidad} as string,\n\t\t{Nombre del proveedor} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceXLSXTransme2n\nSourceXLSXTransme2n select(mapColumn(\n\t\tDocumentoCompras = {Documento compras},\n\t\tNumNecesidad = {Número de necesidad},\n\t\tNombreProveedor = {Nombre del proveedor}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns derive(DocumentoCompras = trim(DocumentoCompras),\n\t\tNumNecesidad = trim(NumNecesidad),\n\t\tNombreProveedor = trim(NombreProveedor)) ~> TrimColumns\nTrimColumns sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestintarionSynapseTransme2n"
+		}
+	}
+}

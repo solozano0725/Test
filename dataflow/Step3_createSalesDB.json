@@ -1,0 +1,79 @@
+{
+	"name": "Step3_createSalesDB",
+	"properties": {
+		"folder": {
+			"name": "reverse_logistics/RTI"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "synpsql_consolidation",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSynapseConsolidation"
+				},
+				{
+					"dataset": {
+						"referenceName": "synpsql_catalog",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSynapseCatalog1"
+				},
+				{
+					"dataset": {
+						"referenceName": "synpsql_catalog",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSynapseCatalog2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "synpsql_salesdb",
+						"type": "DatasetReference"
+					},
+					"name": "DestinationSynapseSalesDB"
+				}
+			],
+			"transformations": [
+				{
+					"name": "UnpivotSalesMonths"
+				},
+				{
+					"name": "SelecColumnsConsolidation"
+				},
+				{
+					"name": "SelectColumnsCentDRVUENAgenProv"
+				},
+				{
+					"name": "SelectColumnsMaterEnvaUsadCupo1And2"
+				},
+				{
+					"name": "JoinSalesMonthsAndCentDRVUENAgenProv"
+				},
+				{
+					"name": "SelectFirstColumns"
+				},
+				{
+					"name": "JoinSalesMonthsAndMaterEnvaUsadCupo1And2"
+				},
+				{
+					"name": "SelectFinalColumns"
+				},
+				{
+					"name": "CreateColumnsAnoAndMes"
+				},
+				{
+					"name": "OrderByAnoAndMes"
+				},
+				{
+					"name": "FilterByHLVentaNotEqual0"
+				}
+			],
+			"script": "source(output(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string,\n\t\tSAG_CAT as string,\n\t\tCOD_SAG_CAT as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseConsolidation\nsource(output(\n\t\tMaterial as string,\n\t\tTexto_breve_de_material as string,\n\t\tMercado as string,\n\t\tCupo as string,\n\t\tEnvase as string,\n\t\tFactor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tCe as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubagencia as string,\n\t\tCOD_SAG as string,\n\t\tCe2 as string,\n\t\tCe3 as string,\n\t\tZona2 as string,\n\t\tAgencia2 as string,\n\t\tSubagencia2 as string,\n\t\tId as string,\n\t\tTipo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseCatalog1\nsource(output(\n\t\tMaterial as string,\n\t\tTexto_breve_de_material as string,\n\t\tMercado as string,\n\t\tCupo as string,\n\t\tEnvase as string,\n\t\tFactor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tCe as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubagencia as string,\n\t\tCOD_SAG as string,\n\t\tCe2 as string,\n\t\tCe3 as string,\n\t\tZona2 as string,\n\t\tAgencia2 as string,\n\t\tSubagencia2 as string,\n\t\tId as string,\n\t\tTipo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseCatalog2\nSelecColumnsConsolidation unpivot(output(\n\t\tMes as string,\n\t\tHLVentas as string\n\t),\n\tungroupBy(CODSAG,\n\t\tSAG,\n\t\tMaterial,\n\t\tDescripcion),\n\tlateral: true,\n\tignoreNullPivots: false) ~> UnpivotSalesMonths\nSourceSynapseConsolidation select(mapColumn(\n\t\tMaterial,\n\t\tDescripcion = Des_Mat,\n\t\tEne20 = Ene_20,\n\t\tFeb20 = Feb_20,\n\t\tMar20 = Mar_20,\n\t\tAbr20 = Abr_20,\n\t\tMay20 = May_20,\n\t\tJun20 = Jun_20,\n\t\tJul20 = Jul_20,\n\t\tAgo20 = Ago_20,\n\t\tSep20 = Sep_20,\n\t\tOct20 = Oct_20,\n\t\tNov20 = Nov_20,\n\t\tDic20 = Dic_20,\n\t\tEne21 = Ene_21,\n\t\tFeb21 = Feb_21,\n\t\tMar21 = Mar_21,\n\t\tAbr21 = Abr_21,\n\t\tMay21 = May_21,\n\t\tJun21 = Jun_21,\n\t\tJul21 = Jul_21,\n\t\tAgo21 = Ago_21,\n\t\tSep21 = Sep_21,\n\t\tOct21 = Oct_21,\n\t\tNov21 = Nov_21,\n\t\tDic21 = Dic_21,\n\t\tSAG = SAG_CAT,\n\t\tCODSAG = COD_SAG_CAT\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelecColumnsConsolidation\nSourceSynapseCatalog1 select(mapColumn(\n\t\tCentro = Ce3,\n\t\tDRV = Zona2,\n\t\tUEN = Agencia2,\n\t\tAgencia = Subagencia2,\n\t\tProveedor = Tipo\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsCentDRVUENAgenProv\nSourceSynapseCatalog2 select(mapColumn(\n\t\tMaterial,\n\t\tEnvase,\n\t\tCupo1,\n\t\tCupo2\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsMaterEnvaUsadCupo1And2\nFilterByHLVentaNotEqual0, SelectColumnsCentDRVUENAgenProv join(trim(upper(CODSAG)) == trim(upper(Centro)),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinSalesMonthsAndCentDRVUENAgenProv\nJoinSalesMonthsAndCentDRVUENAgenProv select(mapColumn(\n\t\tCentro,\n\t\tDRV,\n\t\tUEN,\n\t\tAgencia,\n\t\tProveedor,\n\t\tCODSAG,\n\t\tSAG,\n\t\tMaterial,\n\t\tDescripcion,\n\t\tMes,\n\t\tHLVentas\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectFirstColumns\nSelectFirstColumns, SelectColumnsMaterEnvaUsadCupo1And2 join(SelectFirstColumns@Material == SelectColumnsMaterEnvaUsadCupo1And2@Material,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinSalesMonthsAndMaterEnvaUsadCupo1And2\nCreateColumnsAnoAndMes select(mapColumn(\n\t\tAno,\n\t\tMes,\n\t\tCentro,\n\t\tDRV,\n\t\tUEN,\n\t\tAgencia,\n\t\tEnvaseUsado = Envase,\n\t\tProveedor,\n\t\tCupo1,\n\t\tCupo2,\n\t\tSAG,\n\t\tCODSAG,\n\t\tMaterial = SelectFirstColumns@Material,\n\t\tDescripcion,\n\t\tHLVentas,\n\t\tAgencia\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectFinalColumns\nJoinSalesMonthsAndMaterEnvaUsadCupo1And2 derive(Ano = case(endsWith(Mes, '21'), 2021,\r\n     endsWith(Mes, '20'), 2020),\n\t\tMes = case(startsWith(Mes, 'Ene'), 'Enero',\r\n     startsWith(Mes, 'Feb'), 'Febrero',\r\n     startsWith(Mes, 'Mar'), 'Marzo',\r\n     startsWith(Mes, 'Abr'), 'Abril',\r\n     startsWith(Mes, 'May'), 'Mayo',\r\n     startsWith(Mes, 'Jun'), 'Junio',\r\n     startsWith(Mes, 'Jul'), 'Julio',\r\n     startsWith(Mes, 'Ago'), 'Agosto',\r\n     startsWith(Mes, 'Sep'), 'Septiembre',\r\n     startsWith(Mes, 'Oct'), 'Octubre',\r\n     startsWith(Mes, 'Nov'), 'Noviembre',\r\n     startsWith(Mes, 'Dic'), 'Diciembre' \r\n     ),\n\t\tEntregado = 'Agencia') ~> CreateColumnsAnoAndMes\nSelectFinalColumns sort(asc(year(toDate(Ano, 'Y')), true),\n\tasc(month(toDate(Mes, 'M')), true)) ~> OrderByAnoAndMes\nUnpivotSalesMonths filter(HLVentas != '0') ~> FilterByHLVentaNotEqual0\nOrderByAnoAndMes sink(input(\n\t\tAno as integer,\n\t\tMes as string,\n\t\tCentro as string,\n\t\tDRV as string,\n\t\tUEN as string,\n\t\tAgencia as string,\n\t\tEnvaseUsado as string,\n\t\tProveedor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tSAG as string,\n\t\tCODSAG as string,\n\t\tMaterial as string,\n\t\tDescripcion as string,\n\t\tHLVentas as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseSalesDB"
+		}
+	}
+}

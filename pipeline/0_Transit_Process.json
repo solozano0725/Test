@@ -1,0 +1,46 @@
+{
+	"name": "0_Transit_Process",
+	"properties": {
+		"activities": [
+			{
+				"name": "LoadCatalog",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "1_LoadCatalog_Transit",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "LoadInputs",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "LoadCatalog",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "2_LoadInput_Transit",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "reverse_logistics/transit"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-14T23:32:25Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

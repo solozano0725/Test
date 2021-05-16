@@ -1,0 +1,109 @@
+{
+	"name": "csv_catalog",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/RTI/catalog/excel"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Catálogo.csv",
+				"folderPath": "log/reverse_logistics/catalog",
+				"container": "mex"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Material",
+				"type": "String"
+			},
+			{
+				"name": "Texto breve de material",
+				"type": "String"
+			},
+			{
+				"name": "Mercado",
+				"type": "String"
+			},
+			{
+				"name": "Cupo",
+				"type": "String"
+			},
+			{
+				"name": "Envase",
+				"type": "String"
+			},
+			{
+				"name": "Factor",
+				"type": "String"
+			},
+			{
+				"name": "Cupo 1",
+				"type": "String"
+			},
+			{
+				"name": "Cupo 2",
+				"type": "String"
+			},
+			{
+				"name": "Ce",
+				"type": "String"
+			},
+			{
+				"name": "Zona",
+				"type": "String"
+			},
+			{
+				"name": "Agencia",
+				"type": "String"
+			},
+			{
+				"name": "Subagencia",
+				"type": "String"
+			},
+			{
+				"name": "COD_SAG",
+				"type": "String"
+			},
+			{
+				"name": "Ce2",
+				"type": "String"
+			},
+			{
+				"name": "Ce3",
+				"type": "String"
+			},
+			{
+				"name": "Zona2",
+				"type": "String"
+			},
+			{
+				"name": "Agencia2",
+				"type": "String"
+			},
+			{
+				"name": "Subagencia2",
+				"type": "String"
+			},
+			{
+				"name": "Id",
+				"type": "String"
+			},
+			{
+				"name": "Tipo",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

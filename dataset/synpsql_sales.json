@@ -1,0 +1,241 @@
+{
+	"name": "synpsql_sales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx130_AzureSynapse",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/RTI/output/synapse"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Tipo1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tipo2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tipo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Drv_Act",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COD_UEN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UEN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SAG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COD_SAG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Material",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Des_Mat",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Marca",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cupo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Segmento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sector",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Innovacion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Clasificacion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Beerhouse",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SubCupo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Onzas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PackPresentacion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Familia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "High_End",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Origen",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Abr_19",
+				"type": "nvarchar"
+			},
+			{
+				"name": "May_19",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Ene_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Feb_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Mar_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Abr_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "May_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Jun_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Jul_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Ago_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sep_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Oct_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Nov_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Dic_20",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Ene_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Feb_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Mar_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Abr_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "May_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Jun_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Jul_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Ago_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sep_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Oct_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Nov_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Dic_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AcumDia_19",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AcumDia_21",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MTD_19",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tend",
+				"type": "nvarchar"
+			},
+			{
+				"name": "YTD_19",
+				"type": "nvarchar"
+			},
+			{
+				"name": "YTD_21",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "ext",
+			"table": "mex_log_reverlog_rit_sales"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "synapsql_destination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx130_AzureSynapse",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/transit/catalog/synapse"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "ext",
+			"table": "mex_log_reverlog_trans_destination"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,51 @@
+{
+	"name": "Step2_createConsolidationSAPFiles",
+	"properties": {
+		"folder": {
+			"name": "reverse_logistics/RTI"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "synpsql_sales",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSynapseSales"
+				},
+				{
+					"dataset": {
+						"referenceName": "synpsql_catalog",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSynapseCatalog"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "synpsql_consolidation",
+						"type": "DatasetReference"
+					},
+					"name": "DestinationSynapseConsolidation"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectSubagenciaAndCODSAG"
+				},
+				{
+					"name": "LookupSAGtoSubagencia"
+				},
+				{
+					"name": "SelectColumns"
+				},
+				{
+					"name": "SortRows"
+				}
+			],
+			"script": "source(output(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseSales\nsource(output(\n\t\tMaterial as string,\n\t\tTexto_breve_de_material as string,\n\t\tMercado as string,\n\t\tCupo as string,\n\t\tEnvase as string,\n\t\tFactor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tCe as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubagencia as string,\n\t\tCOD_SAG as string,\n\t\tCe2 as string,\n\t\tCe3 as string,\n\t\tZona2 as string,\n\t\tAgencia2 as string,\n\t\tSubagencia2 as string,\n\t\tId as string,\n\t\tTipo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseCatalog\nSourceSynapseCatalog select(mapColumn(\n\t\tSAG_CAT = Subagencia,\n\t\tCOD_SAG_CAT = COD_SAG\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectSubagenciaAndCODSAG\nSourceSynapseSales, SelectSubagenciaAndCODSAG lookup(trim(upper(SAG)) == trim(upper(SAG_CAT)),\n\tmultiple: true,\n\tbroadcast: 'auto')~> LookupSAGtoSubagencia\nLookupSAGtoSubagencia select(mapColumn(\n\t\teach(match(true()))\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns sort(asc(COD_SAG_CAT, true),\n\tasc(SAG, true),\n\tasc(Material, true),\n\tasc(Des_Mat, true)) ~> SortRows\nSortRows sink(input(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string,\n\t\tSAG_CAT as string,\n\t\tCOD_SAG_CAT as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseConsolidation"
+		}
+	}
+}

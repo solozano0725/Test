@@ -1,0 +1,120 @@
+{
+	"name": "3_Process_RTI",
+	"properties": {
+		"activities": [
+			{
+				"name": "Create SynapseConsolidationSalesTable",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Step1_createConsolidationSalesTable",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "mex/log/reverse_logistics"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Create SynapseSalesDB",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Create SynapseConsolidationSalesTable",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Step3_createSalesDB",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "mex/log/reverse_logistics"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Create Dashboard Table",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Create SynapseSalesDB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Step4_createDashboard",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "mex/log"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "reverse_logistics/RTI"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-14T20:52:43Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

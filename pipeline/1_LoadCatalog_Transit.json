@@ -1,0 +1,161 @@
+{
+	"name": "1_LoadCatalog_Transit",
+	"properties": {
+		"activities": [
+			{
+				"name": "XlsxTarimaToSynapseTarima",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ETIQUETAS_FILA",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "EtiquetasFila",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SUMA_TARIMAS",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SumaTarimas",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "xlsx_tarima",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "synapsql_tarima",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "XlsxLocationToSynapseDestination",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "XlsxTarimaToSynapseTarima",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "xlsxLocationToSynapseDestination",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "mex/log/reverse_logistics"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "XlsxPackingToSynapseMaterial",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "XlsxLocationToSynapseDestination",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "xlsxPackingToSynapseMaterial",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "mex/log/reverse_logistics"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "reverse_logistics/transit"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-14T20:42:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

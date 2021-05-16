@@ -1,0 +1,127 @@
+{
+	"name": "xlsx_transitstatus",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/transit/input/excel"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "estatus_trasitos.xlsx",
+				"folderPath": "log/reverse_logistics/input/transit",
+				"container": "mex"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Cl.documento compras",
+				"type": "String"
+			},
+			{
+				"name": "Documento compras",
+				"type": "String"
+			},
+			{
+				"name": "Proveedor",
+				"type": "String"
+			},
+			{
+				"name": "Posición",
+				"type": "String"
+			},
+			{
+				"name": "Material",
+				"type": "String"
+			},
+			{
+				"name": "Texto breve",
+				"type": "String"
+			},
+			{
+				"name": "Cantidad de pedido",
+				"type": "String"
+			},
+			{
+				"name": "Unidad medida pedido",
+				"type": "String"
+			},
+			{
+				"name": "Centro",
+				"type": "String"
+			},
+			{
+				"name": "Almacén",
+				"type": "String"
+			},
+			{
+				"name": "Entrega",
+				"type": "String"
+			},
+			{
+				"name": "Stat.tot.mov.mcía.",
+				"type": "String"
+			},
+			{
+				"name": "Fecha de entrega",
+				"type": "String"
+			},
+			{
+				"name": "",
+				"type": "String"
+			},
+			{
+				"name": "Clase de movimiento1",
+				"type": "String"
+			},
+			{
+				"name": "Documento material1",
+				"type": "String"
+			},
+			{
+				"name": "Cantidad1",
+				"type": "String"
+			},
+			{
+				"name": "Lote1",
+				"type": "String"
+			},
+			{
+				"name": "Fe.contabilización1",
+				"type": "String"
+			},
+			{
+				"name": "",
+				"type": "String"
+			},
+			{
+				"name": "Clase de movimiento2",
+				"type": "String"
+			},
+			{
+				"name": "Documento material2",
+				"type": "String"
+			},
+			{
+				"name": "Cantidad2",
+				"type": "String"
+			},
+			{
+				"name": "Lote2",
+				"type": "String"
+			},
+			{
+				"name": "Fe.contabilización2",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
