@@ -1,0 +1,1102 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-weu-dev-asx-130"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Step1_createConsolidationTransit')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/transit"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "synapsql_transtatus",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseTranStatus"
+						},
+						{
+							"dataset": {
+								"referenceName": "synapsql_trans",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseTrans"
+						},
+						{
+							"dataset": {
+								"referenceName": "synapsql_destination",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseDestination"
+						},
+						{
+							"dataset": {
+								"referenceName": "synapsql_material",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseMaterial"
+						},
+						{
+							"dataset": {
+								"referenceName": "synapsql_tarima",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseTarima"
+						},
+						{
+							"dataset": {
+								"referenceName": "synapsql_transitme2n",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSyanpseTransITME2N"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synapsql_transtatusfinal",
+								"type": "DatasetReference"
+							},
+							"name": "DestinationSyanpseFinalTranStatus"
+						}
+					],
+					"transformations": [
+						{
+							"name": "ReplaceCentro"
+						},
+						{
+							"name": "SelectTransColumns"
+						},
+						{
+							"name": "SelectDestinationColumns"
+						},
+						{
+							"name": "SelectMaterialColumns"
+						},
+						{
+							"name": "SelectTarimaColumns"
+						},
+						{
+							"name": "LeftJoinTranStatusAndDestination"
+						},
+						{
+							"name": "SelectTransITME2NColumns"
+						},
+						{
+							"name": "JoinNewTranStatusAndTransITME2N"
+						},
+						{
+							"name": "JoinNewTransStatus2AndTrans"
+						},
+						{
+							"name": "SelectNewTransStatusColums"
+						}
+					],
+					"script": "source(output(\n\t\tClDocuCompras as string,\n\t\tDocuCompras as string,\n\t\tProveedor as string,\n\t\tPosicion as string,\n\t\tMaterial as string,\n\t\tTextoBreve as string,\n\t\tCantidadPedido as string,\n\t\tUnidadMedidaPedido as string,\n\t\tCentro as string,\n\t\tAlmacen as string,\n\t\tEntrega as string,\n\t\tStaTotMovMercancia as string,\n\t\tFechaEntrega as string,\n\t\tClaseMovimiento1 as string,\n\t\tDocuMaterial1 as string,\n\t\tCantidad1 as string,\n\t\tLote1 as string,\n\t\tFeContabilizacion1 as string,\n\t\tClaseMovimiento2 as string,\n\t\tDocuMaterial2 as string,\n\t\tCantidad2 as string,\n\t\tLote2 as string,\n\t\tFeContabilizacion2 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tquery: 'SELECT *\\nFROM ext.mex_log_reverlog_trans_status\\nWHERE TRIM(UPPER(StaTotMovMercancia)) LIKE \\'C\\'',\n\tformat: 'query',\n\tstaged: false) ~> SourceSynapseTranStatus\nsource(output(\n\t\tPtoExpedicPtoRecepcion as string,\n\t\tDenominacion1 as string,\n\t\tDestinatarioMercancia as string,\n\t\tNombre1 as string,\n\t\tNTransporte as string,\n\t\tAgenteServicios as string,\n\t\tNombre2 as string,\n\t\tEntrega as string,\n\t\tPosicion as string,\n\t\tTipoPosicion as string,\n\t\tDenominacion2 as string,\n\t\tMaterial as string,\n\t\tTextoBreveMaterial as string,\n\t\tCantidadEntrega as string,\n\t\tUnidadMedidaBase as string,\n\t\tFeMovMercanciaReal as string,\n\t\tDocumentoModelo as string,\n\t\tNPedido as string,\n\t\tCreado as string,\n\t\tIdentiExterna1 as string,\n\t\tIdentiExterna2 as string,\n\t\tIDTrackingTransp as string,\n\t\tClaseExpedicion as string,\n\t\tDenominacion3 as string,\n\t\tRutaPTransporte as string,\n\t\tDenominacion4 as string,\n\t\tFePlanifRegistro as string,\n\t\tStaTotMovMercancia as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tquery: 'SELECT *\\nFROM ext.mex_log_reverlog_trans_trans\\nWHERE TRIM(UPPER(StaTotMovMercancia)) LIKE \\'C\\'',\n\tformat: 'query',\n\tstaged: false) ~> SourceSynapseTrans\nsource(output(\n\t\ti2 as string,\n\t\tNSociedadNueva as string,\n\t\tNSociedadAnterior as string,\n\t\tIDSAGNueva as string,\n\t\tIDSAGAnterior as string,\n\t\tDRVNva as string,\n\t\tDRV as string,\n\t\tDescripcionUEN as string,\n\t\tDescripcionUENCorto as string,\n\t\tEsquema as string,\n\t\tEstado as string,\n\t\tTipo as string,\n\t\tDistribucion as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubAgencia as string,\n\t\tTipoInv as string,\n\t\tOrigenJDA as string,\n\t\tDestinoJDA as string,\n\t\tDescripcionDestino as string,\n\t\t{TipoDistribución} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseDestination\nsource(output(\n\t\tMaterial as string,\n\t\tI2 as string,\n\t\tTextoBreveDeMaterial as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tColor as string,\n\t\tTipoDeEnvase as string,\n\t\tCupoAgrupado as string,\n\t\tFactor as string,\n\t\tCajaPorTarima as string,\n\t\tDestino as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseMaterial\nsource(output(\n\t\tEtiquetasFila as string,\n\t\tSumaTarimas as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseTarima\nsource(output(\n\t\tDocumentoCompras as string,\n\t\tNumNecesidad as string,\n\t\tNombreProveedor as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSyanpseTransITME2N\nSourceSynapseTranStatus derive(Centro = replace(Centro, 'AL', 'FL')) ~> ReplaceCentro\nSourceSynapseTrans select(mapColumn(\n\t\tPtoExpedicPtoRecepcion,\n\t\tDenominacion1,\n\t\tDestinatarioMercancia,\n\t\tNombre1,\n\t\tNTransporte,\n\t\tAgenteServicios,\n\t\tNombre2,\n\t\tEntrega,\n\t\tPosicion,\n\t\tTipoPosicion,\n\t\tDenominacion2,\n\t\tMaterial,\n\t\tTextoBreveMaterial,\n\t\tCantidadEntrega,\n\t\tUnidadMedidaBase,\n\t\tFeMovMercanciaReal,\n\t\tDocumentoModelo,\n\t\tNPedido,\n\t\tCreado,\n\t\tIdentiExterna1,\n\t\tIdentiExterna2,\n\t\tIDTrackingTransp,\n\t\tClaseExpedicion,\n\t\tDenominacion3,\n\t\tRutaPTransporte,\n\t\tDenominacion4,\n\t\tFePlanifRegistro,\n\t\tStaTotMovMercancia\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectTransColumns\nSourceSynapseDestination select(mapColumn(\n\t\tAgencia_Des = IDSAGNueva,\n\t\tCentro_Des = DescripcionUENCorto,\n\t\tOP_Des = Tipo\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectDestinationColumns\nSourceSynapseMaterial select(mapColumn(\n\t\tMaterial_Material = Material,\n\t\tTipoDeEnvase_Material = TipoDeEnvase,\n\t\tProduccion_Material = Destino\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectMaterialColumns\nSourceSynapseTarima select(mapColumn(\n\t\tEtiquetasFila_Tarima = EtiquetasFila,\n\t\tSumaTarimas_Materia = SumaTarimas\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectTarimaColumns\nReplaceCentro, SelectDestinationColumns join(trim(upper(Centro)) == trim(upper(Centro_Des)),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> LeftJoinTranStatusAndDestination\nSourceSyanpseTransITME2N select(mapColumn(\n\t\tDocumentoCompras_TransITME2N = DocumentoCompras,\n\t\tFolio_TransITME2N = NumNecesidad,\n\t\tNombreProveedor_TransITME2N = NombreProveedor\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectTransITME2NColumns\nLeftJoinTranStatusAndDestination, SourceSyanpseTransITME2N join(trim(upper(DocuCompras)) == trim(upper(DocumentoCompras)),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinNewTranStatusAndTransITME2N\nJoinNewTranStatusAndTransITME2N, SelectTransColumns join(trim(upper(DocuCompras)) == trim(upper(DocumentoModelo)),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinNewTransStatus2AndTrans\nJoinNewTransStatus2AndTrans select(mapColumn(\n\t\tClDocuCompras,\n\t\tDocuCompras,\n\t\tProveedor,\n\t\tPosicion = SourceSynapseTranStatus@Posicion,\n\t\tMaterial = SourceSynapseTranStatus@Material,\n\t\tTextoBreve,\n\t\tCantidadPedido,\n\t\tUnidadMedidaPedido,\n\t\tCentro,\n\t\tAlmacen,\n\t\tEntrega = SourceSynapseTranStatus@Entrega,\n\t\tStaTotMovMercancia = SourceSynapseTranStatus@StaTotMovMercancia,\n\t\tFechaEntrega,\n\t\tClaseMovimiento1,\n\t\tDocuMaterial1,\n\t\tCantidad1,\n\t\tLote1,\n\t\tFeContabilizacion1,\n\t\tClaseMovimiento2,\n\t\tDocuMaterial2,\n\t\tCantidad2,\n\t\tLote2,\n\t\tFeContabilizacion2,\n\t\tAgencia_Des,\n\t\tOP_Des,\n\t\tDocumentoCompras_TransITME2N = DocumentoCompras,\n\t\tFolio_TransITME2N = NumNecesidad,\n\t\tNombreProveedor__TransITME2N = NombreProveedor,\n\t\tStaTotMovMercancia_Trans = SelectTransColumns@StaTotMovMercancia\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectNewTransStatusColums\nSelectNewTransStatusColums sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tmapColumn(\n\t\tClDocuCompras,\n\t\tDocuCompras,\n\t\tProveedor,\n\t\tPosicion,\n\t\tMaterial,\n\t\tTextoBreve,\n\t\tCantidadPedido,\n\t\tUnidadMedidaPedido,\n\t\tCentro,\n\t\tAlmacen,\n\t\tEntrega,\n\t\tStaTotMovMercancia,\n\t\tFechaEntrega,\n\t\tClaseMovimiento1,\n\t\tDocuMaterial1,\n\t\tCantidad1,\n\t\tLote1,\n\t\tFeContabilizacion1,\n\t\tClaseMovimiento2,\n\t\tDocuMaterial2,\n\t\tCantidad2,\n\t\tLote2,\n\t\tFeContabilizacion2,\n\t\tAgencia_Des,\n\t\tOP_Des,\n\t\tDocumentoCompras_TransITME2N,\n\t\tFolio_TransITME2N,\n\t\tNombreProveedor__TransITME2N,\n\t\tStaTotMovMercancia_Trans\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSyanpseFinalTranStatus"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/1_LoadCat_RTI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CsvSales to SynapseSales",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "CsvCatalog To SynapseCatalog",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "csvSalesToSynapseSales",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceCSVSales": {},
+									"DestinationSynapseTableSales": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log/reverse_logistics/script"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "CsvCatalog To SynapseCatalog",
+						"description": "Source: csv_catalog\nTarget: ext.mex_log_reverse_logistics_catalog",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "SqlDWSink",
+								"preCopyScript": "TRUNCATE TABLE ext.mex_log_reverse_logistics_catalog",
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Material",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Material",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Texto breve de material",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Texto_breve_de_material",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Mercado",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Mercado",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cupo",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Cupo",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Envase",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Envase",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Factor",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Factor",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cupo 1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Cupo1",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cupo 2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Cupo2",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Ce",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Ce",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Zona",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Zona",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Agencia",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Agencia",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Subagencia",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Subagencia",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "COD_SAG",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "COD_SAG",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Ce2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Ce2",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Ce3",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Ce3",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Zona2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Zona2",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Agencia2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Agencia2",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Subagencia2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Subagencia2",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Id",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tipo",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Tipo",
+											"type": "String",
+											"physicalType": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "csv_catalog",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "synpsql_catalog",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "reverse_logistics/RTI"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-05-14T20:52:44Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/1_LoadCatalog_Transit')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "XlsxTarimaToSynapseTarima",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "SqlDWSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ETIQUETAS_FILA",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EtiquetasFila",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "SUMA_TARIMAS",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SumaTarimas",
+											"physicalType": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "xlsx_tarima",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "synapsql_tarima",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "XlsxLocationToSynapseDestination",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "XlsxTarimaToSynapseTarima",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "xlsxLocationToSynapseDestination",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceXLSXLocation": {},
+									"DestinationSynapseDestination": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log/reverse_logistics"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "XlsxPackingToSynapseMaterial",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "XlsxLocationToSynapseDestination",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "xlsxPackingToSynapseMaterial",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceXLSXPacking": {},
+									"DestinationSynapseMaterial": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log/reverse_logistics"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"folder": {
+					"name": "reverse_logistics/transit"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-05-14T20:42:48Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/2_LoadInput_RTI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CsvSales to SynapseSales",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "csvSalesToSynapseSales",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceCSVSales": {},
+									"DestinationSynapseTableSales": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log/reverse_logistics/script"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"folder": {
+					"name": "reverse_logistics/RTI"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-05-14T20:52:44Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/2_LoadInput_Transit')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "XLSXTransme2nToSynapseTransme2n",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "XLSXTranStatusToSynapseTranStatus",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "xlsxTransme2nToSynapseTransme2n",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceXLSXTransme2n": {},
+									"DestintarionSynapseTransme2n": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "XLSXTransToSynapseTrans",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "xlsxTransToSynapseTrans",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceXLSXTrans": {},
+									"DestintarionSynapseTrans": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "XLSXTranStatusToSynapseTranStatus",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "XLSXTransToSynapseTrans",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "xlsxTranStatusToSynapseTranStatus",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceXLSXTranStatus": {},
+									"DestintarionSynapseTrans": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log/reverse_logistics"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"folder": {
+					"name": "reverse_logistics/transit"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-05-14T23:23:34Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/3_Process_RTI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Create SynapseConsolidationSalesTable",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Step1_createConsolidationSalesTable",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceSynapseSales": {},
+									"SourceSynapseCatalog": {},
+									"DestinationSynapseConsolidation1": {},
+									"DestinationSynapseConsolidation2": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log/reverse_logistics"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "Create SynapseSalesDB",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Create SynapseConsolidationSalesTable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Step3_createSalesDB",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceSynapseConsolidation": {},
+									"SourceSynapseCatalog1": {},
+									"SourceSynapseCatalog2": {},
+									"DestinationSynapseSalesDB": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log/reverse_logistics"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "Create Dashboard Table",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Create SynapseSalesDB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Step4_createDashboard",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceSynapseSalesDB": {},
+									"SelectSynapseCatalog": {},
+									"DestinationSynapseDashboard": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "mex/log"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"folder": {
+					"name": "reverse_logistics/RTI"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-05-14T20:52:43Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/0_RTI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "LoadCatalog",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "1_LoadCat_RTI",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "LoadInputs",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "LoadCatalog",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "2_LoadInput_RTI",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Process",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "LoadInputs",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "3_Process_RTI",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"folder": {
+					"name": "reverse_logistics/RTI"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-05-14T20:52:45Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/1_LoadCat_RTI')]",
+				"[concat(variables('factoryId'), '/pipelines/2_LoadInput_RTI')]",
+				"[concat(variables('factoryId'), '/pipelines/3_Process_RTI')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/0_Transit_Process')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "LoadCatalog",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "1_LoadCatalog_Transit",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "LoadInputs",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "LoadCatalog",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "2_LoadInput_Transit",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"folder": {
+					"name": "reverse_logistics/transit"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-05-14T23:32:25Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/1_LoadCatalog_Transit')]",
+				"[concat(variables('factoryId'), '/pipelines/2_LoadInput_Transit')]"
+			]
+		}
+	]
+}

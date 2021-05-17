@@ -1,0 +1,110 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-weu-dev-asx-130"
+		},
+		"aswweudevasx130_AzureSynapse_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'aswweudevasx130_AzureSynapse'"
+		},
+		"atr_forecash_databricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'atr_forecash_databricks'"
+		},
+		"mex_atr_forecash_input_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mex_atr_forecash_input'"
+		},
+		"sta130maz130rsqovup5cso-StorageLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'sta130maz130rsqovup5cso-StorageLinkedService'"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adf-weu-dev-asx-130_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"aswweudevasx130_AzureSynapse_connectionString": {
+						"value": "[parameters('aswweudevasx130_AzureSynapse_connectionString')]"
+					},
+					"atr_forecash_databricks_accessToken": {
+						"value": "[parameters('atr_forecash_databricks_accessToken')]"
+					},
+					"mex_atr_forecash_input_connectionString": {
+						"value": "[parameters('mex_atr_forecash_input_connectionString')]"
+					},
+					"sta130maz130rsqovup5cso-StorageLinkedService_connectionString": {
+						"value": "[parameters('sta130maz130rsqovup5cso-StorageLinkedService_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adf-weu-dev-asx-130_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-weu-dev-asx-130_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adf-weu-dev-asx-130_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-weu-dev-asx-130_ArmTemplate_1')]"
+			]
+		}
+	]
+}

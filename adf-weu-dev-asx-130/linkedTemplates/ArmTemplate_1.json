@@ -1,0 +1,1478 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-weu-dev-asx-130"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/synpsql_salesdb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/output/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Ano",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Mes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Centro",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DRV",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UEN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Agencia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EnvaseUsado",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Proveedor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CODSAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Descripcion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "HLVentas",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "mex_log_reverlog_rit_salesdb"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/test')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/output"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Tipo1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tipo2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tipo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Drv_Act",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_UEN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UEN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_SAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Des_Mat",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Marca",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Segmento",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sector",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Innovacion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Clasificacion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Beerhouse",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubCupo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Onzas",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PackPresentacion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Familia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "High_End",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Origen",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Abr_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "May_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ene_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Feb_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Mar_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Abr_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "May_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jun_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jul_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ago_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sep_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Oct_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Nov_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Dic_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ene_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Feb_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Mar_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Abr_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "May_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jun_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jul_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ago_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sep_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Oct_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Nov_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Dic_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AcumDia_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AcumDia_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MTD_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tend",
+						"type": "nvarchar"
+					},
+					{
+						"name": "YTD_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "YTD_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SAG_CAT",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_SAG_CAT",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "mex_log_reverlog_rit_test"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsx_location')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/catalog/excel"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Destinos",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "CAT_Ubicaciones.xlsx",
+						"folderPath": "log/reverse_logistics/catalog/transit",
+						"container": "mex"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "i2",
+						"type": "String"
+					},
+					{
+						"name": "# Sociedad Nueva",
+						"type": "String"
+					},
+					{
+						"name": "# Sociedad Anterior",
+						"type": "String"
+					},
+					{
+						"name": "ID SAG Nueva",
+						"type": "String"
+					},
+					{
+						"name": "ID SAG Anterior",
+						"type": "String"
+					},
+					{
+						"name": "DRV_Nva",
+						"type": "String"
+					},
+					{
+						"name": "DRV",
+						"type": "String"
+					},
+					{
+						"name": "Descripción UEN",
+						"type": "String"
+					},
+					{
+						"name": "Descripcion UEN Corto",
+						"type": "String"
+					},
+					{
+						"name": "Descripción SAG",
+						"type": "String"
+					},
+					{
+						"name": "Esquema",
+						"type": "String"
+					},
+					{
+						"name": "Estado",
+						"type": "String"
+					},
+					{
+						"name": "Tipo",
+						"type": "String"
+					},
+					{
+						"name": "Distribución",
+						"type": "String"
+					},
+					{
+						"name": "Puerto Expedición",
+						"type": "String"
+					},
+					{
+						"name": "Zona",
+						"type": "String"
+					},
+					{
+						"name": "Agencia",
+						"type": "String"
+					},
+					{
+						"name": "Sub Agencia",
+						"type": "String"
+					},
+					{
+						"name": "Tipo_Inv",
+						"type": "String"
+					},
+					{
+						"name": "OrigenJDA",
+						"type": "String"
+					},
+					{
+						"name": "DestinoJDA",
+						"type": "String"
+					},
+					{
+						"name": "Descripción Destino",
+						"type": "String"
+					},
+					{
+						"name": "Tipo Distribución",
+						"type": "String"
+					},
+					{
+						"name": "Op",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsx_packaging')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/catalog/excel"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Cat_Envase",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "CAT_Envase.xlsx",
+						"folderPath": "log/reverse_logistics/catalog/transit",
+						"container": "mex"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Material",
+						"type": "String"
+					},
+					{
+						"name": "I2",
+						"type": "String"
+					},
+					{
+						"name": "Texto breve de material",
+						"type": "String"
+					},
+					{
+						"name": "Marca",
+						"type": "String"
+					},
+					{
+						"name": "Cupo",
+						"type": "String"
+					},
+					{
+						"name": "Color",
+						"type": "String"
+					},
+					{
+						"name": "Tipo de Envase",
+						"type": "String"
+					},
+					{
+						"name": "Cupo Agrupado",
+						"type": "String"
+					},
+					{
+						"name": "Factor",
+						"type": "String"
+					},
+					{
+						"name": "Cajas x Tarima",
+						"type": "String"
+					},
+					{
+						"name": "Destino",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsx_tarima')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/catalog/excel"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Tarimas",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Tarimas.xlsx",
+						"folderPath": "log/reverse_logistics/catalog/transit",
+						"container": "mex"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "ETIQUETAS_FILA",
+						"type": "String"
+					},
+					{
+						"name": "SUMA_TARIMAS",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsx_trans')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/input/excel"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "trans.xlsx",
+						"folderPath": "log/reverse_logistics/input/transit",
+						"container": "mex"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Pto.expedic./Pto.recepción",
+						"type": "String"
+					},
+					{
+						"name": "Denominación1",
+						"type": "String"
+					},
+					{
+						"name": "Destinatario mcía.",
+						"type": "String"
+					},
+					{
+						"name": "Nombre1",
+						"type": "String"
+					},
+					{
+						"name": "Nº de transporte",
+						"type": "String"
+					},
+					{
+						"name": "Agente servicios",
+						"type": "String"
+					},
+					{
+						"name": "Nombre2",
+						"type": "String"
+					},
+					{
+						"name": "Entrega",
+						"type": "String"
+					},
+					{
+						"name": "Posición",
+						"type": "String"
+					},
+					{
+						"name": "Tipo de posición",
+						"type": "String"
+					},
+					{
+						"name": "Denominación2",
+						"type": "String"
+					},
+					{
+						"name": "Material",
+						"type": "String"
+					},
+					{
+						"name": "Texto breve material",
+						"type": "String"
+					},
+					{
+						"name": "Cantidad entrega",
+						"type": "String"
+					},
+					{
+						"name": "Unidad medida base",
+						"type": "String"
+					},
+					{
+						"name": "Fe.mov.mcía.real",
+						"type": "String"
+					},
+					{
+						"name": "Documento modelo",
+						"type": "String"
+					},
+					{
+						"name": "Nº de pedido",
+						"type": "String"
+					},
+					{
+						"name": "Creado el",
+						"type": "String"
+					},
+					{
+						"name": "Identif.externa 1",
+						"type": "String"
+					},
+					{
+						"name": "Identif.externa 2",
+						"type": "String"
+					},
+					{
+						"name": "ID tracking transp.",
+						"type": "String"
+					},
+					{
+						"name": "Clase expedición",
+						"type": "String"
+					},
+					{
+						"name": "Denominación3",
+						"type": "String"
+					},
+					{
+						"name": "Ruta p.transporte",
+						"type": "String"
+					},
+					{
+						"name": "Denominación4",
+						"type": "String"
+					},
+					{
+						"name": "Fe.planif.registro",
+						"type": "String"
+					},
+					{
+						"name": "Stat.tot.mov.mcía.",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsx_transitme2n')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/input/excel"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "me2n_transitos.xlsx",
+						"folderPath": "log/reverse_logistics/input/transit",
+						"container": "mex"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Documento compras",
+						"type": "String"
+					},
+					{
+						"name": "Número de necesidad",
+						"type": "String"
+					},
+					{
+						"name": "Nombre del proveedor",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsx_transitstatus')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/input/excel"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "estatus_trasitos.xlsx",
+						"folderPath": "log/reverse_logistics/input/transit",
+						"container": "mex"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Cl.documento compras",
+						"type": "String"
+					},
+					{
+						"name": "Documento compras",
+						"type": "String"
+					},
+					{
+						"name": "Proveedor",
+						"type": "String"
+					},
+					{
+						"name": "Posición",
+						"type": "String"
+					},
+					{
+						"name": "Material",
+						"type": "String"
+					},
+					{
+						"name": "Texto breve",
+						"type": "String"
+					},
+					{
+						"name": "Cantidad de pedido",
+						"type": "String"
+					},
+					{
+						"name": "Unidad medida pedido",
+						"type": "String"
+					},
+					{
+						"name": "Centro",
+						"type": "String"
+					},
+					{
+						"name": "Almacén",
+						"type": "String"
+					},
+					{
+						"name": "Entrega",
+						"type": "String"
+					},
+					{
+						"name": "Stat.tot.mov.mcía.",
+						"type": "String"
+					},
+					{
+						"name": "Fecha de entrega",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Clase de movimiento1",
+						"type": "String"
+					},
+					{
+						"name": "Documento material1",
+						"type": "String"
+					},
+					{
+						"name": "Cantidad1",
+						"type": "String"
+					},
+					{
+						"name": "Lote1",
+						"type": "String"
+					},
+					{
+						"name": "Fe.contabilización1",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Clase de movimiento2",
+						"type": "String"
+					},
+					{
+						"name": "Documento material2",
+						"type": "String"
+					},
+					{
+						"name": "Cantidad2",
+						"type": "String"
+					},
+					{
+						"name": "Lote2",
+						"type": "String"
+					},
+					{
+						"name": "Fe.contabilización2",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime2')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "West Europe",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 10,
+							"cleanup": true
+						}
+					}
+				},
+				"managedVirtualNetwork": {
+					"type": "ManagedVirtualNetworkReference",
+					"referenceName": "default"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapsql_transtatusfinal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/output"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "mex_log_reverlog_trans_status_final"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Step1_createConsolidationSalesTable')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/RTI"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "synpsql_sales",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseSales"
+						},
+						{
+							"dataset": {
+								"referenceName": "synpsql_catalog",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseCatalog"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synpsql_consolidation",
+								"type": "DatasetReference"
+							},
+							"name": "DestinationSynapseConsolidation1"
+						},
+						{
+							"dataset": {
+								"referenceName": "synpsql_consolidation",
+								"type": "DatasetReference"
+							},
+							"name": "DestinationSynapseConsolidation2"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectSubagenciaAndCODSAG"
+						},
+						{
+							"name": "SelectColumns"
+						},
+						{
+							"name": "SortRows1"
+						},
+						{
+							"name": "FilterByNullsSAG"
+						},
+						{
+							"name": "FilterBySAG"
+						},
+						{
+							"name": "JoinCODSAGtoCODSAGCAT"
+						},
+						{
+							"name": "JoinSAGtoSubangecia"
+						},
+						{
+							"name": "SelectColumnsFromNullSAG"
+						},
+						{
+							"name": "SortRows2"
+						}
+					],
+					"script": "source(output(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseSales\nsource(output(\n\t\tMaterial as string,\n\t\tTexto_breve_de_material as string,\n\t\tMercado as string,\n\t\tCupo as string,\n\t\tEnvase as string,\n\t\tFactor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tCe as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubagencia as string,\n\t\tCOD_SAG as string,\n\t\tCe2 as string,\n\t\tCe3 as string,\n\t\tZona2 as string,\n\t\tAgencia2 as string,\n\t\tSubagencia2 as string,\n\t\tId as string,\n\t\tTipo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseCatalog\nSourceSynapseCatalog select(mapColumn(\n\t\tSAG_CAT = Subagencia,\n\t\tCOD_SAG_CAT = COD_SAG\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectSubagenciaAndCODSAG\nJoinCODSAGtoCODSAGCAT select(mapColumn(\n\t\tTipo1,\n\t\tTipo2,\n\t\tTipo,\n\t\tDrv_Act,\n\t\tCOD_UEN,\n\t\tUEN,\n\t\tSAG,\n\t\tCOD_SAG,\n\t\tMaterial,\n\t\tDes_Mat,\n\t\tMarca,\n\t\tCupo,\n\t\tSegmento,\n\t\tSector,\n\t\tInnovacion,\n\t\tClasificacion,\n\t\tBeerhouse,\n\t\tSubCupo,\n\t\tOnzas,\n\t\tPackPresentacion,\n\t\tFamilia,\n\t\tHigh_End,\n\t\tOrigen,\n\t\tAbr_19,\n\t\tMay_19,\n\t\tEne_20,\n\t\tFeb_20,\n\t\tMar_20,\n\t\tAbr_20,\n\t\tMay_20,\n\t\tJun_20,\n\t\tJul_20,\n\t\tAgo_20,\n\t\tSep_20,\n\t\tOct_20,\n\t\tNov_20,\n\t\tDic_20,\n\t\tEne_21,\n\t\tFeb_21,\n\t\tMar_21,\n\t\tAbr_21,\n\t\tMay_21,\n\t\tJun_21,\n\t\tJul_21,\n\t\tAgo_21,\n\t\tSep_21,\n\t\tOct_21,\n\t\tNov_21,\n\t\tDic_21,\n\t\tAcumDia_19,\n\t\tAcumDia_21,\n\t\tMTD_19,\n\t\tTend,\n\t\tYTD_19,\n\t\tYTD_21,\n\t\tSAG_CAT,\n\t\tCOD_SAG_CAT\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nFilterBySAG sort(asc(COD_SAG_CAT, true),\n\tasc(SAG_CAT, true),\n\tasc(Material, true),\n\tasc(Des_Mat, true)) ~> SortRows1\nSelectColumns filter(isNull(SAG_CAT)) ~> FilterByNullsSAG\nSelectColumns filter(!isNull(SAG_CAT)) ~> FilterBySAG\nSourceSynapseSales, SelectSubagenciaAndCODSAG join(trim(upper(COD_SAG)) == trim(upper(COD_SAG_CAT)),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinCODSAGtoCODSAGCAT\nFilterByNullsSAG, SelectSubagenciaAndCODSAG join(trim(upper(SAG)) == trim(upper(SelectSubagenciaAndCODSAG@SAG_CAT)),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinSAGtoSubangecia\nJoinSAGtoSubangecia select(mapColumn(\n\t\tTipo1,\n\t\tTipo2,\n\t\tTipo,\n\t\tDrv_Act,\n\t\tCOD_UEN,\n\t\tUEN,\n\t\tSAG,\n\t\tCOD_SAG,\n\t\tMaterial,\n\t\tDes_Mat,\n\t\tMarca,\n\t\tCupo,\n\t\tSegmento,\n\t\tSector,\n\t\tInnovacion,\n\t\tClasificacion,\n\t\tBeerhouse,\n\t\tSubCupo,\n\t\tOnzas,\n\t\tPackPresentacion,\n\t\tFamilia,\n\t\tHigh_End,\n\t\tOrigen,\n\t\tAbr_19,\n\t\tMay_19,\n\t\tEne_20,\n\t\tFeb_20,\n\t\tMar_20,\n\t\tAbr_20,\n\t\tMay_20,\n\t\tJun_20,\n\t\tJul_20,\n\t\tAgo_20,\n\t\tSep_20,\n\t\tOct_20,\n\t\tNov_20,\n\t\tDic_20,\n\t\tEne_21,\n\t\tFeb_21,\n\t\tMar_21,\n\t\tAbr_21,\n\t\tMay_21,\n\t\tJun_21,\n\t\tJul_21,\n\t\tAgo_21,\n\t\tSep_21,\n\t\tOct_21,\n\t\tNov_21,\n\t\tDic_21,\n\t\tAcumDia_19,\n\t\tAcumDia_21,\n\t\tMTD_19,\n\t\tTend,\n\t\tYTD_19,\n\t\tYTD_21,\n\t\tSAG_CAT = SelectSubagenciaAndCODSAG@SAG_CAT,\n\t\tCOD_SAG_CAT = SelectSubagenciaAndCODSAG@COD_SAG_CAT\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsFromNullSAG\nSelectColumnsFromNullSAG sort(asc(COD_SAG_CAT, true),\n\tasc(SAG_CAT, true),\n\tasc(Material, true),\n\tasc(Des_Mat, true)) ~> SortRows2\nSortRows1 sink(input(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string,\n\t\tSAG_CAT as string,\n\t\tCOD_SAG_CAT as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseConsolidation1\nSortRows2 sink(input(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string,\n\t\tSAG_CAT as string,\n\t\tCOD_SAG_CAT as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseConsolidation2"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Step2_createConsolidationSAPFiles')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/RTI"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "synpsql_sales",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseSales"
+						},
+						{
+							"dataset": {
+								"referenceName": "synpsql_catalog",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseCatalog"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synpsql_consolidation",
+								"type": "DatasetReference"
+							},
+							"name": "DestinationSynapseConsolidation"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectSubagenciaAndCODSAG"
+						},
+						{
+							"name": "LookupSAGtoSubagencia"
+						},
+						{
+							"name": "SelectColumns"
+						},
+						{
+							"name": "SortRows"
+						}
+					],
+					"script": "source(output(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseSales\nsource(output(\n\t\tMaterial as string,\n\t\tTexto_breve_de_material as string,\n\t\tMercado as string,\n\t\tCupo as string,\n\t\tEnvase as string,\n\t\tFactor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tCe as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubagencia as string,\n\t\tCOD_SAG as string,\n\t\tCe2 as string,\n\t\tCe3 as string,\n\t\tZona2 as string,\n\t\tAgencia2 as string,\n\t\tSubagencia2 as string,\n\t\tId as string,\n\t\tTipo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseCatalog\nSourceSynapseCatalog select(mapColumn(\n\t\tSAG_CAT = Subagencia,\n\t\tCOD_SAG_CAT = COD_SAG\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectSubagenciaAndCODSAG\nSourceSynapseSales, SelectSubagenciaAndCODSAG lookup(trim(upper(SAG)) == trim(upper(SAG_CAT)),\n\tmultiple: true,\n\tbroadcast: 'auto')~> LookupSAGtoSubagencia\nLookupSAGtoSubagencia select(mapColumn(\n\t\teach(match(true()))\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns sort(asc(COD_SAG_CAT, true),\n\tasc(SAG, true),\n\tasc(Material, true),\n\tasc(Des_Mat, true)) ~> SortRows\nSortRows sink(input(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string,\n\t\tSAG_CAT as string,\n\t\tCOD_SAG_CAT as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseConsolidation"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Step3_createSalesDB')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/RTI"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "synpsql_consolidation",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseConsolidation"
+						},
+						{
+							"dataset": {
+								"referenceName": "synpsql_catalog",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseCatalog1"
+						},
+						{
+							"dataset": {
+								"referenceName": "synpsql_catalog",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseCatalog2"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synpsql_salesdb",
+								"type": "DatasetReference"
+							},
+							"name": "DestinationSynapseSalesDB"
+						}
+					],
+					"transformations": [
+						{
+							"name": "UnpivotSalesMonths"
+						},
+						{
+							"name": "SelecColumnsConsolidation"
+						},
+						{
+							"name": "SelectColumnsCentDRVUENAgenProv"
+						},
+						{
+							"name": "SelectColumnsMaterEnvaUsadCupo1And2"
+						},
+						{
+							"name": "JoinSalesMonthsAndCentDRVUENAgenProv"
+						},
+						{
+							"name": "SelectFirstColumns"
+						},
+						{
+							"name": "JoinSalesMonthsAndMaterEnvaUsadCupo1And2"
+						},
+						{
+							"name": "SelectFinalColumns"
+						},
+						{
+							"name": "CreateColumnsAnoAndMes"
+						},
+						{
+							"name": "OrderByAnoAndMes"
+						},
+						{
+							"name": "FilterByHLVentaNotEqual0"
+						}
+					],
+					"script": "source(output(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string,\n\t\tSAG_CAT as string,\n\t\tCOD_SAG_CAT as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseConsolidation\nsource(output(\n\t\tMaterial as string,\n\t\tTexto_breve_de_material as string,\n\t\tMercado as string,\n\t\tCupo as string,\n\t\tEnvase as string,\n\t\tFactor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tCe as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubagencia as string,\n\t\tCOD_SAG as string,\n\t\tCe2 as string,\n\t\tCe3 as string,\n\t\tZona2 as string,\n\t\tAgencia2 as string,\n\t\tSubagencia2 as string,\n\t\tId as string,\n\t\tTipo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseCatalog1\nsource(output(\n\t\tMaterial as string,\n\t\tTexto_breve_de_material as string,\n\t\tMercado as string,\n\t\tCupo as string,\n\t\tEnvase as string,\n\t\tFactor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tCe as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubagencia as string,\n\t\tCOD_SAG as string,\n\t\tCe2 as string,\n\t\tCe3 as string,\n\t\tZona2 as string,\n\t\tAgencia2 as string,\n\t\tSubagencia2 as string,\n\t\tId as string,\n\t\tTipo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseCatalog2\nSelecColumnsConsolidation unpivot(output(\n\t\tMes as string,\n\t\tHLVentas as string\n\t),\n\tungroupBy(CODSAG,\n\t\tSAG,\n\t\tMaterial,\n\t\tDescripcion),\n\tlateral: true,\n\tignoreNullPivots: false) ~> UnpivotSalesMonths\nSourceSynapseConsolidation select(mapColumn(\n\t\tMaterial,\n\t\tDescripcion = Des_Mat,\n\t\tEne20 = Ene_20,\n\t\tFeb20 = Feb_20,\n\t\tMar20 = Mar_20,\n\t\tAbr20 = Abr_20,\n\t\tMay20 = May_20,\n\t\tJun20 = Jun_20,\n\t\tJul20 = Jul_20,\n\t\tAgo20 = Ago_20,\n\t\tSep20 = Sep_20,\n\t\tOct20 = Oct_20,\n\t\tNov20 = Nov_20,\n\t\tDic20 = Dic_20,\n\t\tEne21 = Ene_21,\n\t\tFeb21 = Feb_21,\n\t\tMar21 = Mar_21,\n\t\tAbr21 = Abr_21,\n\t\tMay21 = May_21,\n\t\tJun21 = Jun_21,\n\t\tJul21 = Jul_21,\n\t\tAgo21 = Ago_21,\n\t\tSep21 = Sep_21,\n\t\tOct21 = Oct_21,\n\t\tNov21 = Nov_21,\n\t\tDic21 = Dic_21,\n\t\tSAG = SAG_CAT,\n\t\tCODSAG = COD_SAG_CAT\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelecColumnsConsolidation\nSourceSynapseCatalog1 select(mapColumn(\n\t\tCentro = Ce3,\n\t\tDRV = Zona2,\n\t\tUEN = Agencia2,\n\t\tAgencia = Subagencia2,\n\t\tProveedor = Tipo\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsCentDRVUENAgenProv\nSourceSynapseCatalog2 select(mapColumn(\n\t\tMaterial,\n\t\tEnvase,\n\t\tCupo1,\n\t\tCupo2\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsMaterEnvaUsadCupo1And2\nFilterByHLVentaNotEqual0, SelectColumnsCentDRVUENAgenProv join(trim(upper(CODSAG)) == trim(upper(Centro)),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinSalesMonthsAndCentDRVUENAgenProv\nJoinSalesMonthsAndCentDRVUENAgenProv select(mapColumn(\n\t\tCentro,\n\t\tDRV,\n\t\tUEN,\n\t\tAgencia,\n\t\tProveedor,\n\t\tCODSAG,\n\t\tSAG,\n\t\tMaterial,\n\t\tDescripcion,\n\t\tMes,\n\t\tHLVentas\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectFirstColumns\nSelectFirstColumns, SelectColumnsMaterEnvaUsadCupo1And2 join(SelectFirstColumns@Material == SelectColumnsMaterEnvaUsadCupo1And2@Material,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinSalesMonthsAndMaterEnvaUsadCupo1And2\nCreateColumnsAnoAndMes select(mapColumn(\n\t\tAno,\n\t\tMes,\n\t\tCentro,\n\t\tDRV,\n\t\tUEN,\n\t\tAgencia,\n\t\tEnvaseUsado = Envase,\n\t\tProveedor,\n\t\tCupo1,\n\t\tCupo2,\n\t\tSAG,\n\t\tCODSAG,\n\t\tMaterial = SelectFirstColumns@Material,\n\t\tDescripcion,\n\t\tHLVentas,\n\t\tAgencia\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectFinalColumns\nJoinSalesMonthsAndMaterEnvaUsadCupo1And2 derive(Ano = case(endsWith(Mes, '21'), 2021,\r\n     endsWith(Mes, '20'), 2020),\n\t\tMes = case(startsWith(Mes, 'Ene'), 'Enero',\r\n     startsWith(Mes, 'Feb'), 'Febrero',\r\n     startsWith(Mes, 'Mar'), 'Marzo',\r\n     startsWith(Mes, 'Abr'), 'Abril',\r\n     startsWith(Mes, 'May'), 'Mayo',\r\n     startsWith(Mes, 'Jun'), 'Junio',\r\n     startsWith(Mes, 'Jul'), 'Julio',\r\n     startsWith(Mes, 'Ago'), 'Agosto',\r\n     startsWith(Mes, 'Sep'), 'Septiembre',\r\n     startsWith(Mes, 'Oct'), 'Octubre',\r\n     startsWith(Mes, 'Nov'), 'Noviembre',\r\n     startsWith(Mes, 'Dic'), 'Diciembre' \r\n     ),\n\t\tEntregado = 'Agencia') ~> CreateColumnsAnoAndMes\nSelectFinalColumns sort(asc(year(toDate(Ano, 'Y')), true),\n\tasc(month(toDate(Mes, 'M')), true)) ~> OrderByAnoAndMes\nUnpivotSalesMonths filter(HLVentas != '0') ~> FilterByHLVentaNotEqual0\nOrderByAnoAndMes sink(input(\n\t\tAno as integer,\n\t\tMes as string,\n\t\tCentro as string,\n\t\tDRV as string,\n\t\tUEN as string,\n\t\tAgencia as string,\n\t\tEnvaseUsado as string,\n\t\tProveedor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tSAG as string,\n\t\tCODSAG as string,\n\t\tMaterial as string,\n\t\tDescripcion as string,\n\t\tHLVentas as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseSalesDB"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/synpsql_salesdb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Step4_createDashboard')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/RTI"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "synpsql_salesdb",
+								"type": "DatasetReference"
+							},
+							"name": "SourceSynapseSalesDB"
+						},
+						{
+							"dataset": {
+								"referenceName": "synpsql_catalog",
+								"type": "DatasetReference"
+							},
+							"name": "SelectSynapseCatalog"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synpsql_mastertable",
+								"type": "DatasetReference"
+							},
+							"name": "DestinationSynapseDashboard"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectColumnsFromCatalog"
+						},
+						{
+							"name": "SelectColumnsFromSalesDB"
+						},
+						{
+							"name": "JoinSalesDBAndCatalog"
+						},
+						{
+							"name": "SelectFirstColumns"
+						},
+						{
+							"name": "GetVentaCtsTotalAndHLRetorno"
+						},
+						{
+							"name": "SortRows"
+						}
+					],
+					"script": "source(output(\n\t\tAno as integer,\n\t\tMes as string,\n\t\tCentro as string,\n\t\tDRV as string,\n\t\tUEN as string,\n\t\tAgencia as string,\n\t\tEnvaseUsado as string,\n\t\tProveedor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tSAG as string,\n\t\tCODSAG as string,\n\t\tMaterial as string,\n\t\tDescripcion as string,\n\t\tHLVentas as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseSalesDB\nsource(output(\n\t\tMaterial as string,\n\t\tTexto_breve_de_material as string,\n\t\tMercado as string,\n\t\tCupo as string,\n\t\tEnvase as string,\n\t\tFactor as string,\n\t\tCupo1 as string,\n\t\tCupo2 as string,\n\t\tCe as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubagencia as string,\n\t\tCOD_SAG as string,\n\t\tCe2 as string,\n\t\tCe3 as string,\n\t\tZona2 as string,\n\t\tAgencia2 as string,\n\t\tSubagencia2 as string,\n\t\tId as string,\n\t\tTipo as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SelectSynapseCatalog\nSelectSynapseCatalog select(mapColumn(\n\t\tMaterial,\n\t\tEnvase,\n\t\tFactor\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsFromCatalog\nSourceSynapseSalesDB select(mapColumn(\n\t\tAno,\n\t\tMes,\n\t\tCentro,\n\t\tDRV,\n\t\tUEN,\n\t\tAgencia,\n\t\tEnvaseUsado,\n\t\tProveedor,\n\t\tCupo1,\n\t\tCupo2,\n\t\tSAG,\n\t\tCODSAG,\n\t\tMaterial,\n\t\tDescripcion,\n\t\tHLVentas\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsFromSalesDB\nSelectColumnsFromSalesDB, SelectColumnsFromCatalog join(SelectColumnsFromSalesDB@Material == SelectColumnsFromCatalog@Material,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinSalesDBAndCatalog\nJoinSalesDBAndCatalog select(mapColumn(\n\t\tAno,\n\t\tMes,\n\t\tCentro,\n\t\tDRV,\n\t\tUEN,\n\t\tAgencia,\n\t\tEnvaseUsado,\n\t\tProveedor,\n\t\tCupo1,\n\t\tCODSAG,\n\t\tCupo2,\n\t\tSAG,\n\t\tMaterial = SelectColumnsFromSalesDB@Material,\n\t\tFactor,\n\t\tDescripcion,\n\t\tHLVentas\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectFirstColumns\nSelectFirstColumns derive(HLRetorno = 0,\n\t\tVentaCtsTotal = iif(divide(toFloat(HLVentas), toFloat(Factor)) != 0, divide(toFloat(HLVentas), toFloat(Factor)), 0.0)) ~> GetVentaCtsTotalAndHLRetorno\nGetVentaCtsTotalAndHLRetorno sort(asc(Ano, true),\n\tasc(Mes, true)) ~> SortRows\nSortRows sink(input(\n\t\tCentro as string,\n\t\tDRV as string,\n\t\tUEN as string,\n\t\tAgencia as string,\n\t\tEnvaseUsado as string,\n\t\tProveedor as string,\n\t\tCupo1 as string,\n\t\tCODSAG as string,\n\t\tCupo2 as string,\n\t\tSAG as string,\n\t\tMaterial as string,\n\t\tFactor as string,\n\t\tDescripcion as string,\n\t\tMes as string,\n\t\tHLVentas as string,\n\t\tHLRetorno as integer,\n\t\tVentaCtsTotal as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseDashboard"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/synpsql_salesdb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/csvSalesToSynapseSales')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/RTI/data_cleaning/catalog"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "csv_sales",
+								"type": "DatasetReference"
+							},
+							"name": "SourceCSVSales"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synpsql_sales",
+								"type": "DatasetReference"
+							},
+							"name": "DestinationSynapseTableSales"
+						}
+					],
+					"transformations": [
+						{
+							"name": "FilterByTipoAndSegmAndSector"
+						},
+						{
+							"name": "SelectColumns"
+						},
+						{
+							"name": "SortRows"
+						}
+					],
+					"script": "source(output(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\t{High End} as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceCSVSales\nSourceCSVSales filter(( equalsIgnoreCase(trim(Tipo), \"Concesionarios\") || equalsIgnoreCase(trim(Tipo), \"Directas\") ) && ( equalsIgnoreCase(trim(Segmento), \"Retornable\") ) && ( equalsIgnoreCase(trim(Sector), \"Cerveza\") )) ~> FilterByTipoAndSegmAndSector\nFilterByTipoAndSegmAndSector select(mapColumn(\n\t\teach(match(true()))\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns sort(asc(COD_SAG, true),\n\tasc(SAG, true),\n\tasc(Material, true),\n\tasc(Des_Mat, true)) ~> SortRows\nSortRows sink(input(\n\t\tTipo1 as string,\n\t\tTipo2 as string,\n\t\tTipo as string,\n\t\tDrv_Act as string,\n\t\tCOD_UEN as string,\n\t\tUEN as string,\n\t\tSAG as string,\n\t\tCOD_SAG as string,\n\t\tMaterial as string,\n\t\tDes_Mat as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tSegmento as string,\n\t\tSector as string,\n\t\tInnovacion as string,\n\t\tClasificacion as string,\n\t\tBeerhouse as string,\n\t\tSubCupo as string,\n\t\tOnzas as string,\n\t\tPackPresentacion as string,\n\t\tFamilia as string,\n\t\tHigh_End as string,\n\t\tOrigen as string,\n\t\tAbr_19 as string,\n\t\tMay_19 as string,\n\t\tEne_20 as string,\n\t\tFeb_20 as string,\n\t\tMar_20 as string,\n\t\tAbr_20 as string,\n\t\tMay_20 as string,\n\t\tJun_20 as string,\n\t\tJul_20 as string,\n\t\tAgo_20 as string,\n\t\tSep_20 as string,\n\t\tOct_20 as string,\n\t\tNov_20 as string,\n\t\tDic_20 as string,\n\t\tEne_21 as string,\n\t\tFeb_21 as string,\n\t\tMar_21 as string,\n\t\tAbr_21 as string,\n\t\tMay_21 as string,\n\t\tJun_21 as string,\n\t\tJul_21 as string,\n\t\tAgo_21 as string,\n\t\tSep_21 as string,\n\t\tOct_21 as string,\n\t\tNov_21 as string,\n\t\tDic_21 as string,\n\t\tAcumDia_19 as string,\n\t\tAcumDia_21 as string,\n\t\tMTD_19 as string,\n\t\tTend as string,\n\t\tYTD_19 as string,\n\t\tYTD_21 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tmapColumn(\n\t\tTipo1,\n\t\tTipo2,\n\t\tTipo,\n\t\tDrv_Act,\n\t\tCOD_UEN,\n\t\tUEN,\n\t\tSAG,\n\t\tCOD_SAG,\n\t\tMaterial,\n\t\tDes_Mat,\n\t\tMarca,\n\t\tCupo,\n\t\tSegmento,\n\t\tSector,\n\t\tInnovacion,\n\t\tClasificacion,\n\t\tBeerhouse,\n\t\tSubCupo,\n\t\tOnzas,\n\t\tPackPresentacion,\n\t\tFamilia,\n\t\tHigh_End = {High End},\n\t\tOrigen,\n\t\tAbr_19,\n\t\tMay_19,\n\t\tEne_20,\n\t\tFeb_20,\n\t\tMar_20,\n\t\tAbr_20,\n\t\tMay_20,\n\t\tJun_20,\n\t\tJul_20,\n\t\tAgo_20,\n\t\tSep_20,\n\t\tOct_20,\n\t\tNov_20,\n\t\tDic_20,\n\t\tEne_21,\n\t\tFeb_21,\n\t\tMar_21,\n\t\tAbr_21,\n\t\tMay_21,\n\t\tJun_21,\n\t\tJul_21,\n\t\tAgo_21,\n\t\tSep_21,\n\t\tOct_21,\n\t\tNov_21,\n\t\tDic_21,\n\t\tAcumDia_19,\n\t\tAcumDia_21,\n\t\tMTD_19,\n\t\tTend,\n\t\tYTD_19,\n\t\tYTD_21\n\t),\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseTableSales"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsxLocationToSynapseDestination')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/transit/data_cleaning/catalog"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "xlsx_location",
+								"type": "DatasetReference"
+							},
+							"name": "SourceXLSXLocation"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synapsql_destination",
+								"type": "DatasetReference"
+							},
+							"name": "DestinationSynapseDestination"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectColumns"
+						},
+						{
+							"name": "TrimColumns"
+						}
+					],
+					"script": "source(output(\n\t\ti2 as string,\n\t\t{# Sociedad Nueva} as string,\n\t\t{# Sociedad Anterior} as string,\n\t\t{ID SAG Nueva} as string,\n\t\t{ID SAG Anterior} as string,\n\t\tDRV_Nva as string,\n\t\tDRV as string,\n\t\t{Descripción UEN} as string,\n\t\t{Descripcion UEN Corto} as string,\n\t\t{Descripción SAG} as string,\n\t\tEsquema as string,\n\t\tEstado as string,\n\t\tTipo as string,\n\t\t{Distribución} as string,\n\t\t{Puerto Expedición} as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\t{Sub Agencia} as string,\n\t\tTipo_Inv as string,\n\t\tOrigenJDA as string,\n\t\tDestinoJDA as string,\n\t\t{Descripción Destino} as string,\n\t\t{Tipo Distribución} as string,\n\t\tOp as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceXLSXLocation\nTrimColumns select(mapColumn(\n\t\tI2 = i2,\n\t\tNSociedadNueva = {# Sociedad Nueva},\n\t\tNSociedadAnterior = {# Sociedad Anterior},\n\t\tIDSAGNueva = {ID SAG Nueva},\n\t\tIDSAGAnterior = {ID SAG Anterior},\n\t\tDRVNva = DRV_Nva,\n\t\tDRV,\n\t\tDescripcionUEN = {Descripción UEN},\n\t\tDescripcionUENCorto = {Descripcion UEN Corto},\n\t\tDescripcionSAG = {Descripcion UEN Corto},\n\t\tEsquema,\n\t\tEstado,\n\t\tTipo,\n\t\tDistribucion = {Distribución},\n\t\tPuertoExpedicion = {Distribución},\n\t\tZona,\n\t\tAgencia,\n\t\tSubAgencia = {Sub Agencia},\n\t\tTipoInv = Tipo_Inv,\n\t\tOrigenJDA,\n\t\tDestinoJDA,\n\t\tDescripcionDestino = {Descripción Destino},\n\t\t{TipoDistribución} = {Tipo Distribución}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSourceXLSXLocation derive(i2 = trim(i2),\n\t\t{# Sociedad Nueva} = trim({# Sociedad Nueva}),\n\t\t{# Sociedad Anterior} = trim({# Sociedad Anterior}),\n\t\t{ID SAG Nueva} = trim({ID SAG Nueva}),\n\t\t{ID SAG Anterior} = trim({ID SAG Anterior}),\n\t\tDRV_Nva = trim(DRV_Nva),\n\t\tDRV = trim(DRV),\n\t\t{Descripción UEN} = trim({Descripción UEN}),\n\t\t{Descripcion UEN Corto} = trim({Descripcion UEN Corto}),\n\t\t{Descripción SAG} = trim({Descripción SAG}),\n\t\tEsquema = trim(Esquema),\n\t\tEstado = trim(Estado),\n\t\tTipo = trim(Tipo),\n\t\t{Distribución} = trim({Distribución}),\n\t\t{Puerto Expedición} = trim({Puerto Expedición}),\n\t\tZona = trim(Zona),\n\t\tAgencia = trim(Agencia),\n\t\t{Sub Agencia} = trim({Sub Agencia}),\n\t\tTipo_Inv = trim(Tipo_Inv),\n\t\tOrigenJDA = trim(OrigenJDA),\n\t\tDestinoJDA = trim(DestinoJDA),\n\t\t{Tipo Distribución} = trim({Tipo Distribución}),\n\t\tOp = trim(Op)) ~> TrimColumns\nSelectColumns sink(input(\n\t\ti2 as string,\n\t\tNSociedadNueva as string,\n\t\tNSociedadAnterior as string,\n\t\tIDSAGNueva as string,\n\t\tIDSAGAnterior as string,\n\t\tDRVNva as string,\n\t\tDRV as string,\n\t\tDescripcionUEN as string,\n\t\tDescripcionUENCorto as string,\n\t\tEsquema as string,\n\t\tEstado as string,\n\t\tTipo as string,\n\t\tDistribucion as string,\n\t\tZona as string,\n\t\tAgencia as string,\n\t\tSubAgencia as string,\n\t\tTipoInv as string,\n\t\tOrigenJDA as string,\n\t\tDestinoJDA as string,\n\t\tDescripcionDestino as string,\n\t\t{TipoDistribución} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tmapColumn(\n\t\ti2 = I2,\n\t\tNSociedadNueva,\n\t\tNSociedadAnterior,\n\t\tIDSAGNueva,\n\t\tIDSAGAnterior,\n\t\tDRVNva,\n\t\tDRV,\n\t\tDescripcionUEN,\n\t\tDescripcionUENCorto,\n\t\tEsquema,\n\t\tEstado,\n\t\tTipo,\n\t\tDistribucion,\n\t\tZona,\n\t\tAgencia,\n\t\tSubAgencia,\n\t\tTipoInv,\n\t\tOrigenJDA,\n\t\tDestinoJDA,\n\t\tDescripcionDestino,\n\t\t{TipoDistribución}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseDestination"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/xlsx_location')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsxPackingToSynapseMaterial')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/transit/data_cleaning/catalog"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "xlsx_packaging",
+								"type": "DatasetReference"
+							},
+							"name": "SourceXLSXPacking"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synapsql_material",
+								"type": "DatasetReference"
+							},
+							"name": "DestinationSynapseMaterial"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectColumns"
+						},
+						{
+							"name": "TrimColumns"
+						}
+					],
+					"script": "source(output(\n\t\tMaterial as string,\n\t\tI2 as string,\n\t\t{Texto breve de material} as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tColor as string,\n\t\t{Tipo de Envase} as string,\n\t\t{Cupo Agrupado} as string,\n\t\tFactor as string,\n\t\t{Cajas x Tarima} as string,\n\t\tDestino as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceXLSXPacking\nTrimColumns select(mapColumn(\n\t\tMaterial,\n\t\tI2,\n\t\tTextoBreveDeMaterial = {Texto breve de material},\n\t\tMarca,\n\t\tCupo,\n\t\tColor,\n\t\tTipoDeEnvase = {Tipo de Envase},\n\t\tCupoAgrupado = {Cupo Agrupado},\n\t\tFactor,\n\t\tCajaPorTarima = {Cajas x Tarima},\n\t\tDestino\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSourceXLSXPacking derive(Material = trim(Material),\n\t\tI2 = trim(I2),\n\t\t{Texto breve de material} = trim({Texto breve de material}),\n\t\tMarca = trim({Marca}),\n\t\tCupo = trim({Cupo}),\n\t\tColor = trim(Color),\n\t\t{Tipo de Envase} = trim({Tipo de Envase}),\n\t\t{Cupo Agrupado} = trim({Cupo Agrupado}),\n\t\tFactor = trim(Factor),\n\t\t{Cajas x Tarima} = trim({Cajas x Tarima}),\n\t\tDestino = trim(Destino)) ~> TrimColumns\nSelectColumns sink(input(\n\t\tMaterial as string,\n\t\tI2 as string,\n\t\tTextoBreveDeMaterial as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tColor as string,\n\t\tTipoDeEnvase as string,\n\t\tCupoAgrupado as string,\n\t\tFactor as string,\n\t\tCajaPorTarima as string,\n\t\tDestino as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tmapColumn(\n\t\tMaterial,\n\t\tI2,\n\t\tTextoBreveDeMaterial,\n\t\tMarca,\n\t\tCupo,\n\t\tColor,\n\t\tTipoDeEnvase,\n\t\tCupoAgrupado,\n\t\tFactor,\n\t\tCajaPorTarima,\n\t\tDestino\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseMaterial"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/xlsx_packaging')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsxTranStatusToSynapseTranStatus')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/transit/data_cleaning/inputs"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "xlsx_transitstatus",
+								"type": "DatasetReference"
+							},
+							"name": "SourceXLSXTranStatus"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synapsql_transtatus",
+								"type": "DatasetReference"
+							},
+							"name": "DestintarionSynapseTrans"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectColumns"
+						},
+						{
+							"name": "TrimColumns"
+						}
+					],
+					"script": "source(output(\n\t\t{Cl.documento compras} as string,\n\t\t{Documento compras} as string,\n\t\tProveedor as string,\n\t\t{Posición} as string,\n\t\tMaterial as string,\n\t\t{Texto breve} as string,\n\t\t{Cantidad de pedido} as string,\n\t\t{Unidad medida pedido} as string,\n\t\tCentro as string,\n\t\t{Almacén} as string,\n\t\tEntrega as string,\n\t\t{Stat.tot.mov.mcía.} as string,\n\t\t{Fecha de entrega} as string,\n\t\tColumn_14 as string,\n\t\t{Clase de movimiento1} as string,\n\t\t{Documento material1} as string,\n\t\tCantidad1 as string,\n\t\tLote1 as string,\n\t\t{Fe.contabilización1} as string,\n\t\tColumn_20 as string,\n\t\t{Clase de movimiento2} as string,\n\t\t{Documento material2} as string,\n\t\tCantidad2 as string,\n\t\tLote2 as string,\n\t\t{Fe.contabilización2} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceXLSXTranStatus\nSourceXLSXTranStatus select(mapColumn(\n\t\tClDocuCompras = {Cl.documento compras},\n\t\tDocuCompras = {Documento compras},\n\t\tProveedor,\n\t\tPosicion = {Posición},\n\t\tMaterial,\n\t\tTextoBreve = {Texto breve},\n\t\tCantidadPedido = {Cantidad de pedido},\n\t\tUnidadMedidaPedido = {Unidad medida pedido},\n\t\tCentro,\n\t\tAlmacen = {Almacén},\n\t\tEntrega,\n\t\tStaTotMovMercancia = {Stat.tot.mov.mcía.},\n\t\tFechaEntrega = {Fecha de entrega},\n\t\tClaseMovimiento1 = {Clase de movimiento1},\n\t\tDocuMaterial1 = {Documento material1},\n\t\tCantidad1,\n\t\tLote1,\n\t\tFeContabilizacion1 = {Fe.contabilización1},\n\t\tClaseMovimiento2 = {Clase de movimiento2},\n\t\tDocuMaterial2 = {Documento material2},\n\t\tCantidad2,\n\t\tLote2,\n\t\tFeContabilizacion2 = {Fe.contabilización2}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns derive(ClDocuCompras = trim(ClDocuCompras),\n\t\tDocuCompras = trim(DocuCompras),\n\t\tProveedor = trim(Proveedor),\n\t\tPosicion = trim(Posicion),\n\t\tMaterial = trim(Material),\n\t\tTextoBreve = trim(TextoBreve),\n\t\tCantidadPedido = trim(CantidadPedido),\n\t\tUnidadMedidaPedido = trim(UnidadMedidaPedido),\n\t\tCentro = trim(Centro),\n\t\tAlmacen = trim(Almacen),\n\t\tEntrega = trim(Entrega),\n\t\tStaTotMovMercancia = trim(StaTotMovMercancia),\n\t\tFechaEntrega = trim(FechaEntrega),\n\t\tClaseMovimiento1 = trim(ClaseMovimiento1),\n\t\tDocuMaterial1 = trim(DocuMaterial1),\n\t\tCantidad1 = trim(Cantidad1),\n\t\tLote1 = trim(Lote1),\n\t\tFeContabilizacion1 = trim(FeContabilizacion1),\n\t\tClaseMovimiento2 = trim(ClaseMovimiento2),\n\t\tDocuMaterial2 = trim(DocuMaterial2),\n\t\tCantidad2 = trim(Cantidad2),\n\t\tLote2 = trim(Lote2),\n\t\tFeContabilizacion2 = trim(FeContabilizacion2)) ~> TrimColumns\nTrimColumns sink(input(\n\t\tClDocuCompras as string,\n\t\tDocuCompras as string,\n\t\tProveedor as string,\n\t\tPosicion as string,\n\t\tMaterial as string,\n\t\tTextoBreve as string,\n\t\tCantidadPedido as string,\n\t\tUnidadMedidaPedido as string,\n\t\tCentro as string,\n\t\tAlmacen as string,\n\t\tEntrega as string,\n\t\tStaTotMovMercancia as string,\n\t\tFechaEntrega as string,\n\t\tClaseMovimiento1 as string,\n\t\tDocuMaterial1 as string,\n\t\tCantidad1 as string,\n\t\tLote1 as string,\n\t\tFeContabilizacion1 as string,\n\t\tClaseMovimiento2 as string,\n\t\tDocuMaterial2 as string,\n\t\tCantidad2 as string,\n\t\tLote2 as string,\n\t\tFeContabilizacion2 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestintarionSynapseTrans"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/xlsx_transitstatus')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsxTransToSynapseTrans')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/transit/data_cleaning/inputs"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "xlsx_trans",
+								"type": "DatasetReference"
+							},
+							"name": "SourceXLSXTrans"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synapsql_trans",
+								"type": "DatasetReference"
+							},
+							"name": "DestintarionSynapseTrans"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectColumns"
+						},
+						{
+							"name": "TrimColumns"
+						}
+					],
+					"script": "source(output(\n\t\t{Pto.expedic./Pto.recepción} as string,\n\t\t{Denominación1} as string,\n\t\t{Destinatario mcía.} as string,\n\t\tNombre1 as string,\n\t\t{Nº de transporte} as string,\n\t\t{Agente servicios} as string,\n\t\tNombre2 as string,\n\t\tEntrega as string,\n\t\t{Posición} as string,\n\t\t{Tipo de posición} as string,\n\t\t{Denominación2} as string,\n\t\tMaterial as string,\n\t\t{Texto breve material} as string,\n\t\t{Cantidad entrega} as string,\n\t\t{Unidad medida base} as string,\n\t\t{Fe.mov.mcía.real} as string,\n\t\t{Documento modelo} as string,\n\t\t{Nº de pedido} as string,\n\t\t{Creado el} as string,\n\t\t{Identif.externa 1} as string,\n\t\t{Identif.externa 2} as string,\n\t\t{ID tracking transp.} as string,\n\t\t{Clase expedición} as string,\n\t\t{Denominación3} as string,\n\t\t{Ruta p.transporte} as string,\n\t\t{Denominación4} as string,\n\t\t{Fe.planif.registro} as string,\n\t\t{Stat.tot.mov.mcía.} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceXLSXTrans\nSourceXLSXTrans select(mapColumn(\n\t\tPtoExpedicPtoRecepcion = {Pto.expedic./Pto.recepción},\n\t\tDenominacion1 = {Denominación1},\n\t\tDestinatarioMercancia = {Destinatario mcía.},\n\t\tNombre1,\n\t\tNTransporte = {Nº de transporte},\n\t\tAgenteServicios = {Agente servicios},\n\t\tNombre2,\n\t\tEntrega,\n\t\tPosicion = {Posición},\n\t\tTipoPosicion = {Tipo de posición},\n\t\tDenominacion2 = {Denominación2},\n\t\tMaterial,\n\t\tTextoBreveMaterial = {Texto breve material},\n\t\tCantidadEntrega = {Cantidad entrega},\n\t\tUnidadMedidaBase = {Unidad medida base},\n\t\tFeMovMercanciaReal = {Fe.mov.mcía.real},\n\t\tDocumentoModelo = {Documento modelo},\n\t\tNPedido = {Nº de pedido},\n\t\tCreado = {Creado el},\n\t\tIdentiExterna1 = {Identif.externa 1},\n\t\tIdentiExterna2 = {Identif.externa 2},\n\t\tIDTrackingTransp = {ID tracking transp.},\n\t\tClaseExpedicion = {Clase expedición},\n\t\tDenominacion3 = {Denominación3},\n\t\tRutaPTransporte = {Ruta p.transporte},\n\t\tDenominacion4 = {Denominación4},\n\t\tFePlanifRegistro = {Fe.planif.registro},\n\t\tStaTotMovMercancia = {Stat.tot.mov.mcía.}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns derive(PtoExpedicPtoRecepcion = trim(PtoExpedicPtoRecepcion),\n\t\tDenominacion1 = trim(Denominacion1),\n\t\tDestinatarioMercancia = trim(DestinatarioMercancia),\n\t\tNombre1 = trim(Nombre1),\n\t\tNTransporte = trim(NTransporte),\n\t\tAgenteServicios = trim(AgenteServicios),\n\t\tNombre2 = trim(Nombre2),\n\t\tEntrega = trim(Entrega),\n\t\tPosicion = trim(Posicion),\n\t\tTipoPosicion = trim(TipoPosicion),\n\t\tDenominacion2 = trim(Denominacion2),\n\t\tMaterial = trim(Material),\n\t\tTextoBreveMaterial = trim(TextoBreveMaterial),\n\t\tCantidadEntrega = trim(CantidadEntrega),\n\t\tUnidadMedidaBase = trim(UnidadMedidaBase),\n\t\tFeMovMercanciaReal = trim(FeMovMercanciaReal),\n\t\tDocumentoModelo = trim(DocumentoModelo),\n\t\tNPedido = trim(NPedido),\n\t\tCreado = trim(Creado),\n\t\tIdentiExterna1 = trim(IdentiExterna1),\n\t\tIdentiExterna2 = trim(IdentiExterna2),\n\t\tIDTrackingTransp = trim(IDTrackingTransp),\n\t\tClaseExpedicion = trim(ClaseExpedicion),\n\t\tDenominacion3 = trim(Denominacion3),\n\t\tRutaPTransporte = trim(RutaPTransporte),\n\t\tDenominacion4 = trim(Denominacion4),\n\t\tFePlanifRegistro = trim(FePlanifRegistro),\n\t\tStaTotMovMercancia = trim(StaTotMovMercancia)) ~> TrimColumns\nTrimColumns sink(input(\n\t\tPtoExpedicPtoRecepcion as string,\n\t\tDenominacion1 as string,\n\t\tDestinatarioMercancia as string,\n\t\tNombre1 as string,\n\t\tNTransporte as string,\n\t\tAgenteServicios as string,\n\t\tNombre2 as string,\n\t\tEntrega as string,\n\t\tPosicion as string,\n\t\tTipoPosicion as string,\n\t\tDenominacion2 as string,\n\t\tMaterial as string,\n\t\tTextoBreveMaterial as string,\n\t\tCantidadEntrega as string,\n\t\tUnidadMedidaBase as string,\n\t\tFeMovMercanciaReal as string,\n\t\tDocumentoModelo as string,\n\t\tNPedido as string,\n\t\tCreado as string,\n\t\tIdentiExterna1 as string,\n\t\tIdentiExterna2 as string,\n\t\tIDTrackingTransp as string,\n\t\tClaseExpedicion as string,\n\t\tDenominacion3 as string,\n\t\tRutaPTransporte as string,\n\t\tDenominacion4 as string,\n\t\tFePlanifRegistro as string,\n\t\tStaTotMovMercancia as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestintarionSynapseTrans"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/xlsx_trans')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/xlsxTransme2nToSynapseTransme2n')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "reverse_logistics/transit/data_cleaning/inputs"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "xlsx_transitme2n",
+								"type": "DatasetReference"
+							},
+							"name": "SourceXLSXTransme2n"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synapsql_transitme2n",
+								"type": "DatasetReference"
+							},
+							"name": "DestintarionSynapseTransme2n"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectColumns"
+						},
+						{
+							"name": "TrimColumns"
+						}
+					],
+					"script": "source(output(\n\t\t{Documento compras} as string,\n\t\t{Número de necesidad} as string,\n\t\t{Nombre del proveedor} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceXLSXTransme2n\nSourceXLSXTransme2n select(mapColumn(\n\t\tDocumentoCompras = {Documento compras},\n\t\tNumNecesidad = {Número de necesidad},\n\t\tNombreProveedor = {Nombre del proveedor}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns derive(DocumentoCompras = trim(DocumentoCompras),\n\t\tNumNecesidad = trim(NumNecesidad),\n\t\tNombreProveedor = trim(NombreProveedor)) ~> TrimColumns\nTrimColumns sink(input(\n\t\tDocumentoCompras as string,\n\t\tNumNecesidad as string,\n\t\tNombreProveedor as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestintarionSynapseTransme2n"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/xlsx_transitme2n')]"
+			]
+		}
+	]
+}

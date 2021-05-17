@@ -1,0 +1,1749 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-weu-dev-asx-130"
+		},
+		"aswweudevasx130_AzureSynapse_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'aswweudevasx130_AzureSynapse'"
+		},
+		"atr_forecash_databricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'atr_forecash_databricks'"
+		},
+		"mex_atr_forecash_input_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mex_atr_forecash_input'"
+		},
+		"sta130maz130rsqovup5cso-StorageLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'sta130maz130rsqovup5cso-StorageLinkedService'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/aswweudevasx130_AzureSynapse')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('aswweudevasx130_AzureSynapse_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/atr_forecash_databricks')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-5872627402099836.16.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('atr_forecash_databricks_accessToken')]"
+					},
+					"existingClusterId": "0505-195616-blobs18"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/mex_atr_forecash_input')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('mex_atr_forecash_input_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sta130maz130rsqovup5cso-StorageLinkedService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('sta130maz130rsqovup5cso-StorageLinkedService_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"preventDataExfiltration": false
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/csv_catalog')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/catalog/excel"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Catálogo.csv",
+						"folderPath": "log/reverse_logistics/catalog",
+						"container": "mex"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Material",
+						"type": "String"
+					},
+					{
+						"name": "Texto breve de material",
+						"type": "String"
+					},
+					{
+						"name": "Mercado",
+						"type": "String"
+					},
+					{
+						"name": "Cupo",
+						"type": "String"
+					},
+					{
+						"name": "Envase",
+						"type": "String"
+					},
+					{
+						"name": "Factor",
+						"type": "String"
+					},
+					{
+						"name": "Cupo 1",
+						"type": "String"
+					},
+					{
+						"name": "Cupo 2",
+						"type": "String"
+					},
+					{
+						"name": "Ce",
+						"type": "String"
+					},
+					{
+						"name": "Zona",
+						"type": "String"
+					},
+					{
+						"name": "Agencia",
+						"type": "String"
+					},
+					{
+						"name": "Subagencia",
+						"type": "String"
+					},
+					{
+						"name": "COD_SAG",
+						"type": "String"
+					},
+					{
+						"name": "Ce2",
+						"type": "String"
+					},
+					{
+						"name": "Ce3",
+						"type": "String"
+					},
+					{
+						"name": "Zona2",
+						"type": "String"
+					},
+					{
+						"name": "Agencia2",
+						"type": "String"
+					},
+					{
+						"name": "Subagencia2",
+						"type": "String"
+					},
+					{
+						"name": "Id",
+						"type": "String"
+					},
+					{
+						"name": "Tipo",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/sta130maz130rsqovup5cso-StorageLinkedService')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/csv_sales')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/input/excel"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Ventas.csv",
+						"folderPath": "log/reverse_logistics/input",
+						"container": "mex"
+					},
+					"columnDelimiter": ",",
+					"encodingName": "UTF-8",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Tipo1",
+						"type": "String"
+					},
+					{
+						"name": "Tipo2",
+						"type": "String"
+					},
+					{
+						"name": "Tipo",
+						"type": "String"
+					},
+					{
+						"name": "Drv_Act",
+						"type": "String"
+					},
+					{
+						"name": "COD_UEN",
+						"type": "String"
+					},
+					{
+						"name": "UEN",
+						"type": "String"
+					},
+					{
+						"name": "SAG",
+						"type": "String"
+					},
+					{
+						"name": "COD_SAG",
+						"type": "String"
+					},
+					{
+						"name": "Material",
+						"type": "String"
+					},
+					{
+						"name": "Des_Mat",
+						"type": "String"
+					},
+					{
+						"name": "Marca",
+						"type": "String"
+					},
+					{
+						"name": "Cupo",
+						"type": "String"
+					},
+					{
+						"name": "Segmento",
+						"type": "String"
+					},
+					{
+						"name": "Sector",
+						"type": "String"
+					},
+					{
+						"name": "Innovacion",
+						"type": "String"
+					},
+					{
+						"name": "Clasificacion",
+						"type": "String"
+					},
+					{
+						"name": "Beerhouse",
+						"type": "String"
+					},
+					{
+						"name": "SubCupo",
+						"type": "String"
+					},
+					{
+						"name": "Onzas",
+						"type": "String"
+					},
+					{
+						"name": "PackPresentacion",
+						"type": "String"
+					},
+					{
+						"name": "Familia",
+						"type": "String"
+					},
+					{
+						"name": "High End",
+						"type": "String"
+					},
+					{
+						"name": "Origen",
+						"type": "String"
+					},
+					{
+						"name": "Abr_19",
+						"type": "String"
+					},
+					{
+						"name": "May_19",
+						"type": "String"
+					},
+					{
+						"name": "Ene_20",
+						"type": "String"
+					},
+					{
+						"name": "Feb_20",
+						"type": "String"
+					},
+					{
+						"name": "Mar_20",
+						"type": "String"
+					},
+					{
+						"name": "Abr_20",
+						"type": "String"
+					},
+					{
+						"name": "May_20",
+						"type": "String"
+					},
+					{
+						"name": "Jun_20",
+						"type": "String"
+					},
+					{
+						"name": "Jul_20",
+						"type": "String"
+					},
+					{
+						"name": "Ago_20",
+						"type": "String"
+					},
+					{
+						"name": "Sep_20",
+						"type": "String"
+					},
+					{
+						"name": "Oct_20",
+						"type": "String"
+					},
+					{
+						"name": "Nov_20",
+						"type": "String"
+					},
+					{
+						"name": "Dic_20",
+						"type": "String"
+					},
+					{
+						"name": "Ene_21",
+						"type": "String"
+					},
+					{
+						"name": "Feb_21",
+						"type": "String"
+					},
+					{
+						"name": "Mar_21",
+						"type": "String"
+					},
+					{
+						"name": "Abr_21",
+						"type": "String"
+					},
+					{
+						"name": "May_21",
+						"type": "String"
+					},
+					{
+						"name": "Jun_21",
+						"type": "String"
+					},
+					{
+						"name": "Jul_21",
+						"type": "String"
+					},
+					{
+						"name": "Ago_21",
+						"type": "String"
+					},
+					{
+						"name": "Sep_21",
+						"type": "String"
+					},
+					{
+						"name": "Oct_21",
+						"type": "String"
+					},
+					{
+						"name": "Nov_21",
+						"type": "String"
+					},
+					{
+						"name": "Dic_21",
+						"type": "String"
+					},
+					{
+						"name": "AcumDia_19",
+						"type": "String"
+					},
+					{
+						"name": "AcumDia_21",
+						"type": "String"
+					},
+					{
+						"name": "MTD_19",
+						"type": "String"
+					},
+					{
+						"name": "Tend",
+						"type": "String"
+					},
+					{
+						"name": "YTD_19",
+						"type": "String"
+					},
+					{
+						"name": "YTD_21",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/sta130maz130rsqovup5cso-StorageLinkedService')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/csv_transaction1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/input/excel"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "MB51 (transaccion1) BD.csv",
+						"folderPath": "log/reverse_logistics/input",
+						"container": "mex"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Material\tTexto breve de material\tCe.\tAlm.\tCMv\tFe.contab.\tOrden\tLote\tUME\tCantidad\tProveedor\tPedido\tReferencia",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/sta130maz130rsqovup5cso-StorageLinkedService')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/csv_transaction2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "sta130maz130rsqovup5cso-StorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/input/excel"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "MB51 (transaccion 2)BD.csv",
+						"folderPath": "log/reverse_logistics/input",
+						"container": "mex"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Material\tTexto breve de material\tCe.\tAlm.\tCMv\tFe.contab.\tOrden\tLote\tUME\tCantidad\tProveedor\tPedido\tReferencia",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/sta130maz130rsqovup5cso-StorageLinkedService')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapsql_destination')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/catalog/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "i2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NSociedadNueva",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NSociedadAnterior",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IDSAGNueva",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IDSAGAnterior",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DRVNva",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DRV",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DescripcionUEN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DescripcionUENCorto",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Esquema",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Estado",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tipo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Distribucion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Zona",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Agencia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubAgencia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TipoInv",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OrigenJDA",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DestinoJDA",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DescripcionDestino",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TipoDistribución",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "ext",
+					"table": "mex_log_reverlog_trans_destination"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapsql_material')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/catalog/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "I2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TextoBreveDeMaterial",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Marca",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Color",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TipoDeEnvase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CupoAgrupado",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Factor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CajaPorTarima",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Destino",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "ext",
+					"table": "mex_log_reverlog_trans_material"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapsql_tarima')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/catalog/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "EtiquetasFila",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SumaTarimas",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "ext",
+					"table": "mex_log_reverlog_trans_tarima"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapsql_trans')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/input/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "PtoExpedicPtoRecepcion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Denominacion1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DestinatarioMercancia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Nombre1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NTransporte",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AgenteServicios",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Nombre2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Entrega",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Posicion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TipoPosicion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Denominacion2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TextoBreveMaterial",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CantidadEntrega",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UnidadMedidaBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FeMovMercanciaReal",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DocumentoModelo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NPedido",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Creado",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IdentiExterna1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IdentiExterna2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IDTrackingTransp",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClaseExpedicion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Denominacion3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "RutaPTransporte",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Denominacion4",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FePlanifRegistro",
+						"type": "nvarchar"
+					},
+					{
+						"name": "StaTotMovMercancia",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "ext",
+					"table": "mex_log_reverlog_trans_trans"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapsql_transitme2n')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/input/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "DocumentoCompras",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NumNecesidad",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NombreProveedor",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "ext",
+					"table": "mex_log_reverlog_trans_itme2n"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapsql_transtatus')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/transit/input/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "ClDocuCompras",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DocuCompras",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Proveedor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Posicion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TextoBreve",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CantidadPedido",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UnidadMedidaPedido",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Centro",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Almacen",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Entrega",
+						"type": "nvarchar"
+					},
+					{
+						"name": "StaTotMovMercancia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FechaEntrega",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClaseMovimiento1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DocuMaterial1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cantidad1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lote1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FeContabilizacion1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClaseMovimiento2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DocuMaterial2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cantidad2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lote2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FeContabilizacion2",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "ext",
+					"table": "mex_log_reverlog_trans_status"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synpsql_catalog')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/catalog/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Texto_breve_de_material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Mercado",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Envase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Factor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ce",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Zona",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Agencia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Subagencia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_SAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ce2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ce3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Zona2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Agencia2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Subagencia2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Id",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tipo",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "ext",
+					"table": "mex_log_reverlog_rit_catalog"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synpsql_consolidation')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/output/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Tipo1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tipo2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tipo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Drv_Act",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_UEN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UEN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_SAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Des_Mat",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Marca",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Segmento",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sector",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Innovacion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Clasificacion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Beerhouse",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubCupo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Onzas",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PackPresentacion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Familia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "High_End",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Origen",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Abr_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "May_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ene_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Feb_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Mar_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Abr_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "May_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jun_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jul_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ago_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sep_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Oct_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Nov_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Dic_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ene_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Feb_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Mar_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Abr_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "May_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jun_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jul_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ago_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sep_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Oct_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Nov_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Dic_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AcumDia_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AcumDia_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MTD_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tend",
+						"type": "nvarchar"
+					},
+					{
+						"name": "YTD_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "YTD_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SAG_CAT",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_SAG_CAT",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "stg",
+					"table": "mex_log_reverlog_rit_consolidation"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synpsql_mastertable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/output/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Centro",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DRV",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UEN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Agencia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EnvaseUsado",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Proveedor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CODSAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Factor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Descripcion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Mes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "HLVentas",
+						"type": "nvarchar"
+					},
+					{
+						"name": "HLRetorno",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "VentaCtsTotal",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"schema": "edw",
+					"table": "mex_log_reverlog_rit_master"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synpsql_sales')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx130_AzureSynapse",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "reverse_logistics/RTI/output/synapse"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Tipo1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tipo2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tipo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Drv_Act",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_UEN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UEN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_SAG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Material",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Des_Mat",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Marca",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cupo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Segmento",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sector",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Innovacion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Clasificacion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Beerhouse",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubCupo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Onzas",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PackPresentacion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Familia",
+						"type": "nvarchar"
+					},
+					{
+						"name": "High_End",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Origen",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Abr_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "May_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ene_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Feb_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Mar_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Abr_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "May_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jun_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jul_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ago_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sep_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Oct_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Nov_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Dic_20",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ene_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Feb_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Mar_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Abr_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "May_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jun_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Jul_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Ago_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Sep_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Oct_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Nov_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Dic_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AcumDia_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AcumDia_21",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MTD_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tend",
+						"type": "nvarchar"
+					},
+					{
+						"name": "YTD_19",
+						"type": "nvarchar"
+					},
+					{
+						"name": "YTD_21",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "ext",
+					"table": "mex_log_reverlog_rit_sales"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/aswweudevasx130_AzureSynapse')]"
+			]
+		}
+	]
+}
