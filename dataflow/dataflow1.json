@@ -1,0 +1,67 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"folder": {
+			"name": "reverse_logistics/transit"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "synapsql_transtatusfinal",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSynapseFinalTranStatus"
+				},
+				{
+					"dataset": {
+						"referenceName": "synapsql_material",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSynapseMaterial"
+				},
+				{
+					"dataset": {
+						"referenceName": "synapsql_tarima",
+						"type": "DatasetReference"
+					},
+					"name": "SourceSyanpseTarima"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "synapsql_trans_mastertable",
+						"type": "DatasetReference"
+					},
+					"name": "DestinationSynapseMaster"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectColumnsMaterial"
+				},
+				{
+					"name": "LeftJoinTranStatusAndMaterial"
+				},
+				{
+					"name": "CreateCantidadRealAndFechaCarga"
+				},
+				{
+					"name": "LeftJoinTranStatus2AndTarimas"
+				},
+				{
+					"name": "SelecColumnsTarimas"
+				},
+				{
+					"name": "CreateSumaTarimasAndTarimasLibresAndHora"
+				},
+				{
+					"name": "SortByDocumentoCompras"
+				}
+			],
+			"script": "source(output(\n\t\tClDocuCompras as string,\n\t\tDocuCompras as string,\n\t\tProveedor as string,\n\t\tPosicion as string,\n\t\tMaterial as string,\n\t\tTextoBreve as string,\n\t\tCantidadPedido as string,\n\t\tUnidadMedidaPedido as string,\n\t\tCentro as string,\n\t\tAlmacen as string,\n\t\tEntrega as string,\n\t\tStaTotMovMercancia as string,\n\t\tFechaEntrega as string,\n\t\tClaseMovimiento1 as string,\n\t\tDocuMaterial1 as string,\n\t\tCantidad1 as string,\n\t\tLote1 as string,\n\t\tFeContabilizacion1 as string,\n\t\tClaseMovimiento2 as string,\n\t\tDocuMaterial2 as string,\n\t\tCantidad2 as string,\n\t\tLote2 as string,\n\t\tFeContabilizacion2 as string,\n\t\tAgencia_Des as string,\n\t\tOP_Des as string,\n\t\tDocumentoCompras_TransITME2N as string,\n\t\tFolio_TransITME2N as string,\n\t\tNombreProveedor__TransITME2N as string,\n\t\tStaTotMovMercancia_Trans as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseFinalTranStatus\nsource(output(\n\t\tMaterial as string,\n\t\tI2 as string,\n\t\tTextoBreveDeMaterial as string,\n\t\tMarca as string,\n\t\tCupo as string,\n\t\tColor as string,\n\t\tTipoDeEnvase as string,\n\t\tCupoAgrupado as string,\n\t\tFactor as string,\n\t\tCajaPorTarima as string,\n\t\tDestino as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSynapseMaterial\nsource(output(\n\t\tEtiquetasFila as string,\n\t\tSumaTarimas as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceSyanpseTarima\nSourceSynapseMaterial select(mapColumn(\n\t\tMaterial_Material = Material,\n\t\tTipoDeEnvase_Material = TipoDeEnvase,\n\t\tProduccion_Material = Destino\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumnsMaterial\nSourceSynapseFinalTranStatus, SelectColumnsMaterial join(trim(upper(Material)) == trim(upper(Material_Material)),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> LeftJoinTranStatusAndMaterial\nLeftJoinTranStatusAndMaterial derive(CantidadReal = iif(trim(upper(UnidadMedidaPedido))=='MIL', ((toInteger(CantidadPedido)*1000)/24), toInteger(CantidadPedido)),\n\t\tFechaCarga = currentDate()) ~> CreateCantidadRealAndFechaCarga\nSortByDocumentoCompras, SelecColumnsTarimas join(trim(upper(DocuCompras)) == trim(upper(EtiquetasFila_Tarima)),\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> LeftJoinTranStatus2AndTarimas\nSourceSyanpseTarima select(mapColumn(\n\t\tEtiquetasFila_Tarima = EtiquetasFila,\n\t\tSumaTarimas_Tarima = SumaTarimas\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelecColumnsTarimas\nLeftJoinTranStatus2AndTarimas derive(SumaTarimas = ERROR_FUNCTION(''),\n\t\tTarimasLibres = ERROR_FUNCTION('')) ~> CreateSumaTarimasAndTarimasLibresAndHora\nCreateCantidadRealAndFechaCarga sort(asc(DocuCompras, false)) ~> SortByDocumentoCompras\nCreateSumaTarimasAndTarimasLibresAndHora sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> DestinationSynapseMaster"
+		}
+	}
+}

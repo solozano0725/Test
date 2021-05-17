@@ -1,0 +1,19 @@
+{
+	"name": "synapsql_trans_mastertable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx130_AzureSynapse",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "reverse_logistics/transit/output"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "ewt",
+			"table": "mex_log_reverlog_trans_master"
+		}
+	}
+}
