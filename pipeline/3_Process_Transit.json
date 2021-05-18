@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Step1_createConsolidationTransit",
+						"referenceName": "Step1_createConsolidationTranStatus",
 						"type": "DataFlowReference"
 					},
 					"staging": {
