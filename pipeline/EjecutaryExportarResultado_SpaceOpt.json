@@ -1,0 +1,64 @@
+{
+	"name": "EjecutaryExportarResultado_SpaceOpt",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute_SpaceOpt",
+				"type": "SynapseNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebook": {
+						"referenceName": "nueva Space Optimization",
+						"type": "NotebookReference"
+					},
+					"snapshot": true
+				}
+			},
+			{
+				"name": "DeleteActivationFile",
+				"description": "El archivo de activación debe eliminarse para evitar conflictos con sharepoint",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Execute_SpaceOpt",
+						"dependencyConditions": [
+							"Succeeded",
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ActivateFile",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-05-23T01:14:31Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}
