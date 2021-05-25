@@ -1,0 +1,246 @@
+{
+	"name": "SpaceOpt",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"## Configuracion de entorno\r\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"from pyspark import SparkConf, SparkContext, SparkFiles\r\n",
+					"from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__\r\n",
+					"from notebookutils import mssparkutils\r\n",
+					"import pandas as pd\r\n",
+					"import ssl\r\n",
+					"import datetime\r\n",
+					"import io\r\n",
+					"import sys\r\n",
+					"\r\n",
+					"ssl._create_default_https_context = ssl._create_unverified_context\r\n",
+					"\r\n",
+					"# Spark config vars\r\n",
+					"\r\n",
+					"linked_service_name = \"OptTemp\"\r\n",
+					"blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linked_service_name)\r\n",
+					"\r\n",
+					"blob_account_name = \"mazstoragectstemp\"\r\n",
+					"blob_container_name = \"mexico\"\r\n",
+					"\r\n",
+					"\r\n",
+					"\r\n",
+					"\r\n",
+					"\r\n",
+					"# Configure blob sorage in Spark\r\n",
+					"spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)\r\n",
+					"\r\n",
+					"# Add python files to spark context\r\n",
+					"\r\n",
+					"file_path_list = [\"/Logistica/PO/SpaceOpt/Code/data_load/excel_load.py\",\r\n",
+					"                \"/Logistica/PO/SpaceOpt/Code/tools/tools.py\",\r\n",
+					"                \"/Logistica/PO/SpaceOpt/Code/vehicles/fleet.py\",\r\n",
+					"                \"/Logistica/PO/SpaceOpt/Code/vehicles/vehicle.py\"]\r\n",
+					"\r\n",
+					"for file_path in file_path_list:\r\n",
+					"    path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, file_path)\r\n",
+					"    sc.addFile(path)"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"## Carga de datos\r\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"# Import files as libraries\n",
+					"\n",
+					"import excel_load as el\n",
+					"\n",
+					"today = datetime.date.today()\n",
+					"print(today)\n",
+					"\n",
+					"identifier_name = \"_\" + str(today)\n",
+					"\n",
+					"container = \"mexico\"\n",
+					"path_to_input = \"Logistica/PO/SpaceOpt/Inputs/\"\n",
+					"path_to_param = \"Logistica/PO/SpaceOpt/Parametros/\"\n",
+					"\n",
+					"# Params Name\n",
+					"\n",
+					"name_param_pesos = \"Pesos\" + \".xlsx\"\n",
+					"name_param_sku = \"SKU\" + \".xlsx\"\n",
+					"name_param_origenes = \"Origenes\" + \".xlsx\"\n",
+					"name_param_combinaciones = \"Combinaciones\" + \".xlsx\"\n",
+					"\n",
+					"# Inputs Name\n",
+					"\n",
+					"name_plan_distribucion = \"PlanDistribucion\" + identifier_name + \".xlsx\"\n",
+					"name_flota_disponible = \"FlotaDisponible\" + identifier_name + \".xlsx\"\n",
+					"#name_flota_disponible_cumbaya = \"FlotaDisponible\" + identifier_name + \".xlsx\"\n",
+					"\n",
+					"# PARAMS\n",
+					"\n",
+					"# Origenes\n",
+					"\n",
+					"df_param_origenes = el.read_excel(container = container,\n",
+					"                                    path_to_input = path_to_param + name_param_origenes,\n",
+					"                                    sheet_number = 0) \n",
+					"\n",
+					"# ===============================================================================\n",
+					"# Pesos\n",
+					"\n",
+					"df_param_pesos = el.read_excel(container = container,\n",
+					"                                    path_to_input = path_to_param + name_param_pesos,\n",
+					"                                    sheet_number = 0)\n",
+					"\n",
+					"# ===============================================================================\n",
+					"# Combinaciones\n",
+					"\n",
+					"df_param_combinaciones = el.read_excel(container = container,\n",
+					"                                        path_to_input = path_to_param + name_param_combinaciones,\n",
+					"                                        sheet_number = 0)\n",
+					"\n",
+					"# ===============================================================================\n",
+					"# SKU\n",
+					"\n",
+					"df_param_sku = el.read_excel(container = container,\n",
+					"                                path_to_input = path_to_param + name_param_sku,\n",
+					"                                sheet_number = 0,\n",
+					"                                limit_columns = [\"Codigo\", \"SKU\", \"Tipo de pallet\", \"# Unidades / Empaque\", \"# SKU x Pallet\", \"Peso Gramos\", \"Contenido en CC\", \"Hectolitros x palet\", \"Peso toneladas\"],\n",
+					"                                rename_columns = [\"SKU\", \"SKU_Descripcion\", \"Tipo Pallet\", \"Unidades Empaque\", \"Empaques Pallet\", \"Peso total Gr Empaque\", \"Unidad CC\", \"HL Pallet\", \"Toneladas Pallet\"])\n",
+					"\n",
+					"df_param_sku[\"SKU\"] = df_param_sku[\"SKU\"].apply(str)\n",
+					"df_param_sku[\"HL Pallet\"] = df_param_sku[\"HL Pallet\"].apply(float)\n",
+					"\n",
+					"# INPUTS\n",
+					"\n",
+					"# ================================================================================\n",
+					"# Plan Distribucion\n",
+					"df_plan_distribucion = el.read_excel(container = container,\n",
+					"                                     path_to_input = path_to_input + name_plan_distribucion,\n",
+					"                                     sheet_number = 0,\n",
+					"                                     limit_columns = [\"Fecha\", \"Ce.\", \"Destinat.\", \"Linea\", \"Marca\", \"Cod.\", \"Palets\"],\n",
+					"                                     rename_columns = [\"Fecha\", \"Origen\", \"Destino\", \"Linea\", \"Marca\", \"SKU\", \"Pallets Demanda\"])\n",
+					"\n",
+					"df_plan_distribucion[\"Prioridad\"] = df_plan_distribucion[\"SKU\"].index + 1\n",
+					"\n",
+					"df_plan_distribucion[\"SKU\"] = df_plan_distribucion[\"SKU\"].apply(str)\n",
+					"\n",
+					"df_plan_distribucion = df_plan_distribucion.merge(df_param_sku[[\"SKU\", \"Tipo Pallet\", \"HL Pallet\", \"Toneladas Pallet\"]],\n",
+					"                                                  how = \"left\",\n",
+					"                                                  left_on = [\"SKU\"],\n",
+					"                                                  right_on = [\"SKU\"])\n",
+					"\n",
+					"df_plan_distribucion = df_plan_distribucion[df_plan_distribucion[\"Tipo Pallet\"].notna()]\n",
+					"\n",
+					"df_plan_distribucion[\"HL Plan\"] = df_plan_distribucion[\"Pallets Demanda\"] * df_plan_distribucion[\"HL Pallet\"]\n",
+					"df_plan_distribucion[\"Toneladas Plan\"] = df_plan_distribucion[\"Pallets Demanda\"] * df_plan_distribucion[\"Toneladas Pallet\"]\n",
+					"\n",
+					"df_plan_distribucion[\"Tipo Pallet\"] = df_plan_distribucion[\"Tipo Pallet\"].apply(str.strip)\n",
+					"\n",
+					"\n",
+					"# ================================================================================\n",
+					"# Flota disponible\n",
+					"\n",
+					"df_flota_disponible = el.read_excel(container = container,\n",
+					"                                    path_to_input = path_to_input + name_flota_disponible,\n",
+					"                                    sheet_number = 0,\n",
+					"                                    limit_columns = [\"TIPO\", \"PLACA\", \"PLACA  Cabezal\", \"Proveedor\", \"LOCALIDAD\"],\n",
+					"                                    rename_columns = [\"Tipo\", \"Placa\", \"Placa Cabezal\", \"OPL\", \"Localidad\"])\n",
+					"\n",
+					"# Blob Storage config vars\n",
+					"\n",
+					"connect_str = \"DefaultEndpointsProtocol=https;AccountName=mazstoragectstemp;AccountKey=26I+TW+L65Hfet2HcNxrjpgaggWTMUL+5FZg+L6OdP3r5Vmt9IHSSOgF9mSXgGXEW+41AphSItkx8ff0d7paFw==;EndpointSuffix=core.windows.net\"\n",
+					"container_name = \"mexico\" # Combine container & relative path to file\n",
+					"output_file_name = \"/Logistica/PO/SpaceOpt/Resultados/Resultado.xlsx\"\n",
+					"\n",
+					"output = io.BytesIO()\n",
+					"writer = pd.ExcelWriter(output, engine = \"xlsxwriter\")\n",
+					"df_plan_distribucion.to_excel(output, sheet_name = \"Hoja1\")\n",
+					"writer.save()\n",
+					"\n",
+					"blob_service_client = BlobServiceClient.from_connection_string(connect_str)\n",
+					"blob_client = blob_service_client.get_blob_client(container=container_name, blob=output_file_name)\n",
+					"blob_client.upload_blob(output.getvalue(), overwrite = True)\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}

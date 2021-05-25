@@ -1,0 +1,25 @@
+{
+	"name": "FileCreatedOptimus",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "EjecutaryExportarResultado_Optimus",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/mex/blobs/log/optimus/archive/",
+			"blobPathEndsWith": "activate.txt",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/73f88e6b-3a35-4612-b550-555157e7059f/resourceGroups/GLOBAL-BREWDAT-SANDBOX-MAZ101-RG-GB-DEV/providers/Microsoft.Storage/storageAccounts/sta130maz130rsqovup5cso",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

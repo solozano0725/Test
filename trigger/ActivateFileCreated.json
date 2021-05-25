@@ -1,0 +1,26 @@
+{
+	"name": "ActivateFileCreated",
+	"properties": {
+		"description": "Al crearse el archivo \"Activate\" en la carpeta log/space_optimization/script/, deberá ejecutarse el modelo de Space Optimization",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "EjecutaryExportarResultado_SpaceOpt",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/mex/blobs/log/space_optimization/archive/",
+			"blobPathEndsWith": "activate.txt",
+			"ignoreEmptyBlobs": false,
+			"scope": "/subscriptions/73f88e6b-3a35-4612-b550-555157e7059f/resourceGroups/GLOBAL-BREWDAT-SANDBOX-MAZ101-RG-GB-DEV/providers/Microsoft.Storage/storageAccounts/sta130maz130rsqovup5cso",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

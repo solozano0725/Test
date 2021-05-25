@@ -1,0 +1,156 @@
+{
+	"name": "ReadFilesFromBlobStorage",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"from notebookutils import mssparkutils\n",
+					"import pandas as pd\n",
+					"\n",
+					"import ssl\n",
+					"\n",
+					"ssl._create_default_https_context = ssl._create_unverified_context\n",
+					"\n",
+					"blob_account_name = \"mazstoragectstemp\"\n",
+					"blob_container_name = \"mex\"\n",
+					"blob_relative_path = \"/Logistica/CUBICACION.CSV\"\n",
+					"# blob_relative_path_output = \"Logistica/PO/SpaceOpt/Resultados/Resultado.xlsx\"\n",
+					"linked_service_name = \"OptTemp\"\n",
+					"blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linked_service_name)\n",
+					"\n",
+					"wasb_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path)\n",
+					"# output_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path_output)\n",
+					"spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)\n",
+					"print('Remote blob path: ' + wasb_path)\n",
+					"\n",
+					"\n",
+					"df = spark.read.option(\"header\", \"true\") \\\n",
+					"            .option(\"delimiter\",\",\") \\\n",
+					"            .csv(wasb_path)\n",
+					"\n",
+					"#print(df)\n",
+					"\n",
+					"\n",
+					"\n",
+					"# df_1 = pd.read_excel(\"https://mazstoragectstemp.blob.core.windows.net/mexico/Logistica/PlanDistribucion.xlsx?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2021-04-05T05:30:17Z&st=2021-04-04T21:30:17Z&spr=https&sig=vnEe%2Fd%2B66GBUpQn%2BcqbXM63ne5N7N%2F8ipqKoEGbNiOA%3D\", engine='openpyxl')\n",
+					"# print(df_1)\n",
+					"\n",
+					"# writer = pd.ExcelWriter('https://mazstoragectstemp.blob.core.windows.net/mexico/Logistica/PO/SpaceOpt/Resultados/Resultado.xlsx?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2021-04-05T05:30:17Z&st=2021-04-04T21:30:17Z&spr=https&sig=vnEe%2Fd%2B66GBUpQn%2BcqbXM63ne5N7N%2F8ipqKoEGbNiOA%3D', engine='xlsxwriter')\n",
+					"\n",
+					"# df_1.to_excel(\"https://mazstoragectstemp.blob.core.windows.net/mexico/Logistica/PO/SpaceOpt/Resultados/Resultado.xlsx?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2021-04-05T05:30:17Z&st=2021-04-04T21:30:17Z&spr=https&sig=vnEe%2Fd%2B66GBUpQn%2BcqbXM63ne5N7N%2F8ipqKoEGbNiOA%3D\", sheet_name='Hoja1', engine=\"openpyxl\")\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"import xlsxwriter\r\n",
+					"import time\r\n",
+					"from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__\r\n",
+					"import pandas as pd\r\n",
+					"import io\r\n",
+					"\r\n",
+					"connect_str = \"DefaultEndpointsProtocol=https;AccountName=mazstoragectstemp;AccountKey=26I+TW+L65Hfet2HcNxrjpgaggWTMUL+5FZg+L6OdP3r5Vmt9IHSSOgF9mSXgGXEW+41AphSItkx8ff0d7paFw==;EndpointSuffix=core.windows.net\"\r\n",
+					"container_name = \"mexico/Logistica/PO/SpaceOpt/Resultados/\"\r\n",
+					"local_file_name = \"Resultado.xlsx\"\r\n",
+					"try:\r\n",
+					"    print(\"Azure Blob Storage v\" + __version__ + \" - Python quickstart sample\")\r\n",
+					"\r\n",
+					"    # Quick start code goes here\r\n",
+					"\r\n",
+					"except Exception as ex:\r\n",
+					"    print('Exception:')\r\n",
+					"    print(ex)\r\n",
+					"\r\n",
+					"\r\n",
+					"blob_service_client = BlobServiceClient.from_connection_string(connect_str)\r\n",
+					"blob_client = blob_service_client.get_blob_client(container=container_name, blob=local_file_name)\r\n",
+					"\r\n",
+					"df_1 = pd.read_excel(\"https://mazstoragectstemp.blob.core.windows.net/mexico/Logistica/PlanDistribucion.xlsx?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2021-04-08T00:35:46Z&st=2021-04-07T16:35:46Z&spr=https&sig=Qb36ZdKtHynxffEfGc7oVDnSicTiarW2vrxmJUGfIas%3D\", engine='openpyxl')\r\n",
+					"writer = io.BytesIO()\r\n",
+					"df_1.to_excel(writer)\r\n",
+					"print(\"a\")\r\n",
+					"blob_client.upload_blob(writer.getvalue(), overwrite = True)"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"from pyspark import SparkConf, SparkContext, SparkFiles\r\n",
+					"import sys\r\n",
+					"\r\n",
+					"blob_account_name = \"mazstoragectstemp\"\r\n",
+					"blob_container_name = \"mexico\"\r\n",
+					"blob_relative_path = \"Logistica/test.py\"\r\n",
+					"file_list = [\"/Logistica/PO/SpaceOpt/Code/CUBICACION.CSV\"]\r\n",
+					"path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path)\r\n",
+					"print(path)\r\n",
+					"linked_service_name = \"OptTemp\"\r\n",
+					"blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linked_service_name)\r\n",
+					"\r\n",
+					"wasb_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path)\r\n",
+					"# output_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path_output)\r\n",
+					"spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)\r\n",
+					"sc.addFile(path)\r\n",
+					"#sys.path.insert(0,SparkFiles.getRootDirectory())\r\n",
+					"import test as t"
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}

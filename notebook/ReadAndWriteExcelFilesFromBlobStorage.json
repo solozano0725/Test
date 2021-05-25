@@ -1,0 +1,180 @@
+{
+	"name": "ReadAndWriteExcelFilesFromBlobStorage",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "Poolexcel",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/73f88e6b-3a35-4612-b550-555157e7059f/resourceGroups/GLOBAL-BREWDAT-SANDBOX-MAZ101-RG-GB-DEV/providers/Microsoft.Synapse/workspaces/aswweudevasx130/bigDataPools/Poolexcel",
+				"name": "Poolexcel",
+				"type": "Spark",
+				"endpoint": "https://aswweudevasx130.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/Poolexcel",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"## Importación de librerías y configuración de entorno"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__ # Escritura Archivo Excel con Pandas\r\n",
+					"import pandas as pd\r\n",
+					"import ssl\r\n",
+					"import datetime\r\n",
+					"import io\r\n",
+					"import sys\r\n",
+					"\r\n",
+					"today = datetime.date.today()\r\n",
+					"\r\n",
+					"ssl._create_default_https_context = ssl._create_unverified_context\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 3
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"## Cargar Archivo Excel con Pandas"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"sas_key = '?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2021-05-05T04:59:59Z&st=2021-05-04T20:59:59Z&spr=https&sig=9zJvLwAAw7vQE9%2FaiB2BSfqXtNTz98hM%2Fcq6%2B4Aqi9U%3D'\n",
+					"container = 'mex'\n",
+					"path_to_input = 'log/space_optimization/input/'\n",
+					"file_name = 'test.xlsx'\n",
+					"sheet_name = 0\n",
+					"df_test = pd.read_excel('https://sta130maz130rsqovup5cso.blob.core.windows.net/' + container + '/' + path_to_input + file_name + sas_key, sheet_name = sheet_name, engine = 'openpyxl')\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 9
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"## Escritura Archivo Excel con Pandas\r\n",
+					""
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"output = io.BytesIO() # Para escribir en en blob storage con pandas es necesario transformar la salida a binario\n",
+					"\n",
+					"connect_str = 'DefaultEndpointsProtocol=https;AccountName=sta130maz130rsqovup5cso;AccountKey=GLwzwfGG5aQuYXRrvs6adHjAg7+ADF8A+NKeul4dOdos22pX1J6uVYOEh6/kNG89DXK7kxYEU3mElTRfHoKCfA==;EndpointSuffix=core.windows.net'\n",
+					"container_name = 'mex' # NO añadir separador (\"/\")\n",
+					"output_file_name = 'log/space_optimization/output/Resultado_SpaceOpt_' + str(today) + '.xlsx'\n",
+					"\n",
+					"df_test.to_excel(output, sheet_name = \"Hoja1\", index = False)\n",
+					"\n",
+					"blob_service_client = BlobServiceClient.from_connection_string(connect_str)\n",
+					"blob_client = blob_service_client.get_blob_client(container=container_name, blob=output_file_name)\n",
+					"\n",
+					"blob_client.upload_blob(output.getvalue(), overwrite = True) # Escribe el resultado en el container especificado tomando los bytes"
+				],
+				"attachments": null,
+				"execution_count": 8
+			}
+		]
+	}
+}
