@@ -1,0 +1,66 @@
+{
+	"name": "mex_forecash_daily_holiday_calendar",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "mex_atr_forecash_storage_linked_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "MEX Daily Holiday Calendar.csv",
+				"folderPath": "atr/forecash/input",
+				"container": "mex"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Date",
+				"type": "String"
+			},
+			{
+				"name": "Day",
+				"type": "String"
+			},
+			{
+				"name": "Year",
+				"type": "String"
+			},
+			{
+				"name": "Month",
+				"type": "String"
+			},
+			{
+				"name": "Weeknum",
+				"type": "String"
+			},
+			{
+				"name": "Weekday",
+				"type": "String"
+			},
+			{
+				"name": "Weekend Flag",
+				"type": "String"
+			},
+			{
+				"name": "National Holiday",
+				"type": "String"
+			},
+			{
+				"name": "Holiday",
+				"type": "String"
+			},
+			{
+				"name": "WorkingDayFlag",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

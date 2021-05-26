@@ -1,0 +1,145 @@
+{
+	"name": "ds_per_log_tentregaptoventa_tb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx128DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "fecha",
+				"type": "nvarchar"
+			},
+			{
+				"name": "region",
+				"type": "nvarchar"
+			},
+			{
+				"name": "centro_distribucion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "placa",
+				"type": "nvarchar"
+			},
+			{
+				"name": "viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "direccion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cajas_plan_entregar",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cajas_entregadas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cajas_plan_recoger",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cajas_recogidas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_visita_plan",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_visita_real",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cliente_visitado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "porc_cumplimiento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "porc_desviacion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "latitud",
+				"type": "nvarchar"
+			},
+			{
+				"name": "longitud",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distancia_plan_cliente_ant",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distancia_ejec_cliente_ant",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hora_plan_llegada_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hora_ejec_llegada_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hora_plan_salida_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hora_ejec_salida_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distancia_plan_sig_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distancia_ejec_sig_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_rec_cliente_ant",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_rec_cliente_sig",
+				"type": "nvarchar"
+			},
+			{
+				"name": "secuencia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "secuencia_real",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "abi_ext",
+			"table": "per_log_celonis_t_entrega_pventa"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

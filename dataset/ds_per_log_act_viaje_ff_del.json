@@ -1,0 +1,83 @@
+{
+	"name": "ds_per_log_act_viaje_ff_del",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta128maz128uhdzzxmw2plz",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "per"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Fecha",
+				"type": "String"
+			},
+			{
+				"name": "CD",
+				"type": "String"
+			},
+			{
+				"name": "Vehiculo",
+				"type": "String"
+			},
+			{
+				"name": "IdVehiculo",
+				"type": "String"
+			},
+			{
+				"name": "codTransportista",
+				"type": "String"
+			},
+			{
+				"name": "Transportista",
+				"type": "String"
+			},
+			{
+				"name": "Viaje",
+				"type": "String"
+			},
+			{
+				"name": "IdViaje",
+				"type": "String"
+			},
+			{
+				"name": "CodResponsableReparto",
+				"type": "String"
+			},
+			{
+				"name": "ResponsableReparto",
+				"type": "String"
+			},
+			{
+				"name": "TipoCamion",
+				"type": "String"
+			},
+			{
+				"name": "Estado",
+				"type": "String"
+			},
+			{
+				"name": "CodEstado",
+				"type": "String"
+			},
+			{
+				"name": "IdRuta",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

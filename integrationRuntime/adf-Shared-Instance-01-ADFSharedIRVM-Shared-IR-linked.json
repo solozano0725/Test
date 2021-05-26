@@ -1,0 +1,12 @@
+{
+	"name": "adf-Shared-Instance-01-ADFSharedIRVM-Shared-IR-linked",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/73f88e6b-3a35-4612-b550-555157e7059f/resourceGroups/GLOBAL-BREWDAT-SANDBOX-RG-GB-DEV/providers/Microsoft.DataFactory/factories/ADF-shared-instance-01/integrationruntimes/adf-Shared-Instance-01-ADFSharedIRVM-Shared-IR",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}

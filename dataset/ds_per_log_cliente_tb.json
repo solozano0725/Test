@@ -1,0 +1,441 @@
+{
+	"name": "ds_per_log_cliente_tb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx128DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "codigo_cliente_corto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_cliente1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_cliente2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_cliente3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_cliente4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_baja",
+				"type": "nvarchar"
+			},
+			{
+				"name": "indicador_actual",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ciudad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_estado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_pais",
+				"type": "nvarchar"
+			},
+			{
+				"name": "latitud",
+				"type": "nvarchar"
+			},
+			{
+				"name": "longitud",
+				"type": "nvarchar"
+			},
+			{
+				"name": "genero",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_clase_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "clase_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_segmento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "segmento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_ramo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ramo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_clmeda_cerveza",
+				"type": "nvarchar"
+			},
+			{
+				"name": "clmeda_cerveza",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_clameda_secun",
+				"type": "nvarchar"
+			},
+			{
+				"name": "clameda_secun",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_clvol_ventas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "clvol_ventas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_atributo_4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "atributo_4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_vias_pago_hh",
+				"type": "nvarchar"
+			},
+			{
+				"name": "vias_pago_hh",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_atributo_6",
+				"type": "nvarchar"
+			},
+			{
+				"name": "atributo_6",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_atributo_7",
+				"type": "nvarchar"
+			},
+			{
+				"name": "atributo_7",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_localidad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "localidad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_canal_subcanal_local",
+				"type": "nvarchar"
+			},
+			{
+				"name": "canal_sub_canal_local",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_subcanal_regional",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sub_canal_regional",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_zona_transporte",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zona_transporte",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_alta_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cliente_ean",
+				"type": "nvarchar"
+			},
+			{
+				"name": "clasificacion_rtm",
+				"type": "nvarchar"
+			},
+			{
+				"name": "clasificacion_nivel_socioec",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_poblacion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bloqueo_pedido",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bloqueo_entrega",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bloqueo_factura",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_tipo_nif",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_nif",
+				"type": "nvarchar"
+			},
+			{
+				"name": "no_identificacion_fiscal",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_davinculado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "direccion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distrito",
+				"type": "nvarchar"
+			},
+			{
+				"name": "concepto_busqueda",
+				"type": "nvarchar"
+			},
+			{
+				"name": "telefono",
+				"type": "nvarchar"
+			},
+			{
+				"name": "provincia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_departamento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "departamento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "grupo_cuenta",
+				"type": "nvarchar"
+			},
+			{
+				"name": "estado_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "id_centro",
+				"type": "nvarchar"
+			},
+			{
+				"name": "centro",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_director_regional",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_gerente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_supervisor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_prevendedor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_grupo_gerencia",
+				"type": "nvarchar"
+			},
+			{
+				"name": "grupo_gerencia",
+				"type": "varchar"
+			},
+			{
+				"name": "codigo_grupo_supervision",
+				"type": "nvarchar"
+			},
+			{
+				"name": "oficina_ventas_regional",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_oficina_ventas_regional",
+				"type": "nvarchar"
+			},
+			{
+				"name": "grupo_supervision",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_organizacion_ventas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "organizacion_ventas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_zona_venta",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zona_venta",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zona_tv",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zona_nombre_tv",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_prevendedor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_supervisor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_gerente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_directorregional",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_canal_distribucion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_sociedad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sociedad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_plan_visita",
+				"type": "nvarchar"
+			},
+			{
+				"name": "frecuencia_visitas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dia_visita",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_planvisita_b2b",
+				"type": "nvarchar"
+			},
+			{
+				"name": "frecuencia_visita_b2b",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dia_visita_b2b",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_plan_desarrollo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "frecuencia_plan_desarrollo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dia_visita_desarrollo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_plan_llamadas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "frecuencia_llamadas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dia_llamada",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_plan_autoventa",
+				"type": "nvarchar"
+			},
+			{
+				"name": "frecuencia_autoventa",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dia_autoventa",
+				"type": "nvarchar"
+			},
+			{
+				"name": "agent_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "attention_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "channel",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "abi_ext",
+			"table": "per_log_celonis_clientes"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

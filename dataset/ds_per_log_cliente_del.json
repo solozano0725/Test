@@ -1,0 +1,31 @@
+{
+	"name": "ds_per_log_cliente_del",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta128maz128uhdzzxmw2plz",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "per"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CodigoClienteCorto;NombreCliente1;NombreCliente2;NombreCliente3;NombreCliente4;FechaBaja;IndicadorActual;Ciudad;CodigoEstado;CodigoPais;Latitud;Longitud;Genero;CodigoClaseCliente;ClaseCliente;CodigoSegmento;Segmento;CodigoRamo;Ramo;CodigoClMEDACerveza;ClMEDACerveza;CodigoClaMedaSecun;ClaMedaSecun;CodigoClVolVentas;ClVolVentas;CodigoAtributo4;Atributo4;CodigoViasPagoHH;ViasPagoHH;CodigoAtributo6;Atributo6;CodigoAtributo7;Atributo7;CodigoLocalidad;Localidad;CodigoCanalSubcanalLocal;CanalSubcanalLocal;CodigoSubCanalRegional;SubCanalRegional;CodigoZonaTransporte;ZonaTransporte;FechaAltaCliente;ClienteEAN;ClasificacionRTM;ClasificacionNivelSocioec;TipoPoblacion;BloqueoPedido;BloqueoEntrega;BloqueoFactura;CodigoTipoNif;TipoNIF;NoIdentificacionFiscal;CodigoDAVinculado;Direccion;Distrito;ConceptoBusqueda;Telefono;Provincia;CodigoDepartamento;Departamento;GrupoCuenta;EstadoCliente;IDCentro;Centro;CodigoDirectorRegional;CodigoGerente;CodigoSupervisor;CodigoPrevendedor;CodigoGrupoGerencia;GrupoGerencia;CodigoGrupoSupervision;OficinaVentasRegional;CodigoOficinaVentasRegional;GrupoSupervision;CodigoOrganizacionVentas;OrganizacionVentas;CodigoZonaVenta;ZonaVenta;ZonaTv;ZonaNombreTv;NombrePrevendedor;NombreSupervisor;NombreGerente;NombreDirectorRegional;CodigoCanalDistribucion;CodigoSociedad;Sociedad;TipoPlanVisita;FrecuenciaVisitas;DiaVisita;TipoPlanVisitaB2B;FrecuenciaVisitaB2B;DiaVisitaB2B;TipoPlanDesarrollo;FrecuenciaPlanDesarrollo;DiaVisitaDesarrollo;TipoPlanLlamadas;FrecuenciaLlamadas;DiaLlamada;TipoPlanAutoventa;FrecuenciaAutoventa;DiaAutoVenta;AgentType;AttentionType;Channel",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

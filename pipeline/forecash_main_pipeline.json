@@ -1,0 +1,218 @@
+{
+	"name": "forecash_main_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Availability Flag - Receivables Latest",
+				"description": "Validate if receivables latest file exists",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "mex_forecash_daily_volume_latest",
+						"type": "DatasetReference"
+					},
+					"timeout": "7.00:00:00",
+					"sleep": 10,
+					"minimumSize": 1
+				}
+			},
+			{
+				"name": "Forecash Notebook",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Availability Flag - Receivables Latest",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Availability Falg - Receivables Historic",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Availability Flag - Daily Volume Historic",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Availability Flag - Daily Volume Latest",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Availability Flag - Volume Monthly Forecasts",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Availability Flag - Daily Holiday Calendar",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Availability Flag - Macroeconomic Variables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/mx003515@modelo.gmodelo.com.mx/MEX_FORECASH",
+					"baseParameters": {
+						"inputPath": {
+							"value": "@pipeline().parameters.inputPath",
+							"type": "Expression"
+						},
+						"outputPath": {
+							"value": "@pipeline().parameters.outputPath",
+							"type": "Expression"
+						},
+						"filenameLatest": {
+							"value": "@pipeline().parameters.fileNameLatest",
+							"type": "Expression"
+						},
+						"pipelineRunId": {
+							"value": "@pipeline().runId",
+							"type": "Expression"
+						},
+						"filenameHistoric": {
+							"value": "@pipeline().parameters.fileNameHistoric",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "mex_atr_forecash_databricks_linked_service",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Availability Falg - Receivables Historic",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "mex_forecash_receivables_historic",
+						"type": "DatasetReference"
+					},
+					"timeout": "7.00:00:00",
+					"sleep": 10
+				}
+			},
+			{
+				"name": "Availability Flag - Daily Volume Historic",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "mex_forecash_daily_volume_historic",
+						"type": "DatasetReference"
+					},
+					"timeout": "7.00:00:00",
+					"sleep": 10,
+					"minimumSize": 1
+				}
+			},
+			{
+				"name": "Availability Flag - Daily Volume Latest",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "mex_forecash_daily_volume_latest",
+						"type": "DatasetReference"
+					},
+					"timeout": "7.00:00:00",
+					"sleep": 10,
+					"minimumSize": 1
+				}
+			},
+			{
+				"name": "Availability Flag - Volume Monthly Forecasts",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "mex_forecash_volume_monthly_forecasts",
+						"type": "DatasetReference"
+					},
+					"timeout": "7.00:00:00",
+					"sleep": 10,
+					"minimumSize": 1
+				}
+			},
+			{
+				"name": "Availability Flag - Daily Holiday Calendar",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "mex_forecash_daily_holiday_calendar",
+						"type": "DatasetReference"
+					},
+					"timeout": "7.00:00:00",
+					"sleep": 10,
+					"minimumSize": 1
+				}
+			},
+			{
+				"name": "Availability Flag - Macroeconomic Variables",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "mex_forecash_macroeconomic_variables",
+						"type": "DatasetReference"
+					},
+					"timeout": "7.00:00:00",
+					"sleep": 10,
+					"minimumSize": 1
+				}
+			}
+		],
+		"parameters": {
+			"inputPath": {
+				"type": "string",
+				"defaultValue": "/atr/forecash/input"
+			},
+			"outputPath": {
+				"type": "string",
+				"defaultValue": "/atr/forecash/output"
+			},
+			"fileNameLatest": {
+				"type": "string",
+				"defaultValue": "MEX Receivables Latest.csv"
+			},
+			"fileNameHistoric": {
+				"type": "string",
+				"defaultValue": "MEX Receivables Historic.csv"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-20T15:52:59Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

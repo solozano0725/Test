@@ -1,0 +1,304 @@
+{
+	"name": "per_log_celonis_tconduccionviaje",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "log/celonis/input",
+							"wildcardFileName": "Tiempo_Conduccion_Viaje_*.xlsx",
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Fecha",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "fecha",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Región",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "region",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Centro de distribución",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "centro_de_distribucion",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Transportista",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "transportista",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Placa",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "placa",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Viaje",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "viaje",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Numero viaje",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "numero_viaje",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora salida CD",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "hora_salida_cd",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Steam ida",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "steam_ida",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tiempo conducción entre clientes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_conduccion_entre_clientes",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tiempo detención entre clientes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_detencion_entre_clientes",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tiempo paradas no programadas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_paradas_no_programadas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Steam regreso",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "steam_regreso",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora llegada CD",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "hora_llegada_cd",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tiempo en ruta total",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_en_ruta_total",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_per_log_tconduccionviaje_ff",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_per_log_tconduccionviaje_tb",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[abi_stg].[usp_per_log_celonis_t_conduccion_viaje]"
+				},
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx128DB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_per_log_tconduccionviaje_del",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "Tiempo_Conduccion_Viaje_*.xlsx",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-21T23:27:36Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

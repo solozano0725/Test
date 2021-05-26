@@ -1,0 +1,297 @@
+{
+	"name": "ds_per_log_fra_tb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx128DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "dc_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dc_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dc_time_zone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "route_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "route_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planned_route_start_date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planned_route_start_timestamp",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_groups",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_digital_route",
+				"type": "nvarchar"
+			},
+			{
+				"name": "digital_route_driver_trace_passed",
+				"type": "nvarchar"
+			},
+			{
+				"name": "digital_route_driver_click_score_passed",
+				"type": "nvarchar"
+			},
+			{
+				"name": "digital_route_hardware_trace_passed",
+				"type": "nvarchar"
+			},
+			{
+				"name": "imported_customers_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "real_time_sequencing_enabled",
+				"type": "nvarchar"
+			},
+			{
+				"name": "customers_with_confident_locations_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "customers_with_unconfident_locations_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "customers_with_unknown_locations_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "successful_customers_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "failed_customers_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "try_again_later_customers_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mixed_status_customers_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_visited_customers_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_unvisited_customers_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "reattempt_authorizations_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_clicks_at_confident_locations",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_clicks_at_unconfident_locations",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_clicks_at_unknown_locations",
+				"type": "nvarchar"
+			},
+			{
+				"name": "actual_route_departure_time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "actual_route_arrival_time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_click_score",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_customers_clicked",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_visits_clicked_with_distance_measured",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_clicks_at_customer",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_sequence_adhered_clicks",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_sequence_not_adhered_clicks",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_sequence_adhered_clicks_with_no_decision",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_sequence_forgiven_clicks",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sequence_adherence",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planned_foxtrot_driving_meters",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_driven_meters",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planned_foxtrot_driving_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_driven_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planned_foxtrot_journey_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_journey_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_stops_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_stop_time_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_authorized_stops_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_authorized_stops_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_unauthorized_stops_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_unauthorized_stops_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_data_gaps_count",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_data_gaps_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "customers_with_additional_visits",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_additional_visits",
+				"type": "nvarchar"
+			},
+			{
+				"name": "additional_visits_with_final_result_success",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_marked_route_start_timestamp",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_marked_route_start_latitude",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_marked_route_start_longitude",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_marked_route_end_timestamp",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_marked_route_end_latitude",
+				"type": "nvarchar"
+			},
+			{
+				"name": "driver_marked_route_end_longitude",
+				"type": "nvarchar"
+			},
+			{
+				"name": "end_terminus_changed",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planned_total_waiting_time_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stem_start_duration_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stem_start_distance_meters",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stem_end_duration_seconds",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stem_end_distance_meters",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "abi_ext",
+			"table": "per_log_celonis_foxtrot_ra"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

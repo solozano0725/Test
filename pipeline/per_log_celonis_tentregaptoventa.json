@@ -1,0 +1,496 @@
+{
+	"name": "per_log_celonis_tentregaptoventa",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "log/celonis/input",
+							"wildcardFileName": "Tiempo de entrega en punto de venta_*.xlsx",
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Fecha",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "fecha",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Region",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "region",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Centro Distribucion",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "centro_distribucion",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Placa",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "placa",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Viaje",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "viaje",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Codigo Cliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre Cliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nombre_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Direccion",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "direccion",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Cajas Plan Entregar",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cajas_plan_entregar",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Cajas Entregadas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cajas_entregadas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Cajas Plan Recoger",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cajas_plan_recoger",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Cajas Recogidas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cajas_recogidas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tiempo visita Plan",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_visita_plan",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tiempo visita Real",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_visita_real",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Cliente visitado",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cliente_visitado",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Porc Cumplimiento",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "porc_cumplimiento",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Porc Desviacion",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "porc_desviacion",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Latitud",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "latitud",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Longitud",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "longitud",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Distancia Plan Cliente Ant",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "distancia_plan_cliente_ant",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Distancia ejec Cliente Ant",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "distancia_ejec_cliente_ant",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora plan Llegada cliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "hora_plan_llegada_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora ejec Llegada cliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "hora_ejec_llegada_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora plan Salida cliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "hora_plan_salida_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora ejec Salida cliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "hora_ejec_salida_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Distancia plan sig Cliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "distancia_plan_sig_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Distancia ejec sig Cliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "distancia_ejec_sig_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tiempo rec cliente ant",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_rec_cliente_ant",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tiempo rec cliente sig",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_rec_cliente_sig",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Secuencia",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "secuencia",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Secuencia real",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "secuencia_real",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_per_log_tentregaptoventa_ff",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_per_log_tentregaptoventa_tb",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[abi_stg].[usp_per_log_celonis_t_entrega_pventa]"
+				},
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx128DB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_per_log_tentregaptoventa_del",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "Tiempo de entrega en punto de venta_*.xlsx",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-21T23:14:41Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

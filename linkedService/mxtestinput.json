@@ -1,0 +1,16 @@
+{
+	"name": "mxtestinput",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=sta128maz128uhdzzxmw2fk;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2ZDc3YWRkMS00OGE3LTRhOWMtOTU5MC02MzY4MThhZWJkZjgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "adf-Shared-Instance-01-ADFSharedIRVM-Shared-IR-linked",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

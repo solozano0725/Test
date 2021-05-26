@@ -1,0 +1,13 @@
+{
+	"name": "mex_atr_forecash_databricks_linked_service",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-4488467433845210.10.azuredatabricks.net",
+			"existingClusterId": "0520-152303-wends704",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFERi1XRVUtREVWLUFTWC0xMjhfMjQ4ZjBiZjItYzY0ZC00NjUzLWI3ZTQtODcwYjFhNDhiYjJiIg0KfQ=="
+		}
+	}
+}

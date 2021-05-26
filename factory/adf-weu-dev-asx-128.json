@@ -1,0 +1,9 @@
+{
+	"name": "adf-weu-dev-asx-128",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "42c0192f-09ad-4068-865a-931d3c6e38c3",
+		"tenantId": "cef04b19-7776-4a94-b89b-375c77a8f936"
+	}
+}

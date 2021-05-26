@@ -1,0 +1,212 @@
+{
+	"name": "ds_per_log_rsperu_del",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta128maz128uhdzzxmw2plz",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "log/celonis",
+				"fileSystem": "per"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ROUTE_NAME",
+				"type": "String"
+			},
+			{
+				"name": "TERRITORIO",
+				"type": "String"
+			},
+			{
+				"name": "DISPATCH_date",
+				"type": "String"
+			},
+			{
+				"name": "ORDER_DATE",
+				"type": "String"
+			},
+			{
+				"name": "ORDER_ID",
+				"type": "String"
+			},
+			{
+				"name": "STOP_ID",
+				"type": "String"
+			},
+			{
+				"name": "TOTAL_CUSTOMERS",
+				"type": "String"
+			},
+			{
+				"name": "UNIQUE_",
+				"type": "String"
+			},
+			{
+				"name": "NUMERO_VIAJE",
+				"type": "String"
+			},
+			{
+				"name": "CAJA_ENTREGAS",
+				"type": "String"
+			},
+			{
+				"name": "CAJAS_RECOJO",
+				"type": "String"
+			},
+			{
+				"name": "PESO",
+				"type": "String"
+			},
+			{
+				"name": "PLACA",
+				"type": "String"
+			},
+			{
+				"name": "TIPO_VEHICULO",
+				"type": "String"
+			},
+			{
+				"name": "VEHICLE_ID1",
+				"type": "String"
+			},
+			{
+				"name": "TIME",
+				"type": "String"
+			},
+			{
+				"name": "CASO",
+				"type": "String"
+			},
+			{
+				"name": "DISPATCH_TIME",
+				"type": "String"
+			},
+			{
+				"name": "DISTANCE",
+				"type": "String"
+			},
+			{
+				"name": "DRIVE_TIME",
+				"type": "String"
+			},
+			{
+				"name": "DELIVERY_TIME",
+				"type": "String"
+			},
+			{
+				"name": "CFT",
+				"type": "String"
+			},
+			{
+				"name": "VEHICLE$",
+				"type": "String"
+			},
+			{
+				"name": "LABOR$",
+				"type": "String"
+			},
+			{
+				"name": "TOTAL$",
+				"type": "String"
+			},
+			{
+				"name": "INCENTIVE$",
+				"type": "String"
+			},
+			{
+				"name": "HL_003",
+				"type": "String"
+			},
+			{
+				"name": "DELIVERY_WEIGHT",
+				"type": "String"
+			},
+			{
+				"name": "TOTAL_WEIGHT_CAPACITY",
+				"type": "String"
+			},
+			{
+				"name": "DELIVERY_VOLUME",
+				"type": "String"
+			},
+			{
+				"name": "TOTAL_VOLUME_CAPACITY",
+				"type": "String"
+			},
+			{
+				"name": "TRANSCURRIDO",
+				"type": "String"
+			},
+			{
+				"name": "COMPLETADO",
+				"type": "String"
+			},
+			{
+				"name": "VENTA",
+				"type": "String"
+			},
+			{
+				"name": "ORDER_SIZE",
+				"type": "String"
+			},
+			{
+				"name": "ORDER_SIZE_VOLUME",
+				"type": "String"
+			},
+			{
+				"name": "DEPOSITO",
+				"type": "String"
+			},
+			{
+				"name": "STOP_NAME",
+				"type": "String"
+			},
+			{
+				"name": "STREET_ADDRESS",
+				"type": "String"
+			},
+			{
+				"name": "DISTANCIA_ENTRE_STOPS",
+				"type": "String"
+			},
+			{
+				"name": "TIEMPO_ENTRE_STOP",
+				"type": "String"
+			},
+			{
+				"name": "TIEMPO_TOTAL_CLIENTE",
+				"type": "String"
+			},
+			{
+				"name": "HORA_LLEGA_CLI",
+				"type": "String"
+			},
+			{
+				"name": "HORA_SAL_CLI",
+				"type": "String"
+			},
+			{
+				"name": "CONCATENADO",
+				"type": "String"
+			},
+			{
+				"name": "Region",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

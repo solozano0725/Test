@@ -1,0 +1,1387 @@
+{
+	"name": "per_log_celonis_clientes",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "log/celonis/input",
+							"wildcardFileName": "PE_CLIENTES_*csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CodigoClienteCorto",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_cliente_corto",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreCliente1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nombre_cliente1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreCliente2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nombre_cliente2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreCliente3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nombre_cliente3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreCliente4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nombre_cliente4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaBaja",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "fecha_baja",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "IndicadorActual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "indicador_actual",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Ciudad",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ciudad",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoEstado",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_estado",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoPais",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_pais",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Latitud",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "latitud",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Longitud",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "longitud",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Genero",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "genero",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoClaseCliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_clase_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaseCliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "clase_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoSegmento",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_segmento",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Segmento",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "segmento",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoRamo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_ramo",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Ramo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ramo",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoClMEDACerveza",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_clmeda_cerveza",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ClMEDACerveza",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "clmeda_cerveza",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoClaMedaSecun",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_clameda_secun",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ClaMedaSecun",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "clameda_secun",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoClVolVentas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_clvol_ventas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ClVolVentas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "clvol_ventas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoAtributo4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_atributo_4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Atributo4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "atributo_4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoViasPagoHH",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_vias_pago_hh",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ViasPagoHH",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "vias_pago_hh",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoAtributo6",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_atributo_6",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Atributo6",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "atributo_6",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoAtributo7",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_atributo_7",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Atributo7",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "atributo_7",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoLocalidad",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_localidad",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Localidad",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "localidad",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoCanalSubcanalLocal",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_canal_subcanal_local",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CanalSubcanalLocal",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "canal_sub_canal_local",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoSubCanalRegional",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_subcanal_regional",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SubCanalRegional",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sub_canal_regional",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoZonaTransporte",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_zona_transporte",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ZonaTransporte",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "zona_transporte",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaAltaCliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "fecha_alta_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ClienteEAN",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cliente_ean",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ClasificacionRTM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "clasificacion_rtm",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ClasificacionNivelSocioec",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "clasificacion_nivel_socioec",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoPoblacion",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tipo_poblacion",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BloqueoPedido",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "bloqueo_pedido",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BloqueoEntrega",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "bloqueo_entrega",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BloqueoFactura",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "bloqueo_factura",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoTipoNif",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_tipo_nif",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoNIF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tipo_nif",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NoIdentificacionFiscal",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "no_identificacion_fiscal",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoDAVinculado",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_davinculado",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Direccion",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "direccion",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Distrito",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "distrito",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ConceptoBusqueda",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "concepto_busqueda",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Telefono",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "telefono",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Provincia",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "provincia",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoDepartamento",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_departamento",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Departamento",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "departamento",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GrupoCuenta",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "grupo_cuenta",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "EstadoCliente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "estado_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "IDCentro",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "id_centro",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Centro",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "centro",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoDirectorRegional",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_director_regional",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoGerente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_gerente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoSupervisor",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_supervisor",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoPrevendedor",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_prevendedor",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoGrupoGerencia",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_grupo_gerencia",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GrupoGerencia",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "grupo_gerencia",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoGrupoSupervision",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_grupo_supervision",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OficinaVentasRegional",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "oficina_ventas_regional",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoOficinaVentasRegional",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_oficina_ventas_regional",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GrupoSupervision",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "grupo_supervision",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoOrganizacionVentas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_organizacion_ventas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OrganizacionVentas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "organizacion_ventas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoZonaVenta",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_zona_venta",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ZonaVenta",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "zona_venta",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ZonaTv",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "zona_tv",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ZonaNombreTv",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "zona_nombre_tv",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NombrePrevendedor",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nombre_prevendedor",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreSupervisor",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nombre_supervisor",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreGerente",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nombre_gerente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreDirectorRegional",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nombre_directorregional",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoCanalDistribucion",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_canal_distribucion",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CodigoSociedad",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "codigo_sociedad",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sociedad",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sociedad",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoPlanVisita",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tipo_plan_visita",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FrecuenciaVisitas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "frecuencia_visitas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DiaVisita",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dia_visita",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoPlanVisitaB2B",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tipo_planvisita_b2b",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FrecuenciaVisitaB2B",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "frecuencia_visita_b2b",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DiaVisitaB2B",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dia_visita_b2b",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoPlanDesarrollo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tipo_plan_desarrollo",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FrecuenciaPlanDesarrollo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "frecuencia_plan_desarrollo",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DiaVisitaDesarrollo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dia_visita_desarrollo",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoPlanLlamadas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tipo_plan_llamadas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FrecuenciaLlamadas",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "frecuencia_llamadas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DiaLlamada",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dia_llamada",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoPlanAutoventa",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tipo_plan_autoventa",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FrecuenciaAutoventa",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "frecuencia_autoventa",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DiaAutoVenta",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dia_autoventa",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "AgentType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "agent_type",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "AttentionType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "attention_type",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Channel",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "channel",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_per_log_ciente_ff",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_per_log_cliente_tb",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[abi_stg].[usp_per_log_celonis_foxtrot_clientes]"
+				},
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx128DB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_per_log_cliente_del",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "PE_CLIENTES_*.csv",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-21T21:25:21Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

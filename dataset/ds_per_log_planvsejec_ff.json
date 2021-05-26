@@ -1,0 +1,225 @@
+{
+	"name": "ds_per_log_planvsejec_ff",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta128maz128uhdzzxmw2plz",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "per"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Fecha inicio",
+				"type": "String"
+			},
+			{
+				"name": "Codigo Transportista",
+				"type": "String"
+			},
+			{
+				"name": "Transportista",
+				"type": "String"
+			},
+			{
+				"name": "Código Reparto",
+				"type": "String"
+			},
+			{
+				"name": "Placa",
+				"type": "String"
+			},
+			{
+				"name": "IdViaje",
+				"type": "String"
+			},
+			{
+				"name": "Viaje",
+				"type": "String"
+			},
+			{
+				"name": "Responsable reparto",
+				"type": "String"
+			},
+			{
+				"name": "-",
+				"type": "String"
+			},
+			{
+				"name": "Tipo Camion",
+				"type": "String"
+			},
+			{
+				"name": "Estado Viaje",
+				"type": "String"
+			},
+			{
+				"name": "Planificados",
+				"type": "String"
+			},
+			{
+				"name": "Visitados",
+				"type": "String"
+			},
+			{
+				"name": "%Visitados",
+				"type": "String"
+			},
+			{
+				"name": "Planificadas",
+				"type": "String"
+			},
+			{
+				"name": "Entregadas",
+				"type": "String"
+			},
+			{
+				"name": "%Entregadas",
+				"type": "String"
+			},
+			{
+				"name": "Planificado",
+				"type": "String"
+			},
+			{
+				"name": "Ejecutado",
+				"type": "String"
+			},
+			{
+				"name": "% Cumplimiento",
+				"type": "String"
+			},
+			{
+				"name": "Fecha Real Llegada",
+				"type": "String"
+			},
+			{
+				"name": "Hora Real Llegada",
+				"type": "String"
+			},
+			{
+				"name": "Fecha Inicio Planeada",
+				"type": "String"
+			},
+			{
+				"name": "Fecha Fin Planeada",
+				"type": "String"
+			},
+			{
+				"name": "Inicial (KM)",
+				"type": "String"
+			},
+			{
+				"name": "Final (KM)",
+				"type": "String"
+			},
+			{
+				"name": "KM Planificados Viaje",
+				"type": "String"
+			},
+			{
+				"name": "KM Recorridos Viaje",
+				"type": "String"
+			},
+			{
+				"name": "Ejecución KM",
+				"type": "String"
+			},
+			{
+				"name": "Ventanas Horarias Cumplidas",
+				"type": "String"
+			},
+			{
+				"name": "Ventanas Horarias No Cumplidas",
+				"type": "String"
+			},
+			{
+				"name": "% Cumplimiento Ventana Horaria Cliente",
+				"type": "String"
+			},
+			{
+				"name": "% Adherencia",
+				"type": "String"
+			},
+			{
+				"name": "Velocidad (KM/H)",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo",
+				"type": "String"
+			},
+			{
+				"name": "Distancia (KM)",
+				"type": "String"
+			},
+			{
+				"name": "Velocidad (KM/H)",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo",
+				"type": "String"
+			},
+			{
+				"name": "Distancia (KM)",
+				"type": "String"
+			},
+			{
+				"name": "Operativas",
+				"type": "String"
+			},
+			{
+				"name": "Seguridad",
+				"type": "String"
+			},
+			{
+				"name": "Botón de Pánico",
+				"type": "String"
+			},
+			{
+				"name": "Consumo Combustible",
+				"type": "String"
+			},
+			{
+				"name": "Rendimiento KM/GL",
+				"type": "String"
+			},
+			{
+				"name": "Planificado (Min)",
+				"type": "String"
+			},
+			{
+				"name": "Ejecutado (Min)",
+				"type": "String"
+			},
+			{
+				"name": "Planificadas",
+				"type": "String"
+			},
+			{
+				"name": "Recogidas",
+				"type": "String"
+			},
+			{
+				"name": "%Recogidas",
+				"type": "String"
+			},
+			{
+				"name": "Nro. Clientes con Ventana Horaria",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,81 @@
+{
+	"name": "ds_per_log_tconduccionviaje_tb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx128DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "fecha",
+				"type": "nvarchar"
+			},
+			{
+				"name": "region",
+				"type": "nvarchar"
+			},
+			{
+				"name": "centro_de_distribucion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "transportista",
+				"type": "nvarchar"
+			},
+			{
+				"name": "placa",
+				"type": "nvarchar"
+			},
+			{
+				"name": "viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "numero_viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hora_salida_cd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "steam_ida",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_conduccion_entre_clientes",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_detencion_entre_clientes",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_paradas_no_programadas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "steam_regreso",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hora_llegada_cd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_en_ruta_total",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "abi_ext",
+			"table": "per_log_celonis_t_conduccion_viaje"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,149 @@
+{
+	"name": "ds_per_log_tentregaptoventa_del",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta128maz128uhdzzxmw2plz",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Data",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "per"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Fecha",
+				"type": "String"
+			},
+			{
+				"name": "Region",
+				"type": "String"
+			},
+			{
+				"name": "Centro Distribucion",
+				"type": "String"
+			},
+			{
+				"name": "Placa",
+				"type": "String"
+			},
+			{
+				"name": "Viaje",
+				"type": "String"
+			},
+			{
+				"name": "Codigo Cliente",
+				"type": "String"
+			},
+			{
+				"name": "Nombre Cliente",
+				"type": "String"
+			},
+			{
+				"name": "Direccion",
+				"type": "String"
+			},
+			{
+				"name": "Cajas Plan Entregar",
+				"type": "String"
+			},
+			{
+				"name": "Cajas Entregadas",
+				"type": "String"
+			},
+			{
+				"name": "Cajas Plan Recoger",
+				"type": "String"
+			},
+			{
+				"name": "Cajas Recogidas",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo visita Plan",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo visita Real",
+				"type": "String"
+			},
+			{
+				"name": "Cliente visitado",
+				"type": "String"
+			},
+			{
+				"name": "Porc Cumplimiento",
+				"type": "String"
+			},
+			{
+				"name": "Porc Desviacion",
+				"type": "String"
+			},
+			{
+				"name": "Latitud",
+				"type": "String"
+			},
+			{
+				"name": "Longitud",
+				"type": "String"
+			},
+			{
+				"name": "Distancia Plan Cliente Ant",
+				"type": "String"
+			},
+			{
+				"name": "Distancia ejec Cliente Ant",
+				"type": "String"
+			},
+			{
+				"name": "Hora plan Llegada cliente",
+				"type": "String"
+			},
+			{
+				"name": "Hora ejec Llegada cliente",
+				"type": "String"
+			},
+			{
+				"name": "Hora plan Salida cliente",
+				"type": "String"
+			},
+			{
+				"name": "Hora ejec Salida cliente",
+				"type": "String"
+			},
+			{
+				"name": "Distancia plan sig Cliente",
+				"type": "String"
+			},
+			{
+				"name": "Distancia ejec sig Cliente",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo rec cliente ant",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo rec cliente sig",
+				"type": "String"
+			},
+			{
+				"name": "Secuencia",
+				"type": "String"
+			},
+			{
+				"name": "Secuencia real",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

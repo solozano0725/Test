@@ -1,0 +1,303 @@
+{
+	"name": "ds_per_log_celonis_fra_ff",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta128maz128uhdzzxmw2plz",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "per"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "DC ID",
+				"type": "String"
+			},
+			{
+				"name": "DC Name",
+				"type": "String"
+			},
+			{
+				"name": "DC Time Zone",
+				"type": "String"
+			},
+			{
+				"name": "Route ID",
+				"type": "String"
+			},
+			{
+				"name": "Route Name",
+				"type": "String"
+			},
+			{
+				"name": "Planned Route Start Date",
+				"type": "String"
+			},
+			{
+				"name": "Planned Route Start Timestamp",
+				"type": "String"
+			},
+			{
+				"name": "Driver ID",
+				"type": "String"
+			},
+			{
+				"name": "Driver Name",
+				"type": "String"
+			},
+			{
+				"name": "Driver Groups",
+				"type": "String"
+			},
+			{
+				"name": "Is Digital Route",
+				"type": "String"
+			},
+			{
+				"name": "Digital Route: Driver Trace Passed",
+				"type": "String"
+			},
+			{
+				"name": "Digital Route: Driver Click Score Passed",
+				"type": "String"
+			},
+			{
+				"name": "Digital Route: Hardware Trace Passed",
+				"type": "String"
+			},
+			{
+				"name": "Imported Customers Count",
+				"type": "String"
+			},
+			{
+				"name": "Real-time Sequencing Enabled",
+				"type": "String"
+			},
+			{
+				"name": "Customers with Confident Locations Count",
+				"type": "String"
+			},
+			{
+				"name": "Customers with Unconfident Locations Count",
+				"type": "String"
+			},
+			{
+				"name": "Customers with Unknown Locations Count",
+				"type": "String"
+			},
+			{
+				"name": "Successful Customers Count",
+				"type": "String"
+			},
+			{
+				"name": "Failed Customers Count",
+				"type": "String"
+			},
+			{
+				"name": "Try Again Later Customers Count",
+				"type": "String"
+			},
+			{
+				"name": "Mixed Status Customers Count",
+				"type": "String"
+			},
+			{
+				"name": "Total Visited Customers Count",
+				"type": "String"
+			},
+			{
+				"name": "Total Unvisited Customers Count",
+				"type": "String"
+			},
+			{
+				"name": "Reattempt Authorizations Count",
+				"type": "String"
+			},
+			{
+				"name": "Total Clicks at Confident Locations",
+				"type": "String"
+			},
+			{
+				"name": "Total Clicks at Unconfident Locations",
+				"type": "String"
+			},
+			{
+				"name": "Total Clicks at Unknown Locations",
+				"type": "String"
+			},
+			{
+				"name": "Actual Route Departure Time",
+				"type": "String"
+			},
+			{
+				"name": "Actual Route Arrival Time",
+				"type": "String"
+			},
+			{
+				"name": "Driver Click Score",
+				"type": "String"
+			},
+			{
+				"name": "Total Customers Clicked",
+				"type": "String"
+			},
+			{
+				"name": "Total Visits Clicked with Distance Measured",
+				"type": "String"
+			},
+			{
+				"name": "Total Clicks at Customer",
+				"type": "String"
+			},
+			{
+				"name": "Total Sequence Adhered Clicks",
+				"type": "String"
+			},
+			{
+				"name": "Total Sequence Not Adhered Clicks",
+				"type": "String"
+			},
+			{
+				"name": "Total Sequence Adhered Clicks with No Decision",
+				"type": "String"
+			},
+			{
+				"name": "Total Sequence Forgiven Clicks",
+				"type": "String"
+			},
+			{
+				"name": "Sequence Adherence",
+				"type": "String"
+			},
+			{
+				"name": "Planned Foxtrot Driving Meters",
+				"type": "String"
+			},
+			{
+				"name": "Total Driven Meters",
+				"type": "String"
+			},
+			{
+				"name": "Planned Foxtrot Driving Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Total Driven Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Planned Foxtrot Journey Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Total Journey Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Total Stops Count",
+				"type": "String"
+			},
+			{
+				"name": "Total Stop Time Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Total Authorized Stops Count",
+				"type": "String"
+			},
+			{
+				"name": "Total Authorized Stops Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Total Unauthorized Stops Count",
+				"type": "String"
+			},
+			{
+				"name": "Total Unauthorized Stops Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Total Data Gaps Count",
+				"type": "String"
+			},
+			{
+				"name": "Total Data Gaps Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Customers with Additional Visits",
+				"type": "String"
+			},
+			{
+				"name": "Total Additional Visits",
+				"type": "String"
+			},
+			{
+				"name": "Additional Visits With Final Result Success",
+				"type": "String"
+			},
+			{
+				"name": "Driver Marked Route Start Timestamp",
+				"type": "String"
+			},
+			{
+				"name": "Driver Marked Route Start Latitude",
+				"type": "String"
+			},
+			{
+				"name": "Driver Marked Route Start Longitude",
+				"type": "String"
+			},
+			{
+				"name": "Driver Marked Route End Timestamp",
+				"type": "String"
+			},
+			{
+				"name": "Driver Marked Route End Latitude",
+				"type": "String"
+			},
+			{
+				"name": "Driver Marked Route End Longitude",
+				"type": "String"
+			},
+			{
+				"name": "End Terminus Changed",
+				"type": "String"
+			},
+			{
+				"name": "Planned Total Waiting Time Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Stem Start Duration (Seconds)",
+				"type": "String"
+			},
+			{
+				"name": "Stem Start Distance (Meters)",
+				"type": "String"
+			},
+			{
+				"name": "Stem End Duration (Seconds)",
+				"type": "String"
+			},
+			{
+				"name": "Stem End Distance (Meters)",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,403 @@
+{
+	"name": "per_log_celonis_faa",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "log/celonis/input",
+							"wildcardFileName": "Foxtrot_Attempt_Analytics__multi_dc_*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DC ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dc_id",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DC Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dc_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DC Time Zone",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dc_time_zone",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Route ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "route_id",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Route Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "route_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Planned Route Start Date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "planned_route_start_date",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Planned Route Start Timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "planned_route_start_timestamp",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_id",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Groups",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_groups",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Waypoint ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "waypoint_id",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "customer_id",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "customer_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer Location Confidence",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "customer_location_confidence",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Visit Start Timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "visit_start_timestamp",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Visit Duration Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "visit_duration_seconds",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Visit Meters from Customer",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "visit_meters_from_customer",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Click Timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_click_timestamp",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Aggregate Visit Status",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "aggregate_visit_status",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sequence Adherence Status",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sequence_adherence_status",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Waypoint Time Windows",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "waypoint_time_windows",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Visit Timeliness",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "visit_timeliness",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Beta: Suspicious Drive By Attempt Flag",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "beta_suspicious_drive_by_attempt_flag",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_per_log_faa_ff",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_per_log_faa_tb",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[abi_stg].[usp_per_log_celonis_foxtrot_aa]"
+				},
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx128DB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_per_log_faa_ff_del",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "Foxtrot_Attempt_Analytics__multi_dc_*.csv",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-21T18:04:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

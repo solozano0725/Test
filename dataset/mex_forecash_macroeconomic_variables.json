@@ -1,0 +1,38 @@
+{
+	"name": "mex_forecash_macroeconomic_variables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "mex_atr_forecash_storage_linked_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "MEX Macroeconomic Variables.csv",
+				"folderPath": "atr/forecash/input",
+				"container": "mex"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Year",
+				"type": "String"
+			},
+			{
+				"name": "Month",
+				"type": "String"
+			},
+			{
+				"name": "Index_Retail_Sales_Nominal_quarter",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

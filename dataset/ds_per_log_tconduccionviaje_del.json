@@ -1,0 +1,85 @@
+{
+	"name": "ds_per_log_tconduccionviaje_del",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta128maz128uhdzzxmw2plz",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "per"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Fecha",
+				"type": "String"
+			},
+			{
+				"name": "Región",
+				"type": "String"
+			},
+			{
+				"name": "Centro de distribución",
+				"type": "String"
+			},
+			{
+				"name": "Transportista",
+				"type": "String"
+			},
+			{
+				"name": "Placa",
+				"type": "String"
+			},
+			{
+				"name": "Viaje",
+				"type": "String"
+			},
+			{
+				"name": "Numero viaje",
+				"type": "String"
+			},
+			{
+				"name": "Hora salida CD",
+				"type": "String"
+			},
+			{
+				"name": "Steam ida",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo conducción entre clientes",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo detención entre clientes",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo paradas no programadas",
+				"type": "String"
+			},
+			{
+				"name": "Steam regreso",
+				"type": "String"
+			},
+			{
+				"name": "Hora llegada CD",
+				"type": "String"
+			},
+			{
+				"name": "Tiempo en ruta total",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

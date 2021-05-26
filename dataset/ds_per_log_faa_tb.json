@@ -1,0 +1,113 @@
+{
+	"name": "ds_per_log_faa_tb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx128DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "dc_id",
+				"type": "varchar"
+			},
+			{
+				"name": "dc_name",
+				"type": "varchar"
+			},
+			{
+				"name": "dc_time_zone",
+				"type": "varchar"
+			},
+			{
+				"name": "route_id",
+				"type": "varchar"
+			},
+			{
+				"name": "route_name",
+				"type": "varchar"
+			},
+			{
+				"name": "planned_route_start_date",
+				"type": "varchar"
+			},
+			{
+				"name": "planned_route_start_timestamp",
+				"type": "varchar"
+			},
+			{
+				"name": "driver_id",
+				"type": "varchar"
+			},
+			{
+				"name": "driver_name",
+				"type": "varchar"
+			},
+			{
+				"name": "driver_groups",
+				"type": "varchar"
+			},
+			{
+				"name": "waypoint_id",
+				"type": "varchar"
+			},
+			{
+				"name": "customer_id",
+				"type": "varchar"
+			},
+			{
+				"name": "customer_name",
+				"type": "varchar"
+			},
+			{
+				"name": "customer_location_confidence",
+				"type": "varchar"
+			},
+			{
+				"name": "visit_start_timestamp",
+				"type": "varchar"
+			},
+			{
+				"name": "visit_duration_seconds",
+				"type": "varchar"
+			},
+			{
+				"name": "visit_meters_from_customer",
+				"type": "varchar"
+			},
+			{
+				"name": "driver_click_timestamp",
+				"type": "varchar"
+			},
+			{
+				"name": "aggregate_visit_status",
+				"type": "varchar"
+			},
+			{
+				"name": "sequence_adherence_status",
+				"type": "varchar"
+			},
+			{
+				"name": "waypoint_time_windows",
+				"type": "varchar"
+			},
+			{
+				"name": "visit_timeliness",
+				"type": "varchar"
+			},
+			{
+				"name": "beta_suspicious_drive_by_attempt_flag",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "abi_ext",
+			"table": "per_log_celonis_foxtrot_aa"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

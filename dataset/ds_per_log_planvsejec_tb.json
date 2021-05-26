@@ -1,0 +1,221 @@
+{
+	"name": "ds_per_log_planvsejec_tb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx128DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "fecha_inicio",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_transportista",
+				"type": "nvarchar"
+			},
+			{
+				"name": "transportista",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo_reparto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "placa",
+				"type": "nvarchar"
+			},
+			{
+				"name": "id_viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "responsable_reparto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "campo_vacio",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_camion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "estado_viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planificados",
+				"type": "nvarchar"
+			},
+			{
+				"name": "visitados",
+				"type": "nvarchar"
+			},
+			{
+				"name": "porcentaje_visitados",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planificadas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "entregadas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "porcentaje_entregadas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planificado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ejecutado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "porcentaje_cumplimiento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_real_llegada",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hora_real_llegada",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_inicio_planeada",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_fin_planeada",
+				"type": "nvarchar"
+			},
+			{
+				"name": "inicial_km",
+				"type": "nvarchar"
+			},
+			{
+				"name": "final_km",
+				"type": "nvarchar"
+			},
+			{
+				"name": "km_planificados_viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "km_recorridos_viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ejecucion_km",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ventanas_horarias_cumplidas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ventanas_horarias_no_cumplidas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "porcentaje_cumplimiento_ventana_horaria_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "porcentaje_adherencia_decimal",
+				"type": "nvarchar"
+			},
+			{
+				"name": "velocidad_km_h",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distancia_km",
+				"type": "nvarchar"
+			},
+			{
+				"name": "velocidad_km_h_2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distancia_km_2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "operativas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "seguridad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "boton_de_panico",
+				"type": "nvarchar"
+			},
+			{
+				"name": "consumo_combustible",
+				"type": "nvarchar"
+			},
+			{
+				"name": "rendimiento_km_gl",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planificado_min",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ejecutado_min",
+				"type": "nvarchar"
+			},
+			{
+				"name": "planificadas_2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "recogidas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "porcentaje_recogidas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nro_clientes_con_ventana_horaria",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "abi_ext",
+			"table": "per_log_celonis_plan_vs_ejec"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

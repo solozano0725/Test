@@ -1,0 +1,77 @@
+{
+	"name": "ds_per_log_act_viaje_tb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx128DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "fecha",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "vehiculo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "id_vehiculo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cod_transportista",
+				"type": "nvarchar"
+			},
+			{
+				"name": "transportista",
+				"type": "nvarchar"
+			},
+			{
+				"name": "viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "id_viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cod_responsable_reparto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "responsable_reparto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_camion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "estado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cod_estado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "id_ruta",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "abi_ext",
+			"table": "per_log_celonis_act_viaje"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

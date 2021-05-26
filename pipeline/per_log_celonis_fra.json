@@ -1,0 +1,955 @@
+{
+	"name": "per_log_celonis_fra",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "log/celonis/input",
+							"wildcardFileName": "Foxtrot_Route_Analytics__multi_dc_*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DC ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dc_id",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DC Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dc_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DC Time Zone",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dc_time_zone",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Route ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "route_id",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Route Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "route_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Planned Route Start Date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "planned_route_start_date",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Planned Route Start Timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "planned_route_start_timestamp",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_id",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Groups",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_groups",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Is Digital Route",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "is_digital_route",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Digital Route: Driver Trace Passed",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "digital_route_driver_trace_passed",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Digital Route: Driver Click Score Passed",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "digital_route_driver_click_score_passed",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Digital Route: Hardware Trace Passed",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "digital_route_hardware_trace_passed",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Imported Customers Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "imported_customers_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Real-time Sequencing Enabled",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "real_time_sequencing_enabled",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customers with Confident Locations Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "customers_with_confident_locations_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customers with Unconfident Locations Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "customers_with_unconfident_locations_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customers with Unknown Locations Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "customers_with_unknown_locations_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Successful Customers Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "successful_customers_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Failed Customers Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "failed_customers_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Try Again Later Customers Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "try_again_later_customers_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Mixed Status Customers Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "mixed_status_customers_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Visited Customers Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_visited_customers_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Unvisited Customers Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_unvisited_customers_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Reattempt Authorizations Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "reattempt_authorizations_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Clicks at Confident Locations",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_clicks_at_confident_locations",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Clicks at Unconfident Locations",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_clicks_at_unconfident_locations",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Clicks at Unknown Locations",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_clicks_at_unknown_locations",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Actual Route Departure Time",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "actual_route_departure_time",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Actual Route Arrival Time",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "actual_route_arrival_time",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Click Score",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_click_score",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Customers Clicked",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_customers_clicked",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Visits Clicked with Distance Measured",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_visits_clicked_with_distance_measured",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Clicks at Customer",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_clicks_at_customer",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Sequence Adhered Clicks",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_sequence_adhered_clicks",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Sequence Not Adhered Clicks",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_sequence_not_adhered_clicks",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Sequence Adhered Clicks with No Decision",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_sequence_adhered_clicks_with_no_decision",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Sequence Forgiven Clicks",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_sequence_forgiven_clicks",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sequence Adherence",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sequence_adherence",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Planned Foxtrot Driving Meters",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "planned_foxtrot_driving_meters",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Driven Meters",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_driven_meters",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Planned Foxtrot Driving Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "planned_foxtrot_driving_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Driven Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_driven_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Planned Foxtrot Journey Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "planned_foxtrot_journey_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Journey Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_journey_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Stops Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_stops_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Stop Time Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_stop_time_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Authorized Stops Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_authorized_stops_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Authorized Stops Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_authorized_stops_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Unauthorized Stops Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_unauthorized_stops_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Unauthorized Stops Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_unauthorized_stops_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Data Gaps Count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_data_gaps_count",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Data Gaps Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_data_gaps_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customers with Additional Visits",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "customers_with_additional_visits",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Additional Visits",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_additional_visits",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Additional Visits With Final Result Success",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "additional_visits_with_final_result_success",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Marked Route Start Timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_marked_route_start_timestamp",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Marked Route Start Latitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_marked_route_start_latitude",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Marked Route Start Longitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_marked_route_start_longitude",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Marked Route End Timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_marked_route_end_timestamp",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Marked Route End Latitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_marked_route_end_latitude",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Driver Marked Route End Longitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "driver_marked_route_end_longitude",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "End Terminus Changed",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "end_terminus_changed",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Planned Total Waiting Time Seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "planned_total_waiting_time_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Stem Start Duration (Seconds)",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "stem_start_duration_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Stem Start Distance (Meters)",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "stem_start_distance_meters",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Stem End Duration (Seconds)",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "stem_end_duration_seconds",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Stem End Distance (Meters)",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "stem_end_distance_meters",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_per_log_celonis_fra_ff",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_per_log_fra_tb",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[abi_stg].[usp_per_log_celonis_foxtrot_ra]"
+				},
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx128DB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_per_log_fra_ff_del",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "Foxtrot_Route_Analytics__multi_dc_*.csv",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-21T18:42:19Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

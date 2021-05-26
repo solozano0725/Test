@@ -1,0 +1,119 @@
+{
+	"name": "ds_per_log_faa_ff_del",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sta128maz128uhdzzxmw2plz",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "per"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "DC ID",
+				"type": "String"
+			},
+			{
+				"name": "DC Name",
+				"type": "String"
+			},
+			{
+				"name": "DC Time Zone",
+				"type": "String"
+			},
+			{
+				"name": "Route ID",
+				"type": "String"
+			},
+			{
+				"name": "Route Name",
+				"type": "String"
+			},
+			{
+				"name": "Planned Route Start Date",
+				"type": "String"
+			},
+			{
+				"name": "Planned Route Start Timestamp",
+				"type": "String"
+			},
+			{
+				"name": "Driver ID",
+				"type": "String"
+			},
+			{
+				"name": "Driver Name",
+				"type": "String"
+			},
+			{
+				"name": "Driver Groups",
+				"type": "String"
+			},
+			{
+				"name": "Waypoint ID",
+				"type": "String"
+			},
+			{
+				"name": "Customer ID",
+				"type": "String"
+			},
+			{
+				"name": "Customer Name",
+				"type": "String"
+			},
+			{
+				"name": "Customer Location Confidence",
+				"type": "String"
+			},
+			{
+				"name": "Visit Start Timestamp",
+				"type": "String"
+			},
+			{
+				"name": "Visit Duration Seconds",
+				"type": "String"
+			},
+			{
+				"name": "Visit Meters from Customer",
+				"type": "String"
+			},
+			{
+				"name": "Driver Click Timestamp",
+				"type": "String"
+			},
+			{
+				"name": "Aggregate Visit Status",
+				"type": "String"
+			},
+			{
+				"name": "Sequence Adherence Status",
+				"type": "String"
+			},
+			{
+				"name": "Waypoint Time Windows",
+				"type": "String"
+			},
+			{
+				"name": "Visit Timeliness",
+				"type": "String"
+			},
+			{
+				"name": "Beta: Suspicious Drive By Attempt Flag",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

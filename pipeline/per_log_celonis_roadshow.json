@@ -1,0 +1,679 @@
+{
+	"name": "per_log_celonis_roadshow",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "log/celonis/input",
+							"wildcardFileName": "Peru*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ROUTE_NAME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "route_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TERRITORIO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "territorio",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DISPATCH_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dispatch_date",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ORDER_DATE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "order_date",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ORDER_ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "order_id",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STOP_ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "stop_id",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOTAL_CUSTOMERS",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_customers",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "UNIQUE_",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "unique",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NUMERO_VIAJE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "numero_viaje",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CAJA_ENTREGAS",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "caja_entregas",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CAJAS_RECOJO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cajas_recojo",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PESO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "peso",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PLACA",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "placa",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TIPO_VEHICULO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tipo_vehiculo",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VEHICLE_ID1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "vehicle_id1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TIME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "time",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CASO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "caso",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DISPATCH_TIME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dispatch_time",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DISTANCE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "distance",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DRIVE_TIME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "drive_time",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERY_TIME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "delivery_time",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CFT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cft",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VEHICLE$",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "vehicle",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LABOR$",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "labor",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOTAL$",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "INCENTIVE$",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "incentive",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HL_003",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "hl_003",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERY_WEIGHT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "delivery_weight",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOTAL_WEIGHT_CAPACITY",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_weight_capacity",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DELIVERY_VOLUME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "delivery_volume",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOTAL_VOLUME_CAPACITY",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total_volume_capacity",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TRANSCURRIDO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "trans_currido",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "COMPLETADO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "completado",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VENTA",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "venta",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ORDER_SIZE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "order_size",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ORDER_SIZE_VOLUME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "order_size_volume",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DEPOSITO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "deposito",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STOP_NAME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "stop_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STREET_ADDRESS",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "street_address",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DISTANCIA_ENTRE_STOPS",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "distancia_entre_stops",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TIEMPO_ENTRE_STOP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_entre_stop",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TIEMPO_TOTAL_CLIENTE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "tiempo_total_cliente",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HORA_LLEGA_CLI",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "hora_llega_cli",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HORA_SAL_CLI",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "hora_sal_cli",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CONCATENADO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "concatenado",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Region",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "region",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_per_log_rsperu_ff",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_per_log_rsperu_tb",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[abi_stg].[usp_per_log_celonis_roadshow]"
+				},
+				"linkedServiceName": {
+					"referenceName": "aswweudevasx128DB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_per_log_rsperu_del",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "Peru*.csv",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-25T20:17:20Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

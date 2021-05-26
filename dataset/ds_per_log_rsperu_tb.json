@@ -1,0 +1,205 @@
+{
+	"name": "ds_per_log_rsperu_tb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aswweudevasx128DB",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "per_log_celonis"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "route_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "territorio",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dispatch_date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stop_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_customers",
+				"type": "nvarchar"
+			},
+			{
+				"name": "unique",
+				"type": "nvarchar"
+			},
+			{
+				"name": "numero_viaje",
+				"type": "nvarchar"
+			},
+			{
+				"name": "caja_entregas",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cajas_recojo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "peso",
+				"type": "nvarchar"
+			},
+			{
+				"name": "placa",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_vehiculo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "vehicle_id1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "caso",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dispatch_time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distance",
+				"type": "nvarchar"
+			},
+			{
+				"name": "drive_time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "delivery_time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cft",
+				"type": "nvarchar"
+			},
+			{
+				"name": "vehicle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "labor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total",
+				"type": "nvarchar"
+			},
+			{
+				"name": "incentive",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hl_003",
+				"type": "nvarchar"
+			},
+			{
+				"name": "delivery_weight",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_weight_capacity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "delivery_volume",
+				"type": "nvarchar"
+			},
+			{
+				"name": "total_volume_capacity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "trans_currido",
+				"type": "nvarchar"
+			},
+			{
+				"name": "completado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "venta",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_size",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_size_volume",
+				"type": "nvarchar"
+			},
+			{
+				"name": "deposito",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stop_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "street_address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distancia_entre_stops",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_entre_stop",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiempo_total_cliente",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hora_llega_cli",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hora_sal_cli",
+				"type": "nvarchar"
+			},
+			{
+				"name": "concatenado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "region",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "abi_ext",
+			"table": "per_log_celonis_roadshow"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
